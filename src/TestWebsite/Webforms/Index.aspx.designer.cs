@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestWebsite {
+namespace TestWebsite.Webforms {
     
     
     public partial class Index {

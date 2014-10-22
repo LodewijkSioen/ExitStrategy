@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Linq;
 using System.Web.ModelBinding;
 using TestWebsite.Models;
 
-namespace TestWebsite
+namespace TestWebsite.Webforms
 {
     public partial class Index : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            View = ViewModel.Default;
+            if (!IsPostBack)
+            {
+                View = ViewModel.Default;
+            }
         }
 
         public ViewModel View { get; set; }
@@ -18,7 +20,6 @@ namespace TestWebsite
         {
             var post = new PostModel();
             TryUpdateModel(post, new FormValueProvider(ModelBindingExecutionContext));
-            var x = ModelState.IsValid;
         }
 
         

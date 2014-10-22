@@ -1,19 +1,22 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="TestWebsite.Layout" %>
+<%@ Import Namespace="System.Web.Optimization" %>
+<%@ Register TagPrefix="mvc" Namespace="ExitStrategy.ForWebforms" Assembly="ExitStrategy.ForWebforms" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <%: Styles.Render("~/styles") %>
 </head>
 <body>
+    <mvc:Partial PartialViewName="Header" runat="server"/>
     <form id="form1" runat="server">
-    <div>
-        <h1>This is a Webforms Master Page</h1>
+        <h2>This is a Webforms Master Page</h2>
         <asp:ContentPlaceHolder ID="Body" runat="server"/>
-    </div>
     </form>
+    <mvc:Partial PartialViewName="Footer" runat="server"/>
 </body>
 </html>

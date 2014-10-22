@@ -5,7 +5,7 @@ using System.Web.UI;
 
 namespace ExitStrategy.ForWebforms
 {
-    public class WebformsController : Controller
+    internal class WebformsController : Controller
     {
         public WebformsController(HttpContext context, Page page)
         {

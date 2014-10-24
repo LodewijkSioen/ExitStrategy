@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\ISO_7010_E002_arrow.svg" />
     <Content Include="Content\Style\bootstrap-theme.css" />
     <Content Include="Content\Style\bootstrap-theme.min.css" />
     <Content Include="Content\Style\bootstrap.css" />

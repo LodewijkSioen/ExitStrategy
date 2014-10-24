@@ -31,10 +31,11 @@ namespace TestWebsite
 
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/jquery").Include(
-                    "~/Scripts/jquery-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bootstrapjs").Include(
-                    "~/Scripts/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/js")
+                .Include("~/Scripts/jquery-{version}.js")
+                .Include("~/Scripts/bootstrap.js")
+                .Include("~/Scripts/main.js")
+            );
 
             bundles.Add(new StyleBundle("~/styles")
                 .IncludeDirectory("~/Content/Style/", "*.css"));

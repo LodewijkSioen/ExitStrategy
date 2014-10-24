@@ -2,6 +2,7 @@
 <%@ Register TagPrefix="mvc" Namespace="ExitStrategy.ForWebforms" Assembly="ExitStrategy.ForWebforms" %>
 
 <asp:Content ContentPlaceHolderID="Body" runat="server">
+<div class="webforms">
     <h2>This is a Webforms Page</h2>
     <mvc:Partial Model="<%$ l:() => View %>" PartialViewName="ViewModel" runat="server" />
     <p>
@@ -10,4 +11,5 @@
     <p>
         <asp:ValidationSummary runat="server" ShowModelStateErrors="True"/>
     </p>
+</div>
 </asp:Content>

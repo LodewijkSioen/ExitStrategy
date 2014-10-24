@@ -1,9 +1,10 @@
 ﻿</div>
 </div>
 </div>
-<footer class="container">
+<footer class="container mvc">
     <hr />
-    This is a shared Footer
+    <div>
+        @Html.CheckBox("showFramework") @Html.Label("showFramework", "Show which parts belong to which framework.")
+    </div>
 </footer>
-@Scripts.Render("~/jquery")
-@Scripts.Render("~/bootstrapjs")
+@Scripts.Render("~/js")

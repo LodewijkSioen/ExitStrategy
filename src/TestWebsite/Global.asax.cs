@@ -22,7 +22,7 @@ namespace TestWebsite
 
             routes.MapRoute(
                 name: "Default",
-                url: "mvc/{action}",
+                url: "mvc/{controller}/{action}",
                 defaults: new { action= "index", controller = "mvc"}
             );
 

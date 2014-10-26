@@ -1,9 +1,9 @@
 ﻿$(function() {
     $("#showFramework").change(function() {
         if ($(this).is(":checked")) {
-            $(".mvc, .webforms").css("borderStyle", "solid");
+            $(".mvc, .webforms").addClass("showFx");
         } else {
-            $(".mvc, .webforms").css("borderStyle", "none");
+            $(".mvc, .webforms").removeClass("showFx");
         }
     }).prop("checked", false);
 });

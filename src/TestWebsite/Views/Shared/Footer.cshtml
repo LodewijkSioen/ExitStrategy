@@ -5,6 +5,10 @@
     <hr />
     <div>
         @Html.CheckBox("showFramework") @Html.Label("showFramework", "Show which parts belong to which framework.")
+        <ul>
+            <li><span class="webformsLegend">&nbsp;</span> Webforms</li>
+            <li><span class="mvcLegend">&nbsp;</span> Mvc</li>
+        </ul>
     </div>
 </footer>
 @Scripts.Render("~/js")

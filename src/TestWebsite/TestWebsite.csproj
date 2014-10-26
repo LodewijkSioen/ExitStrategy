@@ -121,7 +121,7 @@
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Style\bootstrap-theme.css.map" />
     <Content Include="Content\Style\bootstrap.css.map" />
-    <None Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Shared\_layout.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

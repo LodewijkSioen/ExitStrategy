@@ -1,5 +1,5 @@
 ﻿@using System.Web.Mvc.Html
-@model IEnumerable<TestWebsite.Models.ViewModel>
+@model IEnumerable<TestWebsite.Models.Person>
 
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
@@ -7,7 +7,28 @@
 }
 <div class="mvc">
 <h1>Modelbinding</h1>
-<p>
-    How Modelbinding works
-</p>
+    <p>
+        How Modelbinding works
+    </p>
+    <table class="table table-condensed table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.FirstName)</th>
+                <th>@Html.DisplayNameFor(m => m.LastName)</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                    <td>@Html.ActionLink("Edit", "edit", new {id = @person.Id})</td>
+                    <td>Delete</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

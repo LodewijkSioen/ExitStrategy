@@ -8,20 +8,6 @@ namespace TestWebsite.Webforms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                View = ViewModel.Default;
-            }
         }
-
-        public ViewModel View { get; set; }
-
-        protected void WebFormsClick(object sender, EventArgs e)
-        {
-            var post = new PostModel();
-            TryUpdateModel(post, new FormValueProvider(ModelBindingExecutionContext));
-        }
-
-        
     }
 }

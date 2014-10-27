@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using TestWebsite.Models;
 
 namespace TestWebsite.Controllers
 {
@@ -10,7 +7,12 @@ namespace TestWebsite.Controllers
     {
         public ActionResult Index()
         {
-            return View("index");
+            return View(Person.GetBeatles());
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return View(id);
         }
     }
 }

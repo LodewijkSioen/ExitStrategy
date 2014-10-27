@@ -4,31 +4,31 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TestWebsite.Models
 {
-    public class ViewModel
+    public enum Sex
     {
-        [Display(Name = "Test displayName")]
-        [Required]
-        public string Test { get; set; }
-        public DateTime Now { get; set; }
-        public int Number { get; set; }
-        [Display(Name="This is a Boolean")]
-        public bool Boolean { get; set; }
-        public SubModel Sub { get; set; }
+        Unknown,
+        Male,
+        Female
+    }
 
-        public List<string> List { get; set; }
-        public static ViewModel Default {
-            get
+    public class Person
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public Sex Gender { get; set; }
+        public int Age { get; set; }
+        public bool IsDeceased { get; set; }
+
+        public static IEnumerable<Person> GetBeatles() 
+        {
+            yield return new Person
             {
-                return new ViewModel
-                {
-                    Test = "lalalalala",
-                    Now = DateTime.Now,
-                    Number = 8,
-                    Boolean = true,
-                    Sub = new SubModel(),
-                    List = new List<string> { "Zero", "One", "Two", "Three" }
-                };
-            }
+                FirstName = "Ringo",
+                LastName = "Starr",
+
+            };
         }
     }
 }

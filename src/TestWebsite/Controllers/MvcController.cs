@@ -7,7 +7,7 @@ namespace TestWebsite.Controllers
     {
         public ActionResult Index()
         {
-            return View(ViewModel.Default);
+            return View();
         }
     }
 }

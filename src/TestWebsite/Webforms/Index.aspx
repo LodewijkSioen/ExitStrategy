@@ -1,15 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="TestWebsite.Webforms.Index" MasterPageFile="~/Layout.Master" Title="This is a Webforms page" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="TestWebsite.Webforms.Index" MasterPageFile="~/Webforms/Layout.Master" Title="This is a Webforms page" %>
 <%@ Register TagPrefix="mvc" Namespace="ExitStrategy.ForWebforms" Assembly="ExitStrategy.ForWebforms" %>
 
 <asp:Content ContentPlaceHolderID="Body" runat="server">
 <div class="webforms">
-    <h2>This is a Webforms Page</h2>
-    <mvc:Partial Model="<%$ l:() => View %>" PartialViewName="ViewModel" runat="server" />
+    <h1>This is a Webforms Page</h1>
     <p>
-        <asp:Button runat="server" Text="Postback to webforms" OnClick="WebFormsClick" />
+        This is a simple webforms page with a masterpage. However, the header and the footer on the masterpage are two razor partial views.
+        These are shared with the layout that is used on the mcv page. This way, every page can have the same layout with minimal duplication.        
     </p>
     <p>
-        <asp:ValidationSummary runat="server" ShowModelStateErrors="True"/>
+        For a more complicated example, look at <asp:HyperLink NavigateUrl="<%$ RouteUrl:routename=Webforms-ModelBinding%>" runat="server">ModelBinding</asp:HyperLink>.
     </p>
 </div>
 </asp:Content>

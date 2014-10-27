@@ -125,8 +125,11 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Webforms\ModelBinding\Edit.aspx" />
+    <Content Include="Webforms\ModelBinding\Index.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ModelBindingController.cs" />
     <Compile Include="Controllers\MvcController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -138,17 +141,31 @@
     <Compile Include="Webforms\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Layout.Master.cs">
+    <Compile Include="Webforms\Layout.Master.cs">
       <DependentUpon>Layout.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Layout.Master.designer.cs">
+    <Compile Include="Webforms\Layout.Master.designer.cs">
       <DependentUpon>Layout.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\PostModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SubModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="Webforms\ModelBinding\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webforms\ModelBinding\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Webforms\ModelBinding\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webforms\ModelBinding\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
@@ -158,7 +175,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\ViewModel.cshtml" />
-    <Content Include="Layout.Master" />
+    <Content Include="Webforms\Layout.Master" />
+    <Content Include="Views\ModelBinding\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

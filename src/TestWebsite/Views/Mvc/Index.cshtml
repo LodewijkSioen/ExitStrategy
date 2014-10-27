@@ -1,10 +1,12 @@
 ﻿@using System.Web.Mvc.Html
-@model TestWebsite.Models.ViewModel
-
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
     ViewBag.Title = "This is an MVC Page";
 }
-
-<h2>This is a Razor Page</h2>
-@Html.Partial("ViewModel", Model)
+<div class="mvc">
+<h1>This is a Razor Page</h1>
+<p>
+    This is a simple Razor view with a layout rendered from an Mvc controller. However, the layout contains two partial views that are shared with the
+    Webforms master page. This way, every page can have the same layout with minimal duplication.
+</p>
+</div>

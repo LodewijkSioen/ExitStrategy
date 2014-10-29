@@ -174,7 +174,6 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Shared\ViewModel.cshtml" />
     <Content Include="Webforms\Layout.Master" />
     <Content Include="Views\ModelBinding\Index.cshtml" />
     <Content Include="Views\ModelBinding\Edit.cshtml" />

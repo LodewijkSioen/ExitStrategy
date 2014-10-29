@@ -1,9 +1,22 @@
-﻿@model int
+﻿@model TestWebsite.Models.Person
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Mvc Modelbinding Edit";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
-
-<h2>title</h2>
-@Model
+<div class="mvc">
+    <h1>Mvc Modelbinding Editor Template</h1>
+    <p>
+        How modelbinding editors work
+    </p>
+@using (Html.BeginForm("edit", "ModelBinding", FormMethod.Post,  new {@class = "form-horizontal", role="form"}))
+{
+    @Html.EditorFor(m => m, new {htmlAttributes = new {@class = "form-control"},})
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-primary" value="Edit"/>
+            @Html.ActionLink("Cancel", "index", "ModelBinding", new {@class = "btn btn-link"})
+        </div>
+    </div>
+}
+</div>

@@ -1,0 +1,18 @@
+﻿@model Object
+@if (ViewData.TemplateInfo.TemplateDepth > 1)
+{
+    @ViewData.ModelMetadata.SimpleDisplayText
+}
+else
+{
+    foreach (var prop in ViewData.ModelMetadata.Properties.Where(pm => pm.ShowForEdit && !ViewData.TemplateInfo.Visited(pm)))
+    {
+        <div class="form-group@(Html.OnValidationError(prop.PropertyName, " has-error"))">
+            @Html.Label(prop.PropertyName, new { @class="col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.Editor(prop.PropertyName)
+                @Html.ValidationMessage(prop.PropertyName, new {@class="help-block"})
+            </div>
+        </div>
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace TestWebsite.Models
@@ -13,8 +14,12 @@ namespace TestWebsite.Models
 
     public class Person
     {
+        [ScaffoldColumn(false)]
+        [Key, ReadOnly(true)]
         public int Id { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public Sex Gender { get; set; }
@@ -25,6 +30,7 @@ namespace TestWebsite.Models
         {
             yield return new Person
             {
+                Id = 1,
                 FirstName = "Ringo",
                 LastName = "Starr",
 

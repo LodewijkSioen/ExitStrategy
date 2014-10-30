@@ -9,7 +9,12 @@ namespace TestWebsite.Controllers
     {
         public ActionResult Index()
         {
-            return View(Person.GetBeatles());
+            return View(Person.GetBeatles().Select(p => new PersonListItem
+            {
+                FirstName = p.FirstName, 
+                LastName = p.LastName,
+                EditLink = new Link("Edit", Url.Action("Edit", new {p.Id}))
+            }));
         }
 
         [HttpGet]

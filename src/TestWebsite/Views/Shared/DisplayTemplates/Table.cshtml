@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Object>
+@{
+    var modelType = Model.GetItemType();
+    var modelMetaData = ModelMetadataProviders.Current.GetMetadataForType(null, modelType.UnderlyingSystemType);
+    var toshow = modelMetaData.Properties.Where(pm => pm.ShowForEdit && !ViewData.TemplateInfo.Visited(pm));
+}
+
+<table class="table table-condensed table-striped table-hover">
+    <thead>
+        <tr>
+            @foreach (var property in toshow)
+            {
+                <th>@Html.Label(property.PropertyName)</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        @Html.DisplayFor(m => item, "TableRow")
+    }
+    </tbody>
+</table>

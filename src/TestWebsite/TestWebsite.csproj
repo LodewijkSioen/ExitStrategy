@@ -135,6 +135,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\TypeHelpers.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Webforms\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -168,7 +170,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Views\Mvc\Index.cshtml" />
     <Content Include="Views\Web.config">
@@ -178,6 +179,10 @@
     <Content Include="Views\ModelBinding\Index.cshtml" />
     <Content Include="Views\ModelBinding\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Object.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Object.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Table.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TableRow.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Link.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

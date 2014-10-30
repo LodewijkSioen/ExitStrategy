@@ -17,9 +17,9 @@ namespace TestWebsite.Models
         [ScaffoldColumn(false)]
         [Key, ReadOnly(true)]
         public int Id { get; set; }
-        [Required]
+        [Required, DisplayName("First Name")]
         public string FirstName { get; set; }
-        [Required]
+        [Required, DisplayName("Last Name")]
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public Sex Gender { get; set; }
@@ -36,5 +36,13 @@ namespace TestWebsite.Models
 
             };
         }
+    }
+
+    public class PersonListItem
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        [DisplayName("")]
+        public Link EditLink { get; set; }
     }
 }

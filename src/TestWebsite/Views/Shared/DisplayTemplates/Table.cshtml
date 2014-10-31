@@ -2,7 +2,7 @@
 @{
     var modelType = Model.GetItemType();
     var modelMetaData = ModelMetadataProviders.Current.GetMetadataForType(null, modelType.UnderlyingSystemType);
-    var toshow = modelMetaData.Properties.Where(pm => pm.ShowForEdit && !ViewData.TemplateInfo.Visited(pm));
+    var toshow = modelMetaData.Properties.Where(pm => pm.ShowForEdit && !ViewData.TemplateInfo.Visited(pm)).ToList();
 }
 
 <table class="table table-condensed table-striped table-hover">
@@ -10,14 +10,23 @@
         <tr>
             @foreach (var property in toshow)
             {
-                <th>@Html.Label(property.PropertyName)</th>
+                <th>@(property.DisplayName ?? property.PropertyName)</th>
             }
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-        @Html.DisplayFor(m => item, "TableRow")
-    }
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+             {
+                 @Html.DisplayFor(m => item, "TableRow")
+             }
+        }
+        else
+        {
+            <tr>
+                <td colspan="@toshow.Count()">@(ViewBag.EmptyDataText ?? "No items in collection")</td>
+            </tr>
+        }
     </tbody>
 </table>

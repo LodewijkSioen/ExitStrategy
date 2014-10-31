@@ -28,19 +28,22 @@ namespace TestWebsite.Models
 
         public static IEnumerable<Person> GetBeatles() 
         {
-            yield return new Person
-            {
-                Id = 1,
-                FirstName = "Ringo",
-                LastName = "Starr",
+            yield break;
+            //yield return new Person
+            //{
+            //    Id = 1,
+            //    FirstName = "Ringo",
+            //    LastName = "Starr",
 
-            };
+            //};
         }
     }
 
     public class PersonListItem
     {
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
+        [DisplayName("First Name")]
         public string LastName { get; set; }
         [DisplayName("")]
         public Link EditLink { get; set; }

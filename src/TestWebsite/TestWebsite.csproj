@@ -105,8 +105,10 @@
     <Content Include="Content\Style\bootstrap-theme.min.css" />
     <Content Include="Content\Style\bootstrap.css" />
     <Content Include="Content\Style\bootstrap.min.css" />
+    <Content Include="Content\Style\datepicker3.css" />
     <Content Include="Content\Style\main.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -183,6 +185,9 @@
     <Content Include="Views\Shared\DisplayTemplates\Table.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TableRow.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Link.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

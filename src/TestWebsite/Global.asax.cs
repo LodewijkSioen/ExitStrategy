@@ -36,6 +36,7 @@ namespace TestWebsite
             bundles.Add(new ScriptBundle("~/js")
                 .Include("~/Scripts/jquery-{version}.js")
                 .Include("~/Scripts/bootstrap.js")
+                .Include("~/Scripts/bootstrap-datepicker.js")
                 .Include("~/Scripts/main.js")
             );
 

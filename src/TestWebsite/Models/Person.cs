@@ -7,9 +7,9 @@ namespace TestWebsite.Models
 {
     public enum Sex
     {
-        Unknown,
         Male,
-        Female
+        Female,
+        Other
     }
 
     public class Person
@@ -21,6 +21,7 @@ namespace TestWebsite.Models
         public string FirstName { get; set; }
         [Required, DisplayName("Last Name")]
         public string LastName { get; set; }
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public Sex Gender { get; set; }
         public bool IsDeceased { get; set; }

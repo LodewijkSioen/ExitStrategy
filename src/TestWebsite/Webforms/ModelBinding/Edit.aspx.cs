@@ -21,8 +21,7 @@ namespace TestWebsite.Webforms.ModelBinding
         protected void Button_Click(object sender, EventArgs e)
         {
             var person = new Person();
-            TryUpdateModel(person, new FormValueProvider(ModelBindingExecutionContext));
-            if (ModelState.IsValid)
+            if (TryUpdateModel(person, new FormValueProvider(ModelBindingExecutionContext)))
             {
                 Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
             }

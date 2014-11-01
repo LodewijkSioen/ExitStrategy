@@ -9,7 +9,6 @@
     <p>
         This page has a Model that is bound to a Razor EditorTemplate using @@Html.EditorForModel.
         Both the First Name and Last Name fields are required, so you can see the validation in action when you press Edit.
-        (Todo: DatePicker)
     </p>
 @using (Html.BeginForm("edit", "ModelBinding", FormMethod.Post,  new {@class = "form-horizontal", role="form"}))
 {

@@ -1,4 +1,10 @@
-﻿<div class="navbar-inverse navbar-fixed-top mvc" role="navigation">
+﻿@{
+    var currentUrl = Context.Request.Url.ToString().ToLower();
+    var isWebforms = currentUrl.Contains("webforms");
+    var webformsUrl = isWebforms ? currentUrl : currentUrl.Replace("mvc", "webforms");
+    var mvcUrl = isWebforms ? currentUrl.Replace("webforms", "mvc") : currentUrl;
+}
+<div class="navbar-inverse navbar-fixed-top mvc" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="~/">
@@ -10,8 +16,8 @@
 </div>
 <div class="container mvc">
 <div class="panel panel-default">
-    <ul class="nav nav-tabs" role="tablist">
-        <li><a href="~/webforms">Webforms</a></li>
-        <li><a href="~/mvc">Mvc</a></li>
+    <ul class="nav nav-pills nav-justified @(isWebforms ? "green" : "orange")" role="tablist">
+        <li class="@(isWebforms ? "active" : "")"><a href="@webformsUrl">Webforms</a></li>
+        <li class="@(isWebforms ? "" : "active")"><a href="@mvcUrl">Mvc</a></li>
     </ul>
     <div class="panel-body">

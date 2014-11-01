@@ -28,7 +28,7 @@ namespace TestWebsite
 
             routes.MapPageRoute("Webforms", "Webforms", "~/Webforms/Index.aspx");
             routes.MapPageRoute("Webforms-ModelBinding", "Webforms/ModelBinding", "~/Webforms/ModelBinding/Index.aspx");
-            routes.MapPageRoute("Webforms-ModelBinding-Edit", "Webforms/ModelBinding/{Id}", "~/Webforms/ModelBinding/Edit.aspx");
+            routes.MapPageRoute("Webforms-ModelBinding-Edit", "Webforms/ModelBinding/edit/{Id}", "~/Webforms/ModelBinding/Edit.aspx");
         }
 
         public static void RegisterBundles(BundleCollection bundles)

@@ -19,3 +19,9 @@
 .mvcLegend {
     background-color: #f0ad4e;
 }
+.nav-pills.green > li.active > a {
+    background-color: #419641;
+}
+.nav-pills.orange > li.active > a {
+    background-color: #f0ad4e;
+}

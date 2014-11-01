@@ -1,5 +1,5 @@
 ﻿@{
-    var currentUrl = Context.Request.Url.ToString().ToLower();
+    var currentUrl = Request.RawUrl.ToLower();
     var isWebforms = currentUrl.Contains("webforms");
     var webformsUrl = isWebforms ? currentUrl : currentUrl.Replace("mvc", "webforms");
     var mvcUrl = isWebforms ? currentUrl.Replace("webforms", "mvc") : currentUrl;

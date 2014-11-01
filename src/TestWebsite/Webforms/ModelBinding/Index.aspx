@@ -1,26 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="TestWebsite.Webforms.ModelBinding.Index" MasterPageFile="~/Webforms/Layout.Master" Title="Webforms Modelbinding" %>
+<%@ Register TagPrefix="mvc" Namespace="ExitStrategy.ForWebforms" Assembly="ExitStrategy.ForWebforms" %>
+
 <asp:Content ContentPlaceHolderID="Body" runat="server">
 <div class="webforms">
-    <h1>Modelbinding</h1>
-    <p>How Modelbinding works</p>
-    <asp:ListView runat="server" SelectMethod="Unnamed_GetData">
-        <LayoutTemplate>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr runat="server" id="itemPlaceholder" />
-                </tbody>
-          </table>
-        </LayoutTemplate>
-        <ItemTemplate>
-            <tr runat="server">
-                <td></td>
-            </tr>
-        </ItemTemplate>
-    </asp:ListView>
+    <h1>Webforms Modelbinding list</h1>
+    <p>
+        This is a Webforms page that uses a Razor DisplayTemplate to show a property defined in the codebehind.
+    </p>
+    <div class="mvc">
+        <mvc:Display Model="<%$l:() => Model %>" TemplateName="Table" runat="server" />
+    </div>
 </div>
 </asp:Content>

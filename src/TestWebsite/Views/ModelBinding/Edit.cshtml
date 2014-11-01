@@ -5,13 +5,15 @@
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 <div class="mvc">
-    <h1>Mvc Modelbinding Editor Template</h1>
+    <h1>Mvc Modelbinding Editor</h1>
     <p>
-        How modelbinding editors work
+        This page has a Model that is bound to a Razor EditorTemplate using @@Html.EditorForModel.
+        Both the First Name and Last Name fields are required, so you can see the validation in action when you press Edit.
+        (Todo: DatePicker)
     </p>
 @using (Html.BeginForm("edit", "ModelBinding", FormMethod.Post,  new {@class = "form-horizontal", role="form"}))
 {
-    @Html.EditorFor(m => m, new {htmlAttributes = new {@class = "form-control"},})
+    @Html.EditorForModel(new {htmlAttributes = new {@class = "form-control"},})
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <input type="submit" class="btn btn-primary" value="Edit"/>

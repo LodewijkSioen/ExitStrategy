@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Routing;
 using TestWebsite.Models;
 
 namespace TestWebsite.Webforms.ModelBinding
@@ -12,18 +10,14 @@ namespace TestWebsite.Webforms.ModelBinding
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Model = Person.GetBeatles().Select(p => new PersonListItem
+            {
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                EditLink = new Link("Edit", RouteTable.Routes.GetVirtualPath(null, "Webforms-ModelBinding-Edit", new RouteValueDictionary { { "Id", p.Id } }).VirtualPath)
+            });
         }
 
-        // The return type can be changed to IEnumerable, however to support
-        // paging and sorting, the following parameters must be added:
-        //     int maximumRows
-        //     int startRowIndex
-        //     out int totalRowCount
-        //     string sortByExpression
-        public IEnumerable<Person> GetData()
-        {
-            return Person.GetBeatles();
-        }
+        public IEnumerable<PersonListItem> Model { get; set; }
     }
 }

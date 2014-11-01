@@ -7,9 +7,9 @@
     ViewBag.EmptyDataText = "Nobody in the collection.";
 }
 <div class="mvc">
-<h1>Mvc Modelbinding list</h1>
+    <h1>Mvc Modelbinding list</h1>
     <p>
-        How Modelbinding works
+        This page has a Model that is bound to a Razor template using @@Html.DisplayForModel.
     </p>
-    @Html.DisplayFor(m => m, "Table")
+    @Html.DisplayForModel("Table")
 </div>

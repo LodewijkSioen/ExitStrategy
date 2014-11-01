@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.ModelBinding;
+using System.Web.Routing;
+using TestWebsite.Models;
 
 namespace TestWebsite.Webforms.ModelBinding
 {
@@ -11,7 +10,23 @@ namespace TestWebsite.Webforms.ModelBinding
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Model = Person.GetBeatles().FirstOrDefault(p => p.Id == Convert.ToInt32(RouteData.Values["Id"]));
+            }
+        }
 
+        public Person Model {get;set;}
+
+        protected void Button_Click(object sender, EventArgs e)
+        {
+            var person = new Person();
+            TryUpdateModel(person, new FormValueProvider(ModelBindingExecutionContext));
+            if (ModelState.IsValid)
+            {
+                Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
+            }
+            Model = person;
         }
     }
 }

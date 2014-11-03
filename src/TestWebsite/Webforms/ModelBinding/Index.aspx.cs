@@ -10,14 +10,17 @@ namespace TestWebsite.Webforms.ModelBinding
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Model = Person.GetBeatles().Select(p => new PersonListItem
+            
+        }
+
+        public IEnumerable<PersonListItem> GetPersons()
+        {
+            return Person.GetBeatles().Select(p => new PersonListItem
             {
                 FirstName = p.FirstName,
                 LastName = p.LastName,
                 EditLink = new Link("Edit", RouteTable.Routes.GetVirtualPath(null, "Webforms-ModelBinding-Edit", new RouteValueDictionary { { "Id", p.Id } }).VirtualPath)
             });
         }
-
-        public IEnumerable<PersonListItem> Model { get; set; }
     }
 }

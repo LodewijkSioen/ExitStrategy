@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Display.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="ModelStateAdapter.cs" />
     <Compile Include="MvcBridge.cs" />
     <Compile Include="MvcControl.cs" />
     <Compile Include="WebformsController.cs" />

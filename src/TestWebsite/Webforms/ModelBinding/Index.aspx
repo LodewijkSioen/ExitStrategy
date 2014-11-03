@@ -8,7 +8,7 @@
         This is a Webforms page that uses a Razor DisplayTemplate to show a property defined in the codebehind.
     </p>
     <div class="mvc">
-        <mvc:Display Model="<%$l:() => Model %>" TemplateName="Table" runat="server" />
+        <mvc:Display SelectMethod="GetPersons" TemplateName="Table" runat="server" />
     </div>
 </div>
 </asp:Content>

@@ -8,15 +8,12 @@ namespace TestWebsite.Webforms.ModelBinding
 {
     public partial class Edit : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
-            {
-                Model = Person.GetBeatles().FirstOrDefault(p => p.Id == Convert.ToInt32(RouteData.Values["Id"]));
-            }
-        }
+        private Person _postBackPerson;
 
-        public Person Model {get;set;}
+        public Person GetModel([RouteData]int id)
+        {
+            return _postBackPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);
+        }
 
         protected void Button_Click(object sender, EventArgs e)
         {
@@ -25,7 +22,7 @@ namespace TestWebsite.Webforms.ModelBinding
             {
                 Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
             }
-            Model = person;
+            _postBackPerson = person;
         }
     }
 }

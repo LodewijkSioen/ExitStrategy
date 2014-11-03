@@ -9,7 +9,7 @@
     </p>
     <div class="form-horizontal">
         <div class="mvc">
-            <mvc:Editor Model="<%$l:() => Model %>" AdditionalViewData='<%$l:()=> new {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
+            <mvc:Editor SelectMethod="GetModel" AdditionalViewData='<%$l:()=> new {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

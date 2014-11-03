@@ -14,6 +14,9 @@ namespace ExitStrategy.ForWebforms
 
         protected override void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext)
         {
+            if (viewBag.Model == null)
+                return;
+
             var helper = new HtmlHelper(viewContext, new WebformsViewDataContainer(viewBag));
             MvcHtmlString markup;
             Object additionalData = null;
@@ -22,7 +25,7 @@ namespace ExitStrategy.ForWebforms
             {
                 additionalData = AdditionalViewData.Compile().Invoke();
             }
-
+            
             if (string.IsNullOrEmpty(TemplateName))
             {
                 markup = helper.EditorForModel(additionalData);

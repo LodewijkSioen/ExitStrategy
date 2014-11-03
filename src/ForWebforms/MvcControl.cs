@@ -1,5 +1,6 @@
 using System;
-using System.Linq.Expressions;
+using System.Collections;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -7,19 +8,46 @@ using System.Web.UI.WebControls;
 
 namespace ExitStrategy.ForWebforms
 {
-    public abstract class MvcControl : WebControl
+    public abstract class MvcControl : DataBoundControl
     {
-        public Expression<Func<object>> Model { get; set; }
+        private object _model;
+        private Type _modelType;
+        private bool _isDataBound;
+
+        public override bool EnableViewState { get{return false;} }
+
+        protected override void PerformDataBinding(IEnumerable data)
+        {
+            _isDataBound = true;
+
+            if (string.IsNullOrWhiteSpace(SelectMethod))
+            {
+                _model = data;
+                _modelType = data != null ? data.GetType() : null;
+            }
+            else
+            {
+                _modelType = Page.GetType().GetMethod(SelectMethod).ReturnType;
+                if (typeof(IEnumerable).IsAssignableFrom(_modelType))
+                {
+                    _model = data;
+                }
+                else
+                {
+                    _model = data.OfType<object>().First();
+                }
+            }
+        }
 
         protected override void Render(HtmlTextWriter writer)
         {
             var viewBag = new ViewDataDictionary();
-            if (Model != null)
+            viewBag.ModelState.AdaptModelState(Page.ModelState);
+            
+            if (_isDataBound)
             {
-                var compiledModel = Model.Compile();
-                viewBag.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForExpression(Model);
-                viewBag.Model = compiledModel.Invoke();
-                viewBag.ModelState.AdaptModelState(Page.ModelState);
+                viewBag.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, _modelType);
+                viewBag.Model = _model;
             }
 
             var controllerContext = HttpContext.Current.CreateControllerContext(Page);
@@ -30,42 +58,5 @@ namespace ExitStrategy.ForWebforms
 
         protected abstract void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext);
 
-    }
-
-    public static class ModelStateAdapter
-    {
-        public static void AdaptModelState(this ModelStateDictionary mvcState, System.Web.ModelBinding.ModelStateDictionary webformsState)
-        {
-            foreach (var state in webformsState)
-            {
-                mvcState.Add(state.Key, state.Value.ToMvc());
-            }
-        }
-
-        public static ModelState ToMvc(this System.Web.ModelBinding.ModelState webformsState)
-        {
-            var mvcState = new ModelState
-            {
-                Value = new ValueProviderResult(webformsState.Value.RawValue, webformsState.Value.AttemptedValue, webformsState.Value.Culture)
-            };
-            foreach (var error in webformsState.Errors)
-            {
-                ModelError mvcError;
-                if (error.Exception == null)
-                {
-                    mvcError = new ModelError(error.ErrorMessage);
-                }
-                else if (error.ErrorMessage == null)
-                {
-                    mvcError = new ModelError(error.Exception);
-                }
-                else
-                {
-                    mvcError = new ModelError(error.Exception, error.ErrorMessage);
-                }
-                mvcState.Errors.Add(mvcError);
-            }
-            return mvcState;
-        }
     }
 }

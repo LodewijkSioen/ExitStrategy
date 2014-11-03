@@ -9,7 +9,10 @@ namespace ExitStrategy.ForWebforms
         public string TemplateName { get; set; }
 
         protected override void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext)
-        {   
+        {
+            if (viewBag.Model == null)
+                return;
+
             var helper = new HtmlHelper(viewContext, new WebformsViewDataContainer(viewBag));
             MvcHtmlString markup;
             if (string.IsNullOrEmpty(TemplateName))

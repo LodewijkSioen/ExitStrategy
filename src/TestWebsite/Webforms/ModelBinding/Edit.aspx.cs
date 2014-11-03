@@ -12,6 +12,7 @@ namespace TestWebsite.Webforms.ModelBinding
 
         public Person GetModel([RouteData]int id)
         {
+            //Not 100% happy about this... (otoh, it's better than viewstate...)
             return _postBackPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);
         }
 

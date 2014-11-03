@@ -27,14 +27,26 @@ namespace ExitStrategy.ForWebforms
             }
             else
             {
+                //If the control is databound using the 4.5 SelectMethod, we can determine the 
+                //type of the model by looking at the returntype of the SelectMethod
                 _modelType = Page.GetType().GetMethod(SelectMethod).ReturnType;
-                if (typeof(IEnumerable).IsAssignableFrom(_modelType))
+
+                //Webforms Databinding only works with IEnumerables (hello .net 1.0). It has no concept of
+                //databinding to a single item. So we need to handle this here: If the type of the model 
+                //is not an IEnumerable, we just need the first item in the collection.
+                if (data == null)
+                {
+                    _model = null;
+                }
+                else if (typeof(IEnumerable).IsAssignableFrom(_modelType))
                 {
                     _model = data;
                 }
                 else
                 {
-                    _model = data.OfType<object>().First();
+                    var enumerator = data.GetEnumerator();
+                    enumerator.MoveNext();
+                    _model = enumerator.Current;
                 }
             }
         }

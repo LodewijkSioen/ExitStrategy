@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -20,12 +19,7 @@ namespace ExitStrategy.ForWebforms
         {
             _isDataBound = true;
 
-            if (string.IsNullOrWhiteSpace(SelectMethod))
-            {
-                _model = data;
-                _modelType = data != null ? data.GetType() : null;
-            }
-            else
+            if (IsUsingModelBinders)
             {
                 //If the control is databound using the 4.5 SelectMethod, we can determine the 
                 //type of the model by looking at the returntype of the SelectMethod
@@ -38,7 +32,7 @@ namespace ExitStrategy.ForWebforms
                 {
                     _model = null;
                 }
-                else if (typeof(IEnumerable).IsAssignableFrom(_modelType))
+                else if (typeof (IEnumerable).IsAssignableFrom(_modelType))
                 {
                     _model = data;
                 }
@@ -48,6 +42,11 @@ namespace ExitStrategy.ForWebforms
                     enumerator.MoveNext();
                     _model = enumerator.Current;
                 }
+            }
+            else
+            {
+                _model = data;
+                _modelType = data != null ? data.GetType() : null;
             }
         }
 

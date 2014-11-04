@@ -4,7 +4,7 @@ using System.Web.UI;
 
 namespace ExitStrategy.ForWebforms
 {
-    public class LambdaExpressionBuilder : ExpressionBuilder
+    public class ObjectExpressionBuilder : ExpressionBuilder
     {
         public override CodeExpression GetCodeExpression(BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
         {

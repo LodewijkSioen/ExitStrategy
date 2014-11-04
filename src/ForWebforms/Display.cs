@@ -8,6 +8,8 @@ namespace ExitStrategy.ForWebforms
     {
         public string TemplateName { get; set; }
 
+        public object AdditionalViewData { get; set; }
+
         protected override void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext)
         {
             if (viewBag.Model == null)
@@ -17,11 +19,11 @@ namespace ExitStrategy.ForWebforms
             MvcHtmlString markup;
             if (string.IsNullOrEmpty(TemplateName))
             {
-                markup = helper.DisplayForModel();
+                markup = helper.DisplayForModel(AdditionalViewData);
             }
             else
             {
-                markup = helper.DisplayForModel(TemplateName);
+                markup = helper.DisplayForModel(TemplateName, AdditionalViewData);
             }
 
             writer.Write(markup.ToString());

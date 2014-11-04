@@ -9,12 +9,17 @@
     </p>
     <div class="form-horizontal">
         <div class="mvc">
-            <mvc:Editor SelectMethod="GetModel" AdditionalViewData='<%$l:()=> new {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
+            <mvc:Editor SelectMethod="GetModel" AdditionalViewData='<%$Object:new {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <asp:Button Text="Edit" CssClass="btn btn-primary" OnClick="Button_Click" runat="server" />
                 <asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
+                <div class="checkbox-inline">
+                    <label for="disableValidation">
+                        <input type="checkbox" id="disableValidation" /> Disable client-side validation
+                    </label>
+                </div>
             </div>
         </div>
     </div>

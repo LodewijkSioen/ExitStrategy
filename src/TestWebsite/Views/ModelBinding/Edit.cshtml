@@ -17,6 +17,11 @@
         <div class="col-sm-offset-2 col-sm-10">
             <input type="submit" class="btn btn-primary" value="Edit"/>
             @Html.ActionLink("Cancel", "index", "ModelBinding", new {@class = "btn btn-link"})
+            <div class="checkbox-inline">
+                    <label for="disableValidation">
+                        <input type="checkbox" id="disableValidation" /> Disable client-side validation
+                    </label>
+                </div>
         </div>
     </div>
 }

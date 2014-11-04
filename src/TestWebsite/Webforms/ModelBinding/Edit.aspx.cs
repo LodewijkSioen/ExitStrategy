@@ -8,12 +8,12 @@ namespace TestWebsite.Webforms.ModelBinding
 {
     public partial class Edit : System.Web.UI.Page
     {
-        private Person _postBackPerson;
+        private Person _validatedPerson;
 
         public Person GetModel([RouteData]int id)
         {
             //Not 100% happy about this... (otoh, it's better than viewstate...)
-            return _postBackPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);
+            return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);
         }
 
         protected void Button_Click(object sender, EventArgs e)
@@ -23,7 +23,8 @@ namespace TestWebsite.Webforms.ModelBinding
             {
                 Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
             }
-            _postBackPerson = person;
+            
+            _validatedPerson = person;
         }
     }
 }

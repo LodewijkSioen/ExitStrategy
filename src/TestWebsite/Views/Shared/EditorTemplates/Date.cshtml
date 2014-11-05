@@ -1,5 +1,5 @@
 ﻿@model DateTime
 <div class="input-group date">
-    @Html.TextBoxFor(m => m, new {@class="form-control text-box single-line", data_provide = "datepicker", type="date"})
+    @Html.TextBoxFor(m => m, ViewData.ModelMetadata.EditFormatString, new {@class="form-control text-box single-line", data_provide = "datepicker", type="date"})
     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 </div>

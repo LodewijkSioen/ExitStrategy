@@ -21,7 +21,7 @@ namespace TestWebsite.Models
         public string FirstName { get; set; }
         [Required, DisplayName("Last Name")]
         public string LastName { get; set; }
-        [DataType(DataType.Date), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "dd/MM/yyyy")]
+        [DataType(DataType.Date), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
         public Sex Gender { get; set; }
         public bool IsDeceased { get; set; }

@@ -7,9 +7,10 @@
         This is a webforms page with the same Razor template from the Mvc Editor sample. You can post back to a codebehind method. 
         Leaving First Name or Last Name blank will trigger the validation in Webforms and the result will be shown on the Razor template.
     </p>
+     
     <div class="form-horizontal">
         <div class="mvc">
-            <mvc:Editor SelectMethod="GetModel" AdditionalViewData='<%$Object:new {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
+            <mvc:Editor ID="ModelBoundEditor" SelectMethod="GetModel" AdditionalViewData='<%$Object:new {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -23,5 +24,24 @@
             </div>
         </div>
     </div>
+    
+    <asp:FormView ID="FormView1" runat="server" SelectMethod="GetModel" UpdateMethod="SetModel" DefaultMode="Edit" RenderOuterTable="false" EnableViewState="False">
+        <EditItemTemplate>
+            <div class="form-horizontal">
+                <mvc:Editor ID="FormViewEditor" runat="server" DataSource="<%# Container.DataItem %>" AdditionalViewData='<%$Object:new {htmlAttributes = new {@class = "form-control"},} %>'/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>
+                        <asp:HyperLink ID="HyperLink1" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
+                        <div class="checkbox-inline">
+                            <label for="disableValidation">
+                                <input type="checkbox" id="disableValidation" /> Disable client-side validation
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </EditItemTemplate>
+    </asp:FormView>
 </div>
 </asp:Content>

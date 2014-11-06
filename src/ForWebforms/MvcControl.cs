@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.Specialized;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -7,13 +9,18 @@ using System.Web.UI.WebControls;
 
 namespace ExitStrategy.ForWebforms
 {
-    public abstract class MvcControl : DataBoundControl
+    public abstract class MvcControl : DataBoundControl, IBindableControl
     {
         private object _model;
         private Type _modelType;
         private bool _isDataBound;
 
         public override bool EnableViewState { get{return false;} }
+
+        protected override void ValidateDataSource(object dataSource)
+        {
+            //Do noting, we accept anything
+        }
 
         protected override void PerformDataBinding(IEnumerable data)
         {
@@ -43,6 +50,11 @@ namespace ExitStrategy.ForWebforms
                     _model = enumerator.Current;
                 }
             }
+            else if (DataSource != null)
+            {
+                _model = DataSource;
+                _modelType = DataSource.GetType();
+            }
             else
             {
                 _model = data;
@@ -59,6 +71,7 @@ namespace ExitStrategy.ForWebforms
             {
                 viewBag.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, _modelType);
                 viewBag.Model = _model;
+                viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
             }
 
             var controllerContext = HttpContext.Current.CreateControllerContext(Page);
@@ -69,5 +82,34 @@ namespace ExitStrategy.ForWebforms
 
         protected abstract void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext);
 
+        public void ExtractValues(IOrderedDictionary dictionary)
+        {
+            var formPrefix = ClientID + ".";
+            var form = Context.Request.Form;
+
+            foreach (var key in form.Keys.OfType<string>())
+            {
+                if (key.StartsWith(formPrefix))
+                {
+                    var actualKey = key.Substring(formPrefix.Length);
+                    dictionary.Add(actualKey, GetValue(key, form));
+                }
+            }
+        }
+
+        private string GetValue(string key, NameValueCollection form)
+        {
+            //Sigh: http://stackoverflow.com/questions/2697299/asp-net-mvc-why-is-html-checkbox-generating-an-additional-hidden-input
+            var value = form[key];
+            switch (value)
+            {
+                case "true,false":
+                    return "true";
+                case "false,true":
+                    return "false";
+                default:
+                    return value;
+            }
+        }
     }
 }

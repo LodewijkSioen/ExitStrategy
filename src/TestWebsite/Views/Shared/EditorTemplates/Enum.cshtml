@@ -2,7 +2,7 @@
 @if (EnumHelper.IsValidForEnumHelper(ViewData.ModelMetadata))
 {
    // Provide radio buttons for current Enum value
-   string name = ViewData.ModelMetadata.PropertyName;
+   string name = Html.NameForModel().ToString();
    string id = Html.IdForModel().ToString();
    int itemNum = 0;
    

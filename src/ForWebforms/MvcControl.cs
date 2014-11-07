@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Collections;
 using System.Collections.Specialized;
@@ -82,19 +84,32 @@ namespace ExitStrategy.ForWebforms
 
         protected abstract void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext);
 
-        public void ExtractValues(IOrderedDictionary dictionary)
+        private IEnumerable<KeyValuePair<String, String>> ExtractValues()
         {
             var formPrefix = ClientID + ".";
             var form = Context.Request.Form;
 
-            foreach (var key in form.Keys.OfType<string>())
+            return from key in form.Keys.OfType<string>()
+                   where key.StartsWith(formPrefix)
+                   select new KeyValuePair<string, string>(key.Substring(formPrefix.Length), GetValue(key, form));
+        }
+
+        public void ExtractValues(IOrderedDictionary dictionary)
+        {
+            foreach (var value in ExtractValues())
             {
-                if (key.StartsWith(formPrefix))
-                {
-                    var actualKey = key.Substring(formPrefix.Length);
-                    dictionary.Add(actualKey, GetValue(key, form));
-                }
+                dictionary.Add(value.Key, value.Value);
             }
+        }
+
+        public System.Web.ModelBinding.IValueProvider GetValueProvider()
+        {
+            var nameValueCollection = new NameValueCollection();
+            foreach (var value in ExtractValues())
+            {
+                nameValueCollection.Add(value.Key, value.Value);
+            }
+            return new System.Web.ModelBinding.NameValueCollectionValueProvider(nameValueCollection, CultureInfo.CurrentCulture);
         }
 
         private string GetValue(string key, NameValueCollection form)

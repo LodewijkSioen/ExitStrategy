@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Web.ModelBinding;
-using System.Web.Routing;
 using TestWebsite.Models;
 
 namespace TestWebsite.Webforms.ModelBinding
@@ -20,7 +19,7 @@ namespace TestWebsite.Webforms.ModelBinding
         {
             if (ModelState.IsValid)
             {
-                Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
+                OnSucces(person);
             }
             _validatedPerson = person;
         }
@@ -30,10 +29,19 @@ namespace TestWebsite.Webforms.ModelBinding
             var person = new Person();
             if (TryUpdateModel(person, ModelBoundEditor.GetValueProvider()))
             {
-                Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
+                OnSucces(person);
             }
             
             _validatedPerson = person;
+        }
+
+        private void OnSucces(Person person)
+        {
+            //Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
+            FormPanel.Visible = false;
+            ResultPanel.Visible = true;
+            ResultDisplay.DataSource = person;
+            ResultDisplay.DataBind();
         }
     }
 

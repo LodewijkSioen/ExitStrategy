@@ -7,7 +7,7 @@
         This is a webforms page with the same Razor template from the Mvc Editor sample. You can post back to a codebehind method. 
         Leaving First Name or Last Name blank will trigger the validation in Webforms and the result will be shown on the Razor template.
     </p>
-     
+    <asp:Panel runat="server" ID="FormPanel">
     <div class="form-horizontal">
         <div class="mvc">
             <mvc:Editor ID="ModelBoundEditor" SelectMethod="GetModel" AdditionalViewData='<%$Object:new {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
@@ -43,5 +43,14 @@
             </div>
         </EditItemTemplate>
     </asp:FormView>
+    </asp:Panel>
+    <asp:Panel runat="server" ID="ResultPanel" Visible="false">
+        <p>These are the values you posted to the form:</p>
+        <div class="form-horizontal">
+        <div class="mvc">
+        <mvc:Display runat="server" ID="ResultDisplay"/>
+        </div>
+        </div>
+    </asp:Panel>
 </div>
 </asp:Content>

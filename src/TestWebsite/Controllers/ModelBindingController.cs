@@ -29,7 +29,7 @@ namespace TestWebsite.Controllers
         {
             if (TryValidateModel(editPerson))
             {
-                return RedirectToAction("index");    
+                return View("Post", editPerson);
             }
 
             return View(editPerson);

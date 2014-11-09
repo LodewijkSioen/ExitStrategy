@@ -1,0 +1,17 @@
+﻿@model TestWebsite.Models.Person
+
+@{
+    ViewBag.Title = "Mvc Modelbinding Edit";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<div class="mvc">
+    <h1>Mvc Modelbinding Editor</h1>
+    <p>
+        This page has a Model that is bound to a Razor EditorTemplate using @@Html.EditorForModel.
+        Both the First Name and Last Name fields are required, so you can see the validation in action when you press Edit.
+    </p>
+    <p>These are the values you posted to the form:</p>
+    <div class="form-horizontal">
+        @Html.DisplayForModel(new {htmlAttributes = new {@class = "form-control"},})
+    </div>
+</div>

@@ -13,5 +13,10 @@
     <p>These are the values you posted to the form:</p>
     <div class="form-horizontal">
         @Html.DisplayForModel(new {htmlAttributes = new {@class = "form-control"},})
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a href='@Url.Action("index", "ModelBinding")' class="btn btn-link">&#8592; Back to list</a>
+            </div>
+        </div>
     </div>
 </div>

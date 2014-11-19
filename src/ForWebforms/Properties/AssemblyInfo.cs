@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ExitStrategy.ForWebforms")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Tools and Controls to help the migration from Webformst to MVC")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Lodewijk Sioen")]
 [assembly: AssemblyProduct("ExitStrategy.ForWebforms")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]

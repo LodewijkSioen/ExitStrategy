@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ExitStrategy.ForWebforms")]
-[assembly: AssemblyDescription("Tools and Controls to help the migration from Webformst to MVC")]
+[assembly: AssemblyDescription("Tools and Controls to help the migration from asp.net Webforms to MVC")]
 [assembly: AssemblyCompany("Lodewijk Sioen")]
 [assembly: AssemblyProduct("ExitStrategy.ForWebforms")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]

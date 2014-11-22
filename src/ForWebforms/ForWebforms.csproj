@@ -77,7 +77,9 @@
     <Compile Include="WebformsViewDataContainer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ForWebforms.nuspec" />
+    <None Include="ForWebforms.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

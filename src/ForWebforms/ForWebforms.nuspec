@@ -10,7 +10,7 @@
     <description>$description$</description>
     <copyright>Copyright 2014</copyright>
     <projectUrl>https://github.com/LodewijkSioen/ExitStrategy</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/LodewijkSioen/ExitStrategy/master/src/FromWebforms/NugetIcon.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/LodewijkSioen/ExitStrategy/master/src/ForWebforms/NugetIcon.png</iconUrl>
     <tags>webforms asp.net mvc razor migration</tags>
   </metadata>
 </package>

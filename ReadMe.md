@@ -9,3 +9,5 @@ won't find any tools to integrate WebForms into MVC, just tools to integrate the
 your legacy WebForms pages.
 
 You can see a [demo site here](http://exitstrategy.apphb.com/).
+
+[![Build status](https://ci.appveyor.com/api/projects/status/6q6qxr2t7p03v2m7/branch/master?svg=true)](https://ci.appveyor.com/project/LodewijkSioen/exitstrategy/branch/master)

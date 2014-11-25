@@ -69,6 +69,7 @@
     <Compile Include="ModelStateAdapter.cs" />
     <Compile Include="MvcBridge.cs" />
     <Compile Include="MvcControl.cs" />
+    <Compile Include="Version.cs" />
     <Compile Include="WebformsController.cs" />
     <Compile Include="Partial.cs" />
     <Compile Include="PropertyHelper.cs" />
@@ -81,9 +82,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="NugetIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

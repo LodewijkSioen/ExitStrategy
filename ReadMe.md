@@ -5,8 +5,12 @@ This repository provides the following:
 - WebForms controls that will allow you to re-use your MVC Views in the WebForms world. For Example:
 
 ````aspnet
-<mcv:Partial PartialViewName="Header" runat="server" />
-<mvc:Editor SelectMethod="GetModel" AdditionalViewData='<%$Object:new {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
+<mcv:Partial PartialViewName="Header" 
+             runat="server" />
+
+<mvc:Editor SelectMethod="GetModel" 
+            AdditionalViewData='<%$Object:new {htmlAttributes = new {@class = "form-control"},} %>' 
+            runat="server" />
 ````
 
 The ultimate goal is to help you migrate away from WebForms into the new and shiny MVC-world. That's why you

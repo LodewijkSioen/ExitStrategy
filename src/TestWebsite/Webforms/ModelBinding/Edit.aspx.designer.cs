@@ -13,6 +13,15 @@ namespace TestWebsite.Webforms.ModelBinding {
     public partial class Edit {
         
         /// <summary>
+        /// HyperLink2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+        
+        /// <summary>
         /// FormPanel control.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,13 @@ namespace TestWebsite.Webforms.ModelBinding {
         protected global::ExitStrategy.ForWebforms.Editor ModelBoundEditor;
         
         /// <summary>
-        /// FormView1 control.
+        /// FormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView FormView1;
+        protected global::System.Web.UI.WebControls.FormView FormView;
         
         /// <summary>
         /// ResultPanel control.

@@ -1,4 +1,4 @@
-<img src='https://raw.githubusercontent.com/LodewijkSioen/ExitStrategy/master/img/Icon_512.png' alt='ExitStrategy Logo' />
+<img src='https://raw.githubusercontent.com/LodewijkSioen/ExitStrategy/master/img/Banner.png' alt='ExitStrategy Logo' />
 ================================
 
 What is ExitStrategy?

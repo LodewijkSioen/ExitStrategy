@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit.aspx.cs" Inherits="TestWebsite.Webforms.ModelBinding.Edit" MasterPageFile="~/Webforms/Layout.Master" Title="Webforms Modelbinding Edit" %>
-<%@ Register TagPrefix="mvc" Namespace="ExitStrategy.ForWebforms" Assembly="ExitStrategy.ForWebforms" %>
 <asp:Content ContentPlaceHolderID="Body" runat="server">
 <div class="webforms">
     <h1>Webforms Modelbinding Editor</h1>

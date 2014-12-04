@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="TestWebsite.Webforms.ModelBinding.Index" MasterPageFile="~/Webforms/Layout.Master" Title="Webforms Modelbinding" %>
-<%@ Register TagPrefix="mvc" Namespace="ExitStrategy.ForWebforms" Assembly="ExitStrategy.ForWebforms" %>
 
 <asp:Content ContentPlaceHolderID="Body" runat="server">
 <div class="webforms">

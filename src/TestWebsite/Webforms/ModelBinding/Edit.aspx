@@ -34,7 +34,9 @@
     <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" UpdateMethod="SetModel" DefaultMode="Edit" RenderOuterTable="false" EnableViewState="False" Visible="False">
         <EditItemTemplate>
             <div class="form-horizontal">
-                <mvc:Editor ID="FormViewEditor" runat="server" DataSource="<%# Container.DataItem %>" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                <div class="mvc">
+                    <mvc:Editor ID="FormViewEditor" runat="server" DataSource="<%# Container.DataItem %>" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>

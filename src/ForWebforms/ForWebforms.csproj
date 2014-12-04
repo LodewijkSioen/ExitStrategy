@@ -73,7 +73,7 @@
     <Compile Include="WebformsController.cs" />
     <Compile Include="Partial.cs" />
     <Compile Include="PropertyHelper.cs" />
-    <Compile Include="LambdaExpressionBuilder.cs" />
+    <Compile Include="NewObjectExpressionBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebformsViewDataContainer.cs" />
   </ItemGroup>

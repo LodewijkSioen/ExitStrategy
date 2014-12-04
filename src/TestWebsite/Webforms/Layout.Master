@@ -1,6 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="TestWebsite.Webforms.Layout" %>
 <%@ Import Namespace="System.Web.Optimization" %>
-<%@ Register TagPrefix="mvc" Namespace="ExitStrategy.ForWebforms" Assembly="ExitStrategy.ForWebforms" %>
 
 <!DOCTYPE html>
 <html lang="en">

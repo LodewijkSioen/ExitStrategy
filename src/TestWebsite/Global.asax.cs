@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TestWebsite.Helpers;
 
 namespace TestWebsite
 {
@@ -12,6 +15,14 @@ namespace TestWebsite
         {
             RegisterRoutes(RouteTable.Routes);
             RegisterBundles(BundleTable.Bundles);
+
+            //ModelBinders.Binders.Add(typeof(DateTime), new DateTimeBinder());            
+        }
+
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
         }
 
         public static void RegisterRoutes(RouteCollection routes)

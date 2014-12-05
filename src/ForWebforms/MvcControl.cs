@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ExitStrategy.ForWebforms.ModelBinding;
 
 namespace ExitStrategy.ForWebforms
 {

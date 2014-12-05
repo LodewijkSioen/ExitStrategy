@@ -1,29 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Web;
+using System.Text.RegularExpressions;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
-using IMvcModelBinder = System.Web.Mvc.IModelBinder;
-using IWebformsModelBinder = System.Web.ModelBinding.IModelBinder;
+using IModelBinder = ExitStrategy.ForWebforms.ModelBinding.IModelBinder;
+using MvcModelBindingContext = System.Web.Mvc.ModelBindingContext;
+using WebformsModelBindingContext = System.Web.ModelBinding.ModelBindingContext;
 
 namespace TestWebsite.Helpers
 {
-    public class DateTimeBinder : IMvcModelBinder, IWebformsModelBinder
+    public class DateTimeBinder : IModelBinder
     {
-        public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        public static Regex FormatRegex = new Regex("{.*:(.*)}", RegexOptions.Singleline);
+
+        public object BindModel(ControllerContext controllerContext, MvcModelBindingContext bindingContext)
         {
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            var format = bindingContext.ModelMetadata.EditFormatString;
+            var format = FormatRegex.Match(bindingContext.ModelMetadata.EditFormatString);
 
-            var date = DateTime.ParseExact(value.RawValue.ToString(), format, CultureInfo.CurrentUICulture);
-
-            return date;
+            return BindModelImpl(value.AttemptedValue, format, value.Culture) ?? value.ConvertTo(typeof(DateTime));
         }
 
-        public bool BindModel(System.Web.ModelBinding.ModelBindingExecutionContext modelBindingExecutionContext, System.Web.ModelBinding.ModelBindingContext bindingContext)
+        public bool BindModel(ModelBindingExecutionContext modelBindingExecutionContext, WebformsModelBindingContext bindingContext)
         {
-            throw new NotImplementedException();
+            var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            var format = FormatRegex.Match(bindingContext.ModelMetadata.EditFormatString);
+
+            bindingContext.Model = BindModelImpl(value.AttemptedValue, format, value.Culture);
+
+            return bindingContext.Model != null;
+        }
+
+        private static DateTime? BindModelImpl(string value, Match format, CultureInfo culture)
+        {
+            DateTime result;
+            return (format.Success &&
+                    DateTime.TryParseExact(value, format.Groups[1].Value, culture, DateTimeStyles.None, out result))
+                ? (DateTime?) result
+                : null;
         }
     }
 }

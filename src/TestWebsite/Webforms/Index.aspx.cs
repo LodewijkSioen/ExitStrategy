@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Web.ModelBinding;
-using TestWebsite.Models;
 
 namespace TestWebsite.Webforms
 {

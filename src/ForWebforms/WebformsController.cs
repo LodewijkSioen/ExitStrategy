@@ -7,9 +7,9 @@ namespace ExitStrategy.ForWebforms
 {
     internal class WebformsController : Controller
     {
-        public WebformsController(HttpContext context, Page page)
+        public WebformsController(HttpContextBase context, Page page)
         {
-            this.Initialize(new RequestContext(new HttpContextWrapper(context), page.RouteData));
+            this.Initialize(new RequestContext(context, page.RouteData));
         }
     }
     

@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -52,6 +51,7 @@ namespace ExitStrategy.ForWebforms
                     enumerator.MoveNext();
                     _model = enumerator.Current;
                 }
+                
             }
             else if (DataSource != null)
             {
@@ -77,13 +77,14 @@ namespace ExitStrategy.ForWebforms
                 viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
             }
 
-            var controllerContext = HttpContext.Current.CreateControllerContext(Page);
-            var viewContext = controllerContext.CreateViewContext(writer, viewBag);
+            var helper = MvcBridge.CreateHtmlHelper(Page, viewBag, writer);
 
-            RenderMvcContent(writer, viewBag, controllerContext, viewContext);
+            var markup = RenderMvcContent(helper, viewBag);
+
+            writer.Write(markup.ToString());
         }
 
-        protected abstract void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext);
+        protected abstract MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag);
 
         private IEnumerable<KeyValuePair<String, String>> ExtractValues()
         {

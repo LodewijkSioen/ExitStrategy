@@ -1,23 +1,21 @@
-﻿using System.ComponentModel;
+﻿using System;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using System.Web.UI;
 
 namespace ExitStrategy.ForWebforms
 {
-    [DefaultProperty("Model")]
-    [ToolboxData("<{0}:Partial runat=server></{0}:Partial>")]
+    [ToolboxData("<{0}:Partial runat=server />")]
     public class Partial : MvcControl
     {
         public string PartialViewName { get; set; }
 
-        protected override void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext)
+        protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)
         {
-            var viewEngineResult = ViewEngines.Engines.FindPartialView(controllerContext, PartialViewName);
-            if (viewEngineResult != null)
-            {   
-                viewEngineResult.View.Render(viewContext, writer);
-            }
-        }
+            if (PartialViewName == null)
+                throw new NullReferenceException(String.Format("The Partial View Control with ID '{0}' needs a PartialViewName.", ClientID));
 
+            return helper.Partial(PartialViewName);
+        }
     }
 }

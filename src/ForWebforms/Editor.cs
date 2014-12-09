@@ -4,30 +4,16 @@ using System.Web.UI;
 
 namespace ExitStrategy.ForWebforms
 {
+    [ToolboxData("<{0}:Editor runat=server />")]
     public class Editor : MvcControl
     {
         public string TemplateName { get; set; }
 
         public object AdditionalViewData { get; set; }
 
-        protected override void RenderMvcContent(HtmlTextWriter writer, ViewDataDictionary viewBag, ControllerContext controllerContext, ViewContext viewContext)
+        protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)
         {
-            if (viewBag.Model == null)
-                return;
-
-            var helper = new HtmlHelper(viewContext, new WebformsViewDataContainer(viewBag));
-            MvcHtmlString markup;
-            
-            if (string.IsNullOrEmpty(TemplateName))
-            {
-                markup = helper.EditorForModel(AdditionalViewData);
-            }
-            else
-            {
-                markup = helper.EditorForModel(TemplateName, AdditionalViewData);
-            }
-
-            writer.Write(markup.ToString());
+            return helper.EditorForModel(TemplateName, AdditionalViewData);
         }
     }
 }

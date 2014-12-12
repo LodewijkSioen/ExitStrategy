@@ -10,7 +10,12 @@ namespace ExitStrategy.ForWebforms
 
         public override CodeExpression GetCodeExpression(BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
         {
-            return new CodeSnippetExpression(string.Concat(New, entry.Expression));
+            return GetCodeExpressionImpl(entry.Expression);
+        }
+
+        public CodeSnippetExpression GetCodeExpressionImpl(string expression)
+        {
+            return new CodeSnippetExpression(string.Concat(New, expression));
         }
     }
 }

@@ -79,6 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NewObjectExpressionTests.cs" />
+    <Compile Include="PartialControlTests.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvcBridgeTests.cs" />
   </ItemGroup>

@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Display.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="HttpRequestProvider.cs" />
     <Compile Include="ModelBinding\IModelBinder.cs" />
     <Compile Include="ModelBinding\ModelBinderAdapter.cs" />
     <Compile Include="ModelBinding\ModelStateAdapter.cs" />

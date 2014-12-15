@@ -76,8 +76,8 @@ namespace ExitStrategy.ForWebforms
                 viewBag.Model = _model;
                 viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
             }
-
-            var helper = MvcBridge.CreateHtmlHelper(Page.Request.RequestContext, viewBag, writer);
+            
+            var helper = MvcBridge.CreateHtmlHelper(HttpContextProvider.Current.Request.RequestContext, viewBag, writer);
 
             var markup = RenderMvcContent(helper, viewBag);
 

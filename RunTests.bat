@@ -11,9 +11,9 @@ GOTO FOUND
 IF '%TOOLPATH%'=='' GOTO NOTFOUND
  
 :FOUND
-%TOOLPATH% %* --XUnitXml TestResult.xml src\ForWebforms.Tests\bin\ForWebforms.Tests.dll
+%TOOLPATH% %* --NUnitXml TestResult.xml src\ForWebforms.Tests\bin\ForWebforms.Tests.dll
 GOTO :EOF
  
 :NOTFOUND
-ECHO nunit-console not found.
+ECHO Fixie.Console not found.
 EXIT /B 1 

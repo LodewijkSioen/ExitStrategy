@@ -30,9 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fixie, Version=0.0.1.218, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Fixie, Version=0.0.1.222, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Fixie.0.0.1.218\lib\net45\Fixie.dll</HintPath>
+      <HintPath>..\packages\Fixie.0.0.1.222\lib\net45\Fixie.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -78,6 +78,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisplayControlTests.cs" />
+    <Compile Include="EditorControlTests.cs" />
+    <Compile Include="MvcControlTests.cs" />
     <Compile Include="WebformsScaffold.cs" />
     <Compile Include="MockPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -103,6 +106,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\TestWithModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

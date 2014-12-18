@@ -2,29 +2,31 @@
 using System.Web.UI.WebControls;
 using ExitStrategy.ForWebforms;
 using Shouldly;
-using System.Web.UI;
 
 namespace ForWebforms.Tests
 {
-   public class PartialControlTests
+    public class PartialControlTests : MvcControlTests<Partial>
     {
-        private readonly WebformsScaffold<Partial> _host;
-
-        public PartialControlTests()
-        {
-            _host = WebformsScaffold<Partial>.Create();
-        }
-
         public void RenderWithoutModel()
         {
-            var result = _host.Test((c, p) => c.PartialViewName = "Test");
+            var result = Host.Test((c, p) => c.PartialViewName = "Test");
 
             result.ShouldBe("this is a partial view!");
         }
 
+        public void RenderWithoutViewNameShouldFail()
+        {
+            var ex = Host.Throws<NullReferenceException>((c, p) =>
+            {
+                c.ID = "TestControl";
+            });
+
+            ex.Message.ShouldContain("The Partial View Control with ID 'TestControl' needs a PartialViewName.");
+        }
+
         public void RenderWithModelViaDataSource()
         {
-            var result = _host.Test((c, p) =>
+            var result = Host.Test((c, p) =>
             {
                 c.PartialViewName = "TestWithModel";
                 c.DataSource = new DateTime(2014, 12, 18);
@@ -36,7 +38,7 @@ namespace ForWebforms.Tests
 
         public void RenderWithModelViaModelbinding()
         {
-            var result = _host.Test((c, p) =>
+            var result = Host.Test((c, p) =>
             {
                 c.PartialViewName = "TestWithModel";
                 c.SelectMethod = "GetModel";
@@ -48,7 +50,7 @@ namespace ForWebforms.Tests
 
         public void RenderWithModelViaDateSourceId()
         {
-            var result = _host.Test((c, p) =>
+            var result = Host.Test((c, p) =>
             {
                 c.PartialViewName = "TestWithModel";
                 c.DataSourceID = "ModelSource";
@@ -64,16 +66,6 @@ namespace ForWebforms.Tests
             });
 
             result.ShouldBe("Today is 18/12/2014");
-        }
-
-        public void RenderWithoutViewNameShouldFail()
-        {
-            var ex = _host.Throws<NullReferenceException>((c, p) =>
-            {
-                c.ID = "TestControl";
-            });
-
-            ex.Message.ShouldContain("The Partial View Control with ID 'TestControl' needs a PartialViewName.");
         }
     }
 }

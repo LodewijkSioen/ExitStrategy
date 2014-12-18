@@ -1,64 +1,79 @@
-﻿using ExitStrategy.ForWebforms;
-using Moq;
+﻿using System;
+using System.Web.UI.WebControls;
+using ExitStrategy.ForWebforms;
 using Shouldly;
-using System.Collections.Specialized;
-using System.IO;
-using System.Text;
-using System.Web;
-using System.Web.Routing;
 using System.Web.UI;
 
 namespace ForWebforms.Tests
 {
-    public class PartialControlTests
+   public class PartialControlTests
     {
-        private Partial _control;
+        private readonly FakeAppHost<Partial> _host;
 
         public PartialControlTests()
         {
-            var context = new Mock<HttpContextBase>();
-            var request = new Mock<HttpRequestBase>();
-            var response = new Mock<HttpResponseBase>();
-            var session = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
-            var browser = new Mock<HttpBrowserCapabilitiesBase>();
-            var cookies = new HttpCookieCollection();
-            var items = new ListDictionary();
-
-            browser.Setup(b => b.IsMobileDevice).Returns(false);
-            request.Setup(r => r.Cookies).Returns(cookies);
-            request.Setup(r => r.RequestContext).Returns(new RequestContext(context.Object, new RouteData()));
-            request.Setup(r => r.Browser).Returns(browser.Object);
-            response.Setup(r => r.Cookies).Returns(cookies);
-            context.Setup(ctx => ctx.Items).Returns(items);
-
-            context.SetupGet(ctx => ctx.Request).Returns(request.Object);
-            context.SetupGet(ctx => ctx.Response).Returns(response.Object);
-            context.SetupGet(ctx => ctx.Session).Returns(session.Object);
-            context.SetupGet(ctx => ctx.Server).Returns(server.Object);
-
-            var page = new MockPage();
-            HttpContextProvider.SetHttpContext(context.Object);
-
-            _control = new Partial();       
-            page.Controls.Add(_control);     
+            _host = FakeAppHost<Partial>.Create();
         }
 
-        public void TestRender()
+        public void RenderWithoutModel()
         {
-            var builder = new StringBuilder();
-            using(var writer = new HtmlTextWriter(new StringWriter(builder)))
-            {
-                _control.PartialViewName = "test";
-                _control.RenderControl(writer);
-            }
+            var result = _host.Test((c, p) => c.PartialViewName = "Test");
 
-            builder.ToString().ShouldNotBe(null);
+            result.ShouldBe("this is a partial view!");
         }
-    }
 
-    public class MockPage : Page
-    {
-        
+        public void RenderWithModelViaDataSource()
+        {
+            var result = _host.Test((c, p) =>
+            {
+                c.PartialViewName = "TestWithModel";
+                c.DataSource = new DateTime(2014, 12, 18);
+                p.DataBind();
+            });
+
+            result.ShouldBe("Today is 18/12/2014");
+        }
+
+        public void RenderWithModelViaModelbinding()
+        {
+            var result = _host.Test((c, p) =>
+            {
+                c.PartialViewName = "TestWithModel";
+                c.SelectMethod = "GetModel";
+                p.DataBind();
+            });
+
+            result.ShouldBe("Today is 18/12/2014");
+        }
+
+        public void RenderWithModelViaDateSourceId()
+        {
+            var result = _host.Test((c, p) =>
+            {
+                c.PartialViewName = "TestWithModel";
+                c.DataSourceID = "ModelSource";
+                c.ItemType = "System.DateTime";
+
+                var modelSource = new ObjectDataSource("ForWebforms.Tests.MockPage", "GetModel")
+                {
+                    ID = "ModelSource",
+                };
+
+                c.Page.Controls.Add(modelSource);
+                p.DataBind();
+            });
+
+            result.ShouldBe("Today is 18/12/2014");
+        }
+
+        public void RenderWithoutViewNameShouldFail()
+        {
+            var ex = _host.Throws<NullReferenceException>((c, p) =>
+            {
+                c.ID = "TestControl";
+            });
+
+            ex.Message.ShouldContain("The Partial View Control with ID 'TestControl' needs a PartialViewName.");
+        }
     }
 }

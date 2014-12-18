@@ -28,11 +28,32 @@ namespace ExitStrategy.ForWebforms
         {
             _isDataBound = true;
 
-            if (IsUsingModelBinders)
+            if (DataSource != null)
             {
-                //If the control is databound using the 4.5 SelectMethod, we can determine the 
-                //type of the model by looking at the returntype of the SelectMethod
-                _modelType = Page.GetType().GetMethod(SelectMethod).ReturnType;
+                _model = DataSource;
+                _modelType = DataSource.GetType();
+            }
+            else
+            {
+                if (IsUsingModelBinders)
+                {
+                    //If the control is databound using the 4.5 SelectMethod, we can determine the 
+                    //type of the model by looking at the returntype of the SelectMethod
+                    _modelType = Page.GetType().GetMethod(SelectMethod).ReturnType;
+                }
+                else
+                {
+                    //If it's not ModelBinding, the ItemType property can give a hint about the type of the Model
+                    //Otherwise we just use the type of the object (which will probably be Object[])
+                    if (string.IsNullOrEmpty(ItemType))
+                    {
+                        _modelType = data != null ? data.GetType() : null;
+                    }
+                    else
+                    {
+                        _modelType = Type.GetType(ItemType);
+                    }
+                }
 
                 //Webforms Databinding only works with IEnumerables (hello .net 1.0). It has no concept of
                 //databinding to a single item. So we need to handle this here: If the type of the model 
@@ -41,7 +62,7 @@ namespace ExitStrategy.ForWebforms
                 {
                     _model = null;
                 }
-                else if (typeof (IEnumerable).IsAssignableFrom(_modelType))
+                else if (typeof(IEnumerable).IsAssignableFrom(_modelType))
                 {
                     _model = data;
                 }
@@ -51,17 +72,6 @@ namespace ExitStrategy.ForWebforms
                     enumerator.MoveNext();
                     _model = enumerator.Current;
                 }
-                
-            }
-            else if (DataSource != null)
-            {
-                _model = DataSource;
-                _modelType = DataSource.GetType();
-            }
-            else
-            {
-                _model = data;
-                _modelType = data != null ? data.GetType() : null;
             }
         }
 

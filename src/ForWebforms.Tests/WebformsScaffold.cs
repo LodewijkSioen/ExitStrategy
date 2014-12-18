@@ -5,12 +5,11 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.UI;
 using ExitStrategy.ForWebforms;
-using Shouldly;
 
 namespace ForWebforms.Tests
 {
     ////http://stackoverflow.com/questions/3702526/is-there-a-way-to-process-an-mvc-view-aspx-file-from-a-non-web-application
-    public class FakeAppHost<T> : MarshalByRefObject
+    public class WebformsScaffold<T> : MarshalByRefObject
         where T : MvcControl, new()
     {
         public string Test(Action<T, MockPage> renderAction)
@@ -53,10 +52,10 @@ namespace ForWebforms.Tests
             }
         }
 
-        public static FakeAppHost<T> Create()
+        public static WebformsScaffold<T> Create()
         {
-            var websiteLocation = Directory.GetParent(typeof(FakeAppHost<T>).Assembly.Location).Parent;
-            return (FakeAppHost<T>)ApplicationHost.CreateApplicationHost(typeof(FakeAppHost<T>), "/", websiteLocation.FullName);
+            var websiteLocation = Directory.GetParent(typeof(WebformsScaffold<T>).Assembly.Location).Parent;
+            return (WebformsScaffold<T>)ApplicationHost.CreateApplicationHost(typeof(WebformsScaffold<T>), "/", websiteLocation.FullName);
         }
     }
 }

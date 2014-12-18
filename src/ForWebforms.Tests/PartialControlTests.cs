@@ -8,11 +8,11 @@ namespace ForWebforms.Tests
 {
    public class PartialControlTests
     {
-        private readonly FakeAppHost<Partial> _host;
+        private readonly WebformsScaffold<Partial> _host;
 
         public PartialControlTests()
         {
-            _host = FakeAppHost<Partial>.Create();
+            _host = WebformsScaffold<Partial>.Create();
         }
 
         public void RenderWithoutModel()

@@ -78,7 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FakeAppHost.cs" />
+    <Compile Include="WebformsScaffold.cs" />
     <Compile Include="MockPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -103,12 +103,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\TestWithModel.cshtml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

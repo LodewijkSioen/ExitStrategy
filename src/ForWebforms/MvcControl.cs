@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Web.Mvc;
@@ -13,77 +10,39 @@ namespace ExitStrategy.ForWebforms
 {
     public abstract class MvcControl : DataBoundControl, IBindableControl
     {
-        private object _model;
-        private Type _modelType;
-        private bool _isDataBound;
+        private ModelDefinition _modelDefinition;
+        private readonly IModelProvider _modelProvider;
+        private readonly IModelValueExtractor _modelExtractor;
+
+        protected MvcControl(IModelProvider provider = null, IModelValueExtractor extractor = null)
+        {
+            _modelProvider = provider ?? new ModelProvider(this);
+            _modelExtractor = extractor ?? new ModelValueExtractor(this);
+        }
 
         public override bool EnableViewState { get{return false;} }
 
         protected override void ValidateDataSource(object dataSource)
         {
-            //Do noting, we accept anything
+            //Do nothing, we accept anything
         }
 
         protected override void PerformDataBinding(IEnumerable data)
         {
-            _isDataBound = true;
-
-            if (DataSource != null)
-            {
-                _model = DataSource;
-                _modelType = DataSource.GetType();
-            }
-            else
-            {
-                if (IsUsingModelBinders)
-                {
-                    //If the control is databound using the 4.5 SelectMethod, we can determine the 
-                    //type of the model by looking at the returntype of the SelectMethod
-                    _modelType = Page.GetType().GetMethod(SelectMethod).ReturnType;
-                }
-                else
-                {
-                    //If it's not ModelBinding, the ItemType property can give a hint about the type of the Model
-                    //Otherwise we just use the type of the object (which will probably be Object[])
-                    if (string.IsNullOrEmpty(ItemType))
-                    {
-                        _modelType = data != null ? data.GetType() : null;
-                    }
-                    else
-                    {
-                        _modelType = Type.GetType(ItemType);
-                    }
-                }
-
-                //Webforms Databinding only works with IEnumerables (hello .net 1.0). It has no concept of
-                //databinding to a single item. So we need to handle this here: If the type of the model 
-                //is not an IEnumerable, we just need the first item in the collection.
-                if (data == null)
-                {
-                    _model = null;
-                }
-                else if (typeof(IEnumerable).IsAssignableFrom(_modelType))
-                {
-                    _model = data;
-                }
-                else
-                {
-                    var enumerator = data.GetEnumerator();
-                    enumerator.MoveNext();
-                    _model = enumerator.Current;
-                }
-            }
+            _modelDefinition = IsUsingModelBinders ? 
+                _modelProvider.ExtractModelFromModelBinding(data) : 
+                _modelProvider.ExtractModelFromDataSource(data ?? DataSource);
         }
 
         protected override void Render(HtmlTextWriter writer)
         {
             var viewBag = new ViewDataDictionary();
             viewBag.ModelState.AdaptModelState(Page.ModelState);
-            
-            if (_isDataBound)
+
+            if (_modelDefinition != null)
             {
-                viewBag.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, _modelType);
-                viewBag.Model = _model;
+                viewBag.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, _modelDefinition.ModelType);
+                viewBag.Model = _modelDefinition.Value;
                 viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
             }
             
@@ -95,20 +54,10 @@ namespace ExitStrategy.ForWebforms
         }
 
         protected abstract MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag);
-
-        private IEnumerable<KeyValuePair<String, String>> ExtractValues()
-        {
-            var formPrefix = ClientID + ".";
-            var form = Context.Request.Form;
-
-            return from key in form.Keys.OfType<string>()
-                   where key.StartsWith(formPrefix)
-                   select new KeyValuePair<string, string>(key.Substring(formPrefix.Length), GetValue(key, form));
-        }
-
+        
         public void ExtractValues(IOrderedDictionary dictionary)
         {
-            foreach (var value in ExtractValues())
+            foreach (var value in _modelExtractor.ExtractValues(HttpContextProvider.Current.Request.Form))
             {
                 dictionary.Add(value.Key, value.Value);
             }
@@ -117,26 +66,11 @@ namespace ExitStrategy.ForWebforms
         public System.Web.ModelBinding.IValueProvider GetValueProvider()
         {
             var nameValueCollection = new NameValueCollection();
-            foreach (var value in ExtractValues())
+            foreach (var value in _modelExtractor.ExtractValues(HttpContextProvider.Current.Request.Form))
             {
                 nameValueCollection.Add(value.Key, value.Value);
             }
             return new System.Web.ModelBinding.NameValueCollectionValueProvider(nameValueCollection, CultureInfo.CurrentCulture);
-        }
-
-        private string GetValue(string key, NameValueCollection form)
-        {
-            //Sigh: http://stackoverflow.com/questions/2697299/asp-net-mvc-why-is-html-checkbox-generating-an-additional-hidden-input
-            var value = form[key];
-            switch (value)
-            {
-                case "true,false":
-                    return "true";
-                case "false,true":
-                    return "false";
-                default:
-                    return value;
-            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.UI;
+using ExitStrategy.ForWebforms.ModelBinding;
 
 namespace ExitStrategy.ForWebforms
 {
@@ -9,6 +10,13 @@ namespace ExitStrategy.ForWebforms
     public class Partial : MvcControl
     {
         public string PartialViewName { get; set; }
+
+        public Partial()
+        {  }
+
+        public Partial(IModelProvider provider, IModelValueExtractor extractor)
+            :base(provider, extractor)
+        {  }
 
         protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)
         {

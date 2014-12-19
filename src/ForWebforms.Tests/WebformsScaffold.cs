@@ -10,9 +10,9 @@ namespace ForWebforms.Tests
 {
     ////http://stackoverflow.com/questions/3702526/is-there-a-way-to-process-an-mvc-view-aspx-file-from-a-non-web-application
     public class WebformsScaffold<T> : MarshalByRefObject
-        where T : MvcControl, new()
+        where T : MvcControl
     {
-        public string Test(Action<T, MockPage> renderAction)
+        public string Test(Func<T> createControl, Action<T, MockPage> renderAction)
         {
             var builder = new StringBuilder();
             using (var writer = new HtmlTextWriter(new StringWriter(builder)))
@@ -22,7 +22,7 @@ namespace ForWebforms.Tests
                 HttpContext.Current = httpContext;
 
                 var page = new MockPage();
-                var control = new T();
+                var control = createControl();
                 page.Controls.Add(control);
 
                 renderAction(control, page);
@@ -34,12 +34,12 @@ namespace ForWebforms.Tests
             }
         }
 
-        public TEx Throws<TEx>(Action<T, MockPage> renderAction)
+        public TEx Throws<TEx>(Func<T> createControl, Action<T, MockPage> renderAction)
             where TEx : Exception
         {
             try
             {
-                Test(renderAction);
+                Test(createControl, renderAction);
                 throw new Exception("Expected exception was " + typeof(TEx).Name + " but no exception was thrown.");
             }
             catch (TEx exception)

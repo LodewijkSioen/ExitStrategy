@@ -70,6 +70,9 @@
     <Compile Include="ModelBinding\IModelBinder.cs" />
     <Compile Include="ModelBinding\ModelBinderAdapter.cs" />
     <Compile Include="ModelBinding\ModelStateAdapter.cs" />
+    <Compile Include="ModelBinding\ModelProvider.cs" />
+    <Compile Include="ModelBinding\ModelDefinition.cs" />
+    <Compile Include="ModelBinding\ModelValueExtractor.cs" />
     <Compile Include="MvcBridge.cs" />
     <Compile Include="MvcControl.cs" />
     <Compile Include="Version.cs" />

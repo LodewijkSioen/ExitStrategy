@@ -8,7 +8,7 @@ namespace ForWebforms.Tests
     {
         public void RenderWithoutTemplateNameShouldRenderDefaultTemplate()
         {
-            var result = Host.Test((c, p) =>
+            var result = Host.Test(() => new Display(), (c, p) =>
             {
                 c.DataSource = new DateTime(2014, 12, 18);
                 c.DataBind();

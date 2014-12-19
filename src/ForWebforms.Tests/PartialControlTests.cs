@@ -9,14 +9,14 @@ namespace ForWebforms.Tests
     {
         public void RenderWithoutModel()
         {
-            var result = Host.Test((c, p) => c.PartialViewName = "Test");
+            var result = Host.Test(() => new Partial(), (c, p) => c.PartialViewName = "Test");
 
             result.ShouldBe("this is a partial view!");
         }
 
         public void RenderWithoutViewNameShouldFail()
         {
-            var ex = Host.Throws<NullReferenceException>((c, p) =>
+            var ex = Host.Throws<NullReferenceException>(() => new Partial(), (c, p) =>
             {
                 c.ID = "TestControl";
             });
@@ -26,7 +26,7 @@ namespace ForWebforms.Tests
 
         public void RenderWithModelViaDataSource()
         {
-            var result = Host.Test((c, p) =>
+            var result = Host.Test(() => new Partial(), (c, p) =>
             {
                 c.PartialViewName = "TestWithModel";
                 c.DataSource = new DateTime(2014, 12, 18);
@@ -38,7 +38,7 @@ namespace ForWebforms.Tests
 
         public void RenderWithModelViaModelbinding()
         {
-            var result = Host.Test((c, p) =>
+            var result = Host.Test(() => new Partial(), (c, p) =>
             {
                 c.PartialViewName = "TestWithModel";
                 c.SelectMethod = "GetModel";
@@ -50,7 +50,7 @@ namespace ForWebforms.Tests
 
         public void RenderWithModelViaDateSourceId()
         {
-            var result = Host.Test((c, p) =>
+            var result = Host.Test(() => new Partial(), (c, p) =>
             {
                 c.PartialViewName = "TestWithModel";
                 c.DataSourceID = "ModelSource";

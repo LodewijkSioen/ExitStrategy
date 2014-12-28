@@ -5,41 +5,51 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.UI;
 using ExitStrategy.ForWebforms;
+using ForWebforms.Tests.Mocks;
 
 namespace ForWebforms.Tests
 {
     ////http://stackoverflow.com/questions/3702526/is-there-a-way-to-process-an-mvc-view-aspx-file-from-a-non-web-application
-    public class WebformsScaffold<T> : MarshalByRefObject
-        where T : MvcControl
+    public class WebformsScaffold : MarshalByRefObject
     {
-        public string Test(Func<T> createControl, Action<T, MockPage> renderAction)
+        public string Test(Action<MockPage, HtmlTextWriter> arrangeAct)
         {
             var builder = new StringBuilder();
             using (var writer = new HtmlTextWriter(new StringWriter(builder)))
             {
-                var httpContext = new HttpContext(new HttpRequest("", "http://example.com", ""), new HttpResponse(writer));
-                if (HttpContext.Current != null) throw new NotSupportedException("httpcontext was already set");
-                HttpContext.Current = httpContext;
+                try
+                {
+                    var httpContext = new HttpContext(new HttpRequest("", "http://example.com", ""), new HttpResponse(writer));
+                    if (HttpContext.Current != null) throw new NotSupportedException("httpcontext was already set");
+                    HttpContext.Current = httpContext;
 
-                var page = new MockPage();
-                var control = createControl();
-                page.Controls.Add(control);
+                    var page = new MockPage();
 
-                renderAction(control, page);
+                    arrangeAct(page, writer);
 
-                control.RenderControl(writer);
-
-                HttpContext.Current = null;
-                return builder.ToString();
+                    return builder.ToString();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Source == "Shouldly")
+                    {
+                        throw new Exception(ex.Message);//Schouldly's exceptions are not serializable
+                    }
+                    throw;
+                }
+                finally
+                {
+                    HttpContext.Current = null;
+                }
             }
         }
 
-        public TEx Throws<TEx>(Func<T> createControl, Action<T, MockPage> renderAction)
+        public TEx Throws<TEx>(Action<MockPage, HtmlTextWriter> arrangeActAssert)
             where TEx : Exception
         {
             try
             {
-                Test(createControl, renderAction);
+                Test(arrangeActAssert);
                 throw new Exception("Expected exception was " + typeof(TEx).Name + " but no exception was thrown.");
             }
             catch (TEx exception)
@@ -52,10 +62,10 @@ namespace ForWebforms.Tests
             }
         }
 
-        public static WebformsScaffold<T> Create()
+        public static WebformsScaffold Create()
         {
-            var websiteLocation = Directory.GetParent(typeof(WebformsScaffold<T>).Assembly.Location).Parent;
-            return (WebformsScaffold<T>)ApplicationHost.CreateApplicationHost(typeof(WebformsScaffold<T>), "/", websiteLocation.FullName);
+            var websiteLocation = Directory.GetParent(typeof(WebformsScaffold).Assembly.Location).Parent;
+            return (WebformsScaffold)ApplicationHost.CreateApplicationHost(typeof(WebformsScaffold), "/", websiteLocation.FullName);
         }
     }
 }

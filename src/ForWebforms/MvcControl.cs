@@ -22,6 +22,14 @@ namespace ExitStrategy.ForWebforms
 
         public override bool EnableViewState { get{return false;} }
 
+        public bool IsModelBound
+        {
+            get
+            {
+                return base.IsUsingModelBinders;
+            }
+        }
+
         protected override void ValidateDataSource(object dataSource)
         {
             //Do nothing, we accept anything
@@ -29,9 +37,7 @@ namespace ExitStrategy.ForWebforms
 
         protected override void PerformDataBinding(IEnumerable data)
         {
-            _modelDefinition = IsUsingModelBinders ? 
-                _modelProvider.ExtractModelFromModelBinding(data) : 
-                _modelProvider.ExtractModelFromDataSource(data ?? DataSource);
+            _modelDefinition = _modelProvider.ExtractModel(data ?? DataSource);
         }
 
         protected override void Render(HtmlTextWriter writer)

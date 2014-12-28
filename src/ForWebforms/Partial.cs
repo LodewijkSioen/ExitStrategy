@@ -14,7 +14,7 @@ namespace ExitStrategy.ForWebforms
         public Partial()
         {  }
 
-        public Partial(IModelProvider provider, IModelValueExtractor extractor)
+        public Partial(IModelProvider provider = null, IModelValueExtractor extractor = null)
             :base(provider, extractor)
         {  }
 

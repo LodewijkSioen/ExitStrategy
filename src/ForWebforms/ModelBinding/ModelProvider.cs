@@ -6,20 +6,28 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 {
     public interface IModelProvider
     {
-        ModelDefinition ExtractModelFromDataSource(object dataSource);
-        ModelDefinition ExtractModelFromModelBinding(IEnumerable source);
+        ModelDefinition ExtractModel(object dataSource);
     }
 
     public class ModelProvider : IModelProvider
     {
-        private readonly DataBoundControl _control;
+        private readonly MvcControl _control;
 
-        public ModelProvider(DataBoundControl control)
+        public ModelProvider(MvcControl control)
         {
             _control = control;
         }
 
-        public ModelDefinition ExtractModelFromDataSource(object dataSource)
+        public ModelDefinition ExtractModel(object dataSource)
+        {
+            var dataSourceAsIEnumerable = dataSource as IEnumerable;
+
+            return _control.IsModelBound ?
+                ExtractModelFromModelBinding(dataSourceAsIEnumerable) :
+                ExtractModelFromDataSource(dataSource);
+        }
+
+        private ModelDefinition ExtractModelFromDataSource(object dataSource)
         {
             if(dataSource == null)
                 throw new ArgumentNullException("dataSource");
@@ -52,7 +60,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             };
         }
 
-        public ModelDefinition ExtractModelFromModelBinding(IEnumerable source)
+        private ModelDefinition ExtractModelFromModelBinding(IEnumerable source)
         {
             //If the control is databound using the 4.5 SelectMethod, we can determine the 
             //type of the model by looking at the returntype of the SelectMethod
@@ -93,8 +101,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             else
             {
                 var enumerator = source.GetEnumerator();
-                enumerator.MoveNext();
-                return enumerator.Current;
+                return enumerator.MoveNext() ? enumerator.Current : null;
             }
         }
     }

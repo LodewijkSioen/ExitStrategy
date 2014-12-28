@@ -80,13 +80,15 @@
   <ItemGroup>
     <Compile Include="DisplayControlTests.cs" />
     <Compile Include="EditorControlTests.cs" />
+    <Compile Include="Mocks\MockControl.cs" />
+    <Compile Include="ModelBinding\ModelProviderTests.cs" />
     <Compile Include="MvcControlTests.cs" />
+    <Compile Include="PartialControlTests.cs" />
     <Compile Include="WebformsScaffold.cs" />
-    <Compile Include="MockPage.cs">
+    <Compile Include="Mocks\MockPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NewObjectExpressionTests.cs" />
-    <Compile Include="PartialControlTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvcBridgeTests.cs" />
   </ItemGroup>

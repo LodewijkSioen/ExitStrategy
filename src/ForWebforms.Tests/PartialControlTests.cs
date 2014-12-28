@@ -2,6 +2,8 @@
 using System.Web.UI.WebControls;
 using ExitStrategy.ForWebforms;
 using Shouldly;
+using Moq;
+using ExitStrategy.ForWebforms.ModelBinding;
 
 namespace ForWebforms.Tests
 {
@@ -9,16 +11,30 @@ namespace ForWebforms.Tests
     {
         public void RenderWithoutModel()
         {
-            var result = Host.Test(() => new Partial(), (c, p) => c.PartialViewName = "Test");
+            var result = Host.Test((p, w) =>
+            {
+                var c = new Partial()
+                {
+                    PartialViewName = "Test"
+                };
+                p.Controls.Add(c);
 
+                c.RenderControl(w);
+            });
             result.ShouldBe("this is a partial view!");
         }
 
         public void RenderWithoutViewNameShouldFail()
         {
-            var ex = Host.Throws<NullReferenceException>(() => new Partial(), (c, p) =>
+            var ex = Host.Throws<NullReferenceException>((p, w) =>
             {
-                c.ID = "TestControl";
+                var c = new Partial()
+                {
+                    ID = "TestControl"
+                };
+                p.Controls.Add(c);
+
+                c.RenderControl(w);
             });
 
             ex.Message.ShouldContain("The Partial View Control with ID 'TestControl' needs a PartialViewName.");
@@ -26,43 +42,17 @@ namespace ForWebforms.Tests
 
         public void RenderWithModelViaDataSource()
         {
-            var result = Host.Test(() => new Partial(), (c, p) =>
+            var result = Host.Test((p, w) =>
             {
-                c.PartialViewName = "TestWithModel";
-                c.DataSource = new DateTime(2014, 12, 18);
-                p.DataBind();
-            });
-
-            result.ShouldBe("Today is 18/12/2014");
-        }
-
-        public void RenderWithModelViaModelbinding()
-        {
-            var result = Host.Test(() => new Partial(), (c, p) =>
-            {
-                c.PartialViewName = "TestWithModel";
-                c.SelectMethod = "GetModel";
-                p.DataBind();
-            });
-
-            result.ShouldBe("Today is 18/12/2014");
-        }
-
-        public void RenderWithModelViaDateSourceId()
-        {
-            var result = Host.Test(() => new Partial(), (c, p) =>
-            {
-                c.PartialViewName = "TestWithModel";
-                c.DataSourceID = "ModelSource";
-                c.ItemType = "System.DateTime";
-
-                var modelSource = new ObjectDataSource("ForWebforms.Tests.MockPage", "GetModel")
+                var provider = new Mock<IModelProvider>();
+                provider.Setup(mp => mp.ExtractModel(null)).Returns(new ModelDefinition(new DateTime(2014, 12, 18)));
+                var c = new Partial(provider.Object)
                 {
-                    ID = "ModelSource",
+                    PartialViewName = "TestWithModel"
                 };
-
-                c.Page.Controls.Add(modelSource);
+                p.Controls.Add(c);
                 p.DataBind();
+                c.RenderControl(w);
             });
 
             result.ShouldBe("Today is 18/12/2014");

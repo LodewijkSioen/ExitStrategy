@@ -37,7 +37,7 @@ namespace ExitStrategy.ForWebforms
 
         protected override void PerformDataBinding(IEnumerable data)
         {
-            _modelDefinition = _modelProvider.ExtractModel(data ?? DataSource);
+            _modelDefinition = _modelProvider.ExtractModel(data);
         }
 
         protected override void Render(HtmlTextWriter writer)

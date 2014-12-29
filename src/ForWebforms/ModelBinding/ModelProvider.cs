@@ -6,7 +6,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 {
     public interface IModelProvider
     {
-        ModelDefinition ExtractModel(object dataSource);
+        ModelDefinition ExtractModel(IEnumerable dataSource);
     }
 
     public class ModelProvider : IModelProvider
@@ -18,13 +18,11 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             _control = control;
         }
 
-        public ModelDefinition ExtractModel(object dataSource)
+        public ModelDefinition ExtractModel(IEnumerable dataSource)
         {
-            var dataSourceAsIEnumerable = dataSource as IEnumerable;
-
             return _control.IsModelBound ?
-                ExtractModelFromModelBinding(dataSourceAsIEnumerable) :
-                ExtractModelFromDataSource(dataSource);
+                ExtractModelFromModelBinding(dataSource) :
+                ExtractModelFromDataSource(dataSource ?? _control.DataSource);
         }
 
         private ModelDefinition ExtractModelFromDataSource(object dataSource)

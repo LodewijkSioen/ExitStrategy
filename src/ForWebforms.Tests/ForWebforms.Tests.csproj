@@ -82,6 +82,7 @@
     <Compile Include="EditorControlTests.cs" />
     <Compile Include="Mocks\MockControl.cs" />
     <Compile Include="ModelBinding\ModelProviderTests.cs" />
+    <Compile Include="ModelBinding\ModelStateTests.cs" />
     <Compile Include="ModelBinding\ModelValueExtractorTests.cs" />
     <Compile Include="MvcControlTests.cs" />
     <Compile Include="PartialControlTests.cs" />

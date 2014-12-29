@@ -27,18 +27,16 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 
         private ModelDefinition ExtractModelFromDataSource(object dataSource)
         {
-            if(dataSource == null)
-                throw new ArgumentNullException("dataSource");
-
-            if (dataSource is IEnumerable)
+            var source = dataSource as IEnumerable;
+            if (source != null)
             {
-                return ExtractModelFromDataSource(dataSource as IEnumerable);
+                return ExtractModelFromDataSource(source);
             }
             else
             {
                 return new ModelDefinition
                 {
-                    ModelType = GetExpectedType() ?? dataSource.GetType(),
+                    ModelType = GetExpectedType(dataSource),
                     Value = dataSource
                 };
             }
@@ -46,7 +44,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 
         private ModelDefinition ExtractModelFromDataSource(IEnumerable dataSource)
         {
-            var expectedType = GetExpectedType();
+            var expectedType = GetExpectedType(dataSource);
 
             var value = expectedType == null ? dataSource : ConvertData(dataSource, expectedType);
             var type = value == null ? expectedType : value.GetType();
@@ -71,7 +69,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             };
         }
 
-        private Type GetExpectedType()
+        private Type GetExpectedType(object value)
         {
             //If it's not ModelBinding, the ItemType property can give a hint about the type of the Model
             //Otherwise we just use the type of the object (which will probably be Object[])
@@ -80,7 +78,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
                 return Type.GetType(_control.ItemType);
             }
 
-            return null;
+            return value != null ? value.GetType() : null;
         }
 
         private object ConvertData(IEnumerable source, Type expectedType)

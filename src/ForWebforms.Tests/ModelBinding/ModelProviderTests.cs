@@ -20,7 +20,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
         private ModelProvider ArrangeWithModelBinding(MockPage p)
         {
-            var control = new MockControl { SelectMethod = "GetModel" };
+            var control = new MockControl() { SelectMethod = "GetModel" };
             p.Controls.Add(control);
             return new ModelProvider(control);
         }

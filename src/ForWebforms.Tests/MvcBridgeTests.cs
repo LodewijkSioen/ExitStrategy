@@ -5,11 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI;
-using ExitStrategy.ForWebforms;
 using Moq;
 using Shouldly;
 
-namespace ForWebforms.Tests
+namespace ExitStrategy.ForWebforms.Tests
 {
     public class MvcBridgeTests
     {

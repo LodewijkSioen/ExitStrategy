@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="TestWebsite.Webforms.Layout" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="ExitStrategy.TestWebsite.Webforms.Layout" %>
 <%@ Import Namespace="System.Web.Optimization" %>
 
 <!DOCTYPE html>

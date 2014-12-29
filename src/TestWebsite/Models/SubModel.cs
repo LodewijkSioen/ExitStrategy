@@ -1,4 +1,4 @@
-﻿namespace TestWebsite.Models
+﻿namespace ExitStrategy.TestWebsite.Models
 {
     public class SubModel
     {

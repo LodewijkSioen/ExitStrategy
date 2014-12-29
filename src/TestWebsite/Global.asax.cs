@@ -5,9 +5,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using ExitStrategy.ForWebforms.ModelBinding;
-using TestWebsite.Helpers;
+using ExitStrategy.TestWebsite.Helpers;
 
-namespace TestWebsite
+namespace ExitStrategy.TestWebsite
 {
     public class Global : System.Web.HttpApplication
     {

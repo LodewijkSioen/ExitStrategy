@@ -7,7 +7,7 @@ using IModelBinder = ExitStrategy.ForWebforms.ModelBinding.IModelBinder;
 using MvcModelBindingContext = System.Web.Mvc.ModelBindingContext;
 using WebformsModelBindingContext = System.Web.ModelBinding.ModelBindingContext;
 
-namespace TestWebsite.Helpers
+namespace ExitStrategy.TestWebsite.Helpers
 {
     public class DateTimeBinder : IModelBinder
     {

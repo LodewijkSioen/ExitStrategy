@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Web.ModelBinding;
 using System.Web.Routing;
-using TestWebsite.Models;
+using ExitStrategy.TestWebsite.Models;
 
-namespace TestWebsite.Webforms.ModelBinding
+namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
     public partial class Edit : System.Web.UI.Page
     {

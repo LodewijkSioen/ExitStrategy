@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TestWebsite.Helpers
+namespace ExitStrategy.TestWebsite.Helpers
 {
     public static class TypeHelpers
     {

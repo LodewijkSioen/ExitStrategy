@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestWebsite.Webforms
+namespace ExitStrategy.TestWebsite.Webforms
 {
     public partial class Index : System.Web.UI.Page
     {

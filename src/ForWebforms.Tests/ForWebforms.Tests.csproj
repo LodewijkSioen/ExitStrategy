@@ -7,8 +7,8 @@
     <ProjectGuid>{4B3F1DE7-1C1B-4FE0-A1B4-7E3A4A81088D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ForWebforms.Tests</RootNamespace>
-    <AssemblyName>ForWebforms.Tests</AssemblyName>
+    <RootNamespace>ExitStrategy.ForWebforms.Tests</RootNamespace>
+    <AssemblyName>ExitStrategy.ForWebforms.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

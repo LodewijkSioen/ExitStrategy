@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Web.UI.WebControls;
-using ExitStrategy.ForWebforms;
-using Shouldly;
-using Moq;
 using ExitStrategy.ForWebforms.ModelBinding;
+using Moq;
+using Shouldly;
 
-namespace ForWebforms.Tests
+namespace ExitStrategy.ForWebforms.Tests
 {
-    public class PartialControlTests : MvcControlTests<Partial>
+    public class PartialControlTests : MvcControlTests
     {
         public void RenderWithoutModel()
         {
@@ -40,7 +38,7 @@ namespace ForWebforms.Tests
             ex.Message.ShouldContain("The Partial View Control with ID 'TestControl' needs a PartialViewName.");
         }
 
-        public void RenderWithModelViaDataSource()
+        public void RenderWithModel()
         {
             var result = Host.Test((p, w) =>
             {

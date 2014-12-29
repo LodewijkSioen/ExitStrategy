@@ -1,21 +1,23 @@
 using System;
-using ExitStrategy.ForWebforms;
+using ExitStrategy.ForWebforms.ModelBinding;
+using Moq;
 using Shouldly;
 
-namespace ForWebforms.Tests
+namespace ExitStrategy.ForWebforms.Tests
 {
-    public class DisplayControlTests : MvcControlTests<Display>
+    public class DisplayControlTests : MvcControlTests
     {
         public void RenderWithoutTemplateNameShouldRenderDefaultTemplate()
         {
             var r = Host.Test((p, w) =>
             {
-                var c = new Display();
-                c.DataSource = new DateTime(2014, 12, 18);
+                var modelProvider = new Mock<IModelProvider>();
+                modelProvider.Setup(m => m.ExtractModel(null)).Returns(new ModelDefinition(new DateTime(2014, 12, 18)));
+                var c = new Display(modelProvider.Object);
                 c.DataBind();
-                p.SetControlUnderTest(c);
+                p.Controls.Add(c);
 
-                p.GetControlUnderTest<Display>().RenderControl(w);
+                c.RenderControl(w);
             });
 
             r.ShouldBe("This is a displaytemplate for 18/12/2014");

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TestWebsite.Controllers
+namespace ExitStrategy.TestWebsite.Controllers
 {
     public class MvcController : Controller
     {

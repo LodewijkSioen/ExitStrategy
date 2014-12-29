@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web.ModelBinding;
 using System.Web.Mvc;
-using TestWebsite.Models;
+using ExitStrategy.TestWebsite.Models;
 
-namespace TestWebsite.Controllers
+namespace ExitStrategy.TestWebsite.Controllers
 {
     public class ModelBindingController : Controller
     {

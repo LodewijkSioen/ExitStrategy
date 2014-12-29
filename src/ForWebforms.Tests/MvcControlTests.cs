@@ -1,9 +1,6 @@
-﻿using ExitStrategy.ForWebforms;
-
-namespace ForWebforms.Tests
+﻿namespace ExitStrategy.ForWebforms.Tests
 {
-    public abstract class MvcControlTests<T>
-        where T : MvcControl, new()
+    public abstract class MvcControlTests
     {
         protected readonly WebformsScaffold Host;
 

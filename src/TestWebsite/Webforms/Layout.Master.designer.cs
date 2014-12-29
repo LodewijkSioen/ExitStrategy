@@ -7,7 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestWebsite.Webforms {
+namespace ExitStrategy.TestWebsite.Webforms
+{
     
     
     public partial class Layout {

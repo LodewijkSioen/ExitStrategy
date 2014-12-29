@@ -7,7 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestWebsite.Webforms.ModelBinding {
+namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
+{
     
     
     public partial class Index {

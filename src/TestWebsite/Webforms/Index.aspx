@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="TestWebsite.Webforms.Index" MasterPageFile="~/Webforms/Layout.Master" Title="This is a Webforms page" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="ExitStrategy.TestWebsite.Webforms.Index" MasterPageFile="~/Webforms/Layout.Master" Title="This is a Webforms page" %>
 
 <asp:Content ContentPlaceHolderID="Body" runat="server">
 <div class="webforms">

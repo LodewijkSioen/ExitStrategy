@@ -1,30 +1,28 @@
-﻿using ExitStrategy.ForWebforms;
+﻿using System;
 using ExitStrategy.ForWebforms.ModelBinding;
-using ForWebforms.Tests.Mocks;
-using Moq;
+using ExitStrategy.ForWebforms.Tests.Mocks;
 using Shouldly;
-using System;
 
-namespace ForWebforms.Tests.ModelBinding
+namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 {
     public class ModelProviderTests
     {
-        private WebformsScaffold Host;
+        private readonly WebformsScaffold _host;
 
         public ModelProviderTests()
         {
-            Host = WebformsScaffold.Create();
+            _host = WebformsScaffold.Create();
         }
 
         public void TestModelBindingWithData()
         {
-            Host.Test(
+            _host.Test(
                 (p, w) => 
                 {
                     var expectedModel = new DateTime(2014, 12, 28);
                     var control = new MockControl();
                     control.SelectMethod = "GetModel";
-                    p.SetControlUnderTest(control);
+                    p.Controls.Add(control);
                     var provider = new ModelProvider(control);
 
                     var result = provider.ExtractModel(new []{expectedModel});
@@ -36,12 +34,12 @@ namespace ForWebforms.Tests.ModelBinding
 
         public void TestModelBindingWithEmptyData()
         {
-            Host.Test(
+            _host.Test(
                 (p, w) =>
                 {
                     var control = new MockControl();
                     control.SelectMethod = "GetModel";
-                    p.SetControlUnderTest(control);
+                    p.Controls.Add(control);
                     var provider = new ModelProvider(control);
 
                     var result = provider.ExtractModel(new Object[0]);
@@ -53,12 +51,12 @@ namespace ForWebforms.Tests.ModelBinding
 
         public void TestModelBindingWithNull()
         {
-            Host.Test(
+            _host.Test(
                 (p, w) =>
                 {
                     var control = new MockControl();
                     control.SelectMethod = "GetModel";
-                    p.SetControlUnderTest(control);
+                    p.Controls.Add(control);
                     var provider = new ModelProvider(control);
 
                     var result = provider.ExtractModel(null);

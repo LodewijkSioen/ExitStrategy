@@ -1,12 +1,12 @@
-﻿using ExitStrategy.ForWebforms;
+﻿using System.Web.Mvc;
 
-namespace ForWebforms.Tests.Mocks
+namespace ExitStrategy.ForWebforms.Tests.Mocks
 {
     public class MockControl : MvcControl
     {
-        protected override System.Web.Mvc.MvcHtmlString RenderMvcContent(System.Web.Mvc.HtmlHelper helper, System.Web.Mvc.ViewDataDictionary viewBag)
+        protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)
         {
-            return System.Web.Mvc.MvcHtmlString.Create("test");
+            return MvcHtmlString.Create("test");
         }
     }
 }

@@ -10,7 +10,7 @@ FOR /R %~dp0\src\packages %%G IN (Fixie.Console.exe) DO (
 IF '%TOOLPATH%'=='' GOTO NOTFOUND
  
 :FOUND
-%TOOLPATH% %* --NUnitXml TestResult.xml src\ForWebforms.Tests\bin\ForWebforms.Tests.dll
+%TOOLPATH% %* --NUnitXml TestResult.xml src\ForWebforms.Tests\bin\ExitStrategy.ForWebforms.Tests.dll
 GOTO :EOF
  
 :NOTFOUND

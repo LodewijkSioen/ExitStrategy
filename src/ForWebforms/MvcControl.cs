@@ -1,10 +1,11 @@
-using System.Globalization;
+using ExitStrategy.ForWebforms.ModelBinding;
+using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ExitStrategy.ForWebforms.ModelBinding;
 
 namespace ExitStrategy.ForWebforms
 {
@@ -20,7 +21,11 @@ namespace ExitStrategy.ForWebforms
             _modelExtractor = extractor ?? new ModelValueExtractor(this);
         }
 
-        public override bool EnableViewState { get{return false;} }
+        public override bool EnableViewState 
+        {
+            get { return false; }
+            set { throw new NotImplementedException("Friends dont let friends use the viewstate."); }
+        }
 
         public bool IsModelBound
         {

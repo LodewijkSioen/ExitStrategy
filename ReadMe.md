@@ -20,7 +20,7 @@ What does it provide?
              runat="server" />
 
 <mvc:Editor SelectMethod="GetModel" 
-            AdditionalViewData='<%$Object:new {htmlAttributes = new {@class = "form-control"},} %>' 
+            AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' 
             runat="server" />
 ````
 

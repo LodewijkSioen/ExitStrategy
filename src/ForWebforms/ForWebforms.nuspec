@@ -14,4 +14,8 @@
     <licenseUrl>https://raw.githubusercontent.com/LodewijkSioen/ExitStrategy/master/Licence.md</licenseUrl>
     <tags>webforms asp.net mvc razor migration</tags>
   </metadata>
+  <files>
+  	<file src="web.config.install.xdt" target="content" />
+  	<file src="web.config.uninstall.xdt" target="content" />
+  </files>
 </package>

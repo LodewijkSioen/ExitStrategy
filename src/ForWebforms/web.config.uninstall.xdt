@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+	<system.web>
+		<pages>
+			<controls>
+				<add assembly="ExitStrategy.ForWebforms" xdt:Transform="Remove" xdt:Locator="Match(assembly)" />
+			</controls>
+		</pages>
+		<compilation>
+			<expressionBuilders>
+				<add type="ExitStrategy.ForWebforms.NewObjectExpressionBuilder, ExitStrategy.ForWebforms" xdt:Transform="Remove" xdt:Locator="Match(type)" />
+			</expressionBuilders>
+		</compilation>
+	</system.web>
+</configuration>

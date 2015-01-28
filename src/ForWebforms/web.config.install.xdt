@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+	<system.web>
+		<pages>
+			<controls>
+				<add assembly="ExitStrategy.ForWebforms" namespace="ExitStrategy.ForWebforms" tagPrefix="mvc" xdt:Transform="Insert" />
+			</controls>
+		</pages>
+		<compilation>
+			<expressionBuilders>
+				<add expressionPrefix="new" type="ExitStrategy.ForWebforms.NewObjectExpressionBuilder, ExitStrategy.ForWebforms" xdt:Transform="Insert" />
+			</expressionBuilders>
+		</compilation>
+	</system.web>
+</configuration>

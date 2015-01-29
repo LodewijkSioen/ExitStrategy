@@ -1,0 +1,14 @@
+<configuration>
+	<system.web>
+		<pages>
+			<controls>
+				<add assembly="ExitStrategy.ForWebforms" namespace="ExitStrategy.ForWebforms" tagPrefix="mvc" />
+			</controls>
+		</pages>
+		<compilation>
+			<expressionBuilders>
+				<add expressionPrefix="new" type="ExitStrategy.ForWebforms.NewObjectExpressionBuilder, ExitStrategy.ForWebforms" />
+			</expressionBuilders>
+		</compilation>
+	</system.web>
+</configuration>

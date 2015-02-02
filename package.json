@@ -2,9 +2,9 @@
   "name": "ExitStrategy",
   "version": "0.0.0",
   "devDependencies": {
+    "findit": "^2.0.0",
     "gulp": "^3.8.10",
     "gulp-msbuild": "^0.2.5",
-    "gulp-run": "^1.6.6",
     "nuget-runner": "^0.1.5"
   }
 }

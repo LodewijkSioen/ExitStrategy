@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var msbuild = require('gulp-msbuild');
-var run = require('gulp-run');
+var exec = require('child_process').exec;
 var nuget = require('nuget-runner')({});
 
 gulp.task('default', ['build', 'test']);
@@ -20,8 +20,20 @@ gulp.task('build', function() {
         }));
 });
 
-gulp.task('test', ['build'], function(){
-	return gulp
-		.src(['src/**/bin/**/*Tests.dll'], { read: false })
-		.pipe(run('RunTests.bat'));
+gulp.task('test', ['build'], function (cb) {
+	var finder = require('findit')('src/packages/');	
+	var fixieName = 'Fixie.Console.exe';
+
+	finder.on('file', function (file, stat) {
+	    if(file.indexOf(fixieName, file.length - fixieName.length) !== -1){	    	
+	    	finder.stop();
+	    	var command = file + ' --NUnitXml TestResult.xml src/ForWebforms.Tests/bin/ExitStrategy.ForWebforms.Tests.dll';
+
+	    	exec(command, function (err, stdout, stderr) {
+		    	console.log(stdout);
+		    	console.log(stderr);
+		    	cb(err);
+		  	});
+	    }	    
+	});  	
 });

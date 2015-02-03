@@ -7,16 +7,16 @@ var nuget = require('nuget-runner')({});
 gulp.task('default', ['nuget-restore', 'create-folders', 'build', 'test', 'nuget-pack']);
 
 gulp.task('create-folders', function(){
-	return fs.mkdir('artifacts');
+	return fs.mkdir('./artifacts');
 });
 
 gulp.task('nuget-restore', function(){
-	return nuget.restore({packages: 'src/ExitStrategy.sln'});
+	return nuget.restore({packages: './src/ExitStrategy.sln'});
 });
 
 gulp.task('build', ['nuget-restore'], function() {
 	return gulp
-        .src('src/ExitStrategy.sln')
+        .src('./src/ExitStrategy.sln')
         .pipe(msbuild({
             toolsVersion: 12.0,
             targets: ['Clean', 'Build'],
@@ -26,7 +26,7 @@ gulp.task('build', ['nuget-restore'], function() {
 });
 
 gulp.task('test', ['create-folders', 'build'], function (cb) {
-	var finder = require('findit')('src/packages/');	
+	var finder = require('findit')('./src/packages/');	
 	var fixieName = 'Fixie.Console.exe';
 
 	finder.on('file', function (file, stat) {
@@ -45,7 +45,7 @@ gulp.task('test', ['create-folders', 'build'], function (cb) {
 
 gulp.task('nuget-pack', ['create-folders', 'test'], function(){
 	return nuget.pack({
-		spec: 'src/ForWebforms/ForWebforms.csproj',
-		outputDirectory: 'artifacts/'
+		spec: './src/ForWebforms/ForWebforms.csproj',
+		outputDirectory: './artifacts/'
 	});
 });

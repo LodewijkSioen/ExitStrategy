@@ -3,15 +3,15 @@ var msbuild = require('gulp-msbuild');
 var exec = require('child_process').exec;
 var nuget = require('nuget-runner')({});
 
-gulp.task('default', ['build', 'test']);
+gulp.task('default', ['nuget-restore', 'build', 'test', 'nuget-pack']);
 
-gulp.task('ci', []);
+gulp.task('nuget-restore', function(){
+	return nuget.restore({packages: 'src/ExitStrategy.sln'});
+});
 
-gulp.task('build', function() {
-	//todo: pipe this? nuget.restore({packages: 'src/ExitStrategy.sln'});
-
-    return gulp
-        .src('src/*.sln')
+gulp.task('build', ['nuget-restore'], function() {
+	return gulp
+        .src('src/ExitStrategy.sln')
         .pipe(msbuild({
             toolsVersion: 12.0,
             targets: ['Clean', 'Build'],
@@ -36,4 +36,11 @@ gulp.task('test', ['build'], function (cb) {
 		  	});
 	    }	    
 	});  	
+});
+
+gulp.task('nuget-pack', ['test'], function(){
+	return nuget.pack({
+		spec: 'src/ForWebforms/ForWebforms.csproj',
+		outputDirectory: '.'
+	});
 });

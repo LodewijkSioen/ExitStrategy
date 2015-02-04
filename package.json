@@ -6,6 +6,7 @@
     "fs": "0.0.2",
     "gulp": "^3.8.10",
     "gulp-msbuild": "^0.2.5",
-    "nuget-runner": "^0.1.5"
+    "nuget-runner": "^0.1.5",
+    "path": "^0.11.14"
   }
 }

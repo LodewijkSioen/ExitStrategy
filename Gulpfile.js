@@ -19,7 +19,6 @@ gulp.task('build', ['nuget-restore'], function() {
         .src('./src/ExitStrategy.sln')
         .pipe(msbuild({
             toolsVersion: 12.0,
-            //msbuildPath: 'C:/Program Files (x86)/MSBuild/12.0/Bin/MSBuild.exe', //Fix for AppVeyor
             targets: ['Clean', 'Build'],
             errorOnFail: true,
             stdout: true

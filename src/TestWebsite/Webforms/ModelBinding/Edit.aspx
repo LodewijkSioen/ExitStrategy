@@ -9,8 +9,16 @@
     </p>
     <ul>
         <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit,mode=modelbinding%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink> <% if (Mode == "modelbinding"){ %>(current page)<% } %></li>
-        <li><asp:HyperLink ID="HyperLink2" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit,mode=formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink> <% if (Mode == "formview"){ %>(current page)<% } %></li>
+        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit,mode=formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink> <% if (Mode == "formview"){ %>(current page)<% } %></li>
     </ul>
+
+    <asp:Panel runat="server" ID="ValidationSummary" ClientIDMode="Static" CssClass="panel panel-danger" Visible="false">
+        <div class="panel-heading">Your input is not valid:</div>
+        <div class="panel-body">
+            <asp:ValidationSummary runat="server" />
+        </div>
+    </asp:Panel>
+
 
     <asp:Panel runat="server" ID="FormPanel" visible="False">
     <div class="form-horizontal">
@@ -19,7 +27,6 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <asp:ValidationSummary runat="server" />
                 <asp:Button Text="Edit" CssClass="btn btn-primary" OnClick="Button_Click" runat="server" />
                 <asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
                 <div class="checkbox-inline">
@@ -40,8 +47,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>
-                        <asp:HyperLink ID="HyperLink1" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
+                        <asp:Button CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>
+                        <asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
                         <div class="checkbox-inline">
                             <label for="disableValidation">
                                 <input type="checkbox" id="disableValidation" /> Disable client-side validation

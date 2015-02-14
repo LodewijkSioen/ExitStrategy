@@ -7,20 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
-{
+namespace ExitStrategy.TestWebsite.Webforms.ModelBinding {
     
     
     public partial class Edit {
         
         /// <summary>
-        /// HyperLink2 control.
+        /// ValidationSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+        protected global::System.Web.UI.WebControls.Panel ValidationSummary;
         
         /// <summary>
         /// FormPanel control.

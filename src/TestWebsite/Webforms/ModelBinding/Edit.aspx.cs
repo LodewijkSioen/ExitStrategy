@@ -44,19 +44,17 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
             if (ModelState.IsValid)
             {
                 OnSucces(person);
+                return;
             }
+            ValidationSummary.Visible = true;
             _validatedPerson = person;
         }
 
         protected void Button_Click(object sender, EventArgs e)
         {
             var person = new Person();
-            if (TryUpdateModel(person, ModelBoundEditor.GetValueProvider()))
-            {
-                OnSucces(person);
-            }
-            
-            _validatedPerson = person;
+            TryUpdateModel(person, ModelBoundEditor.GetValueProvider());
+            SetModel(person);
         }
 
         private void OnSucces(Person person)

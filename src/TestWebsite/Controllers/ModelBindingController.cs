@@ -27,7 +27,7 @@ namespace ExitStrategy.TestWebsite.Controllers
         [HttpPost]
         public ActionResult Edit([RouteData]int id, Person editPerson)
         {
-            if (TryValidateModel(editPerson))
+            if(ModelState.IsValid)
             {
                 return View("Post", editPerson);
             }

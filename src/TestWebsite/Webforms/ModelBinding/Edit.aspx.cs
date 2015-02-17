@@ -35,7 +35,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
                 Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
                 return null;
             }
-            //Not 100% happy about this... (otoh, it's better than viewstate...)
+            
             return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);
         }
 
@@ -48,6 +48,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
             }
             ValidationSummary.Visible = true;
             _validatedPerson = person;
+            FormView.DataBind();
         }
 
         protected void Button_Click(object sender, EventArgs e)
@@ -59,9 +60,9 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 
         private void OnSucces(Person person)
         {
-            //Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
             FormPanel.Visible = false;
             FormView.Visible = false;
+            ValidationSummary.Visible = false;
             ResultPanel.Visible = true;
             ResultDisplay.DataSource = person;
             ResultDisplay.DataBind();

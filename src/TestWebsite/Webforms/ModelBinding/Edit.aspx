@@ -64,7 +64,7 @@
         <p>These are the values you posted to the form:</p>
         <div class="form-horizontal">
         <div class="mvc">
-        <mvc:Display runat="server" ID="ResultDisplay"/>
+            <mvc:Display runat="server" ID="ResultDisplay"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

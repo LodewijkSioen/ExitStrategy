@@ -55,5 +55,29 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             mvcState.Errors[1].ErrorMessage.ShouldBe("errorMessage2");
             mvcState.Errors[1].Exception.ShouldBe(ex2);
         }
+
+        public void ConvertModelStateWithNullValueToMvc()
+        {
+            var ex1 = new Exception("ExceptionMessage1");
+            var ex2 = new Exception("ExceptionMessage2");
+            var webFormsState = new WebformsModelState
+            {
+                Value = null,
+                Errors =
+                {
+                    new ModelError(ex1, "errorMessage1"),
+                    new ModelError(ex2, "errorMessage2")
+                }
+            };
+
+            var mvcState = webFormsState.ToMvc();
+
+            mvcState.Value.ShouldBe(null);
+            mvcState.Errors.Count.ShouldBe(2);
+            mvcState.Errors[0].ErrorMessage.ShouldBe("errorMessage1");
+            mvcState.Errors[0].Exception.ShouldBe(ex1);
+            mvcState.Errors[1].ErrorMessage.ShouldBe("errorMessage2");
+            mvcState.Errors[1].Exception.ShouldBe(ex2);
+        }
     }
 }

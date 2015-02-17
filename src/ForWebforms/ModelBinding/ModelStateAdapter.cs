@@ -19,10 +19,12 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 
         public static MvcModelState ToMvc(this WebformsModelState webformsState)
         {
-            var mvcState = new MvcModelState
+
+            var mvcState = new MvcModelState();
+            if(webformsState.Value != null)
             {
-                Value = new MvcValueProviderResult(webformsState.Value.RawValue, webformsState.Value.AttemptedValue, webformsState.Value.Culture)
-            };
+                mvcState.Value = new MvcValueProviderResult(webformsState.Value.RawValue, webformsState.Value.AttemptedValue, webformsState.Value.Culture);
+            }
             foreach (var error in webformsState.Errors)
             {
                 MvcModelError mvcError;

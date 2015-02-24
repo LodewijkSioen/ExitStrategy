@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Web.Compilation;
 using System.Web.UI.WebControls;
 
 namespace ExitStrategy.ForWebforms.ModelBinding
@@ -75,7 +76,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             //Otherwise we just use the type of the object (which will probably be Object[])
             if (!string.IsNullOrEmpty(_control.ItemType))
             {
-                return Type.GetType(_control.ItemType);
+                return BuildManager.GetType(_control.ItemType, true, false);
             }
 
             return value != null ? value.GetType() : null;

@@ -10,7 +10,7 @@
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding {
     
     
-    public partial class Edit {
+    public partial class EditWithFormView {
         
         /// <summary>
         /// ValidationSummary control.
@@ -22,22 +22,13 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding {
         protected global::System.Web.UI.WebControls.Panel ValidationSummary;
         
         /// <summary>
-        /// FormPanel control.
+        /// FormView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel FormPanel;
-        
-        /// <summary>
-        /// ModelBoundEditor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ExitStrategy.ForWebforms.Editor ModelBoundEditor;
+        protected global::System.Web.UI.WebControls.FormView FormView;
         
         /// <summary>
         /// ResultPanel control.

@@ -34,13 +34,14 @@ namespace ExitStrategy.TestWebsite
 
             routes.MapRoute(
                 name: "Default",
-                url: "mvc/{controller}/{action}/{*Id}",
-                defaults: new { action= "index", controller = "mvc"}
+                url: "mvc/{controller}/{action}/{id}/{mode}",
+                defaults: new { action= "index", controller = "mvc", id = 0, mode = string.Empty}
             );
 
             routes.MapPageRoute("Webforms", "Webforms", "~/Webforms/Index.aspx");
             routes.MapPageRoute("Webforms-ModelBinding", "Webforms/ModelBinding", "~/Webforms/ModelBinding/Index.aspx");
             routes.MapPageRoute("Webforms-ModelBinding-Edit", "Webforms/ModelBinding/edit/{id}", "~/Webforms/ModelBinding/Edit.aspx");
+            routes.MapPageRoute("Webforms-ModelBinding-Edit-FormView", "Webforms/ModelBinding/edit/{id}/formview", "~/Webforms/ModelBinding/EditWithFormView.aspx");
         }
 
         public static void RegisterBundles(BundleCollection bundles)

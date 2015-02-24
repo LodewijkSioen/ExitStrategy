@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ExitStrategy.TestWebsite.Models;
+using System;
 using System.Linq;
 using System.Web.ModelBinding;
 using System.Web.Routing;
-using ExitStrategy.TestWebsite.Models;
 
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
-    public partial class Edit : System.Web.UI.Page
+    public partial class EditWithFormView : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,18 +22,15 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
                 Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
                 return null;
             }
-            
+
             return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);
         }
 
-        protected void Button_Click(object sender, EventArgs e)
+        public void UpdateModel(Person person)
         {
-            var person = new Person();
-            TryUpdateModel(person, ModelBoundEditor.GetValueProvider());
-
             if (ModelState.IsValid)
             {
-                FormPanel.Visible = false;
+                FormView.Visible = false;
                 ValidationSummary.Visible = false;
                 ResultPanel.Visible = true;
                 ResultDisplay.DataSource = person;
@@ -43,9 +40,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 
             ValidationSummary.Visible = true;
             _validatedPerson = person;
+            FormView.DataBind();
         }
-
     }
-
-
 }

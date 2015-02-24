@@ -26,7 +26,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
             return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);
         }
 
-        public void UpdateModel(Person person)
+        public void SetModel(Person person)
         {
             if (ModelState.IsValid)
             {

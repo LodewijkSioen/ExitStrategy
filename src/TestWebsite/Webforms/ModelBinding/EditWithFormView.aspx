@@ -18,7 +18,7 @@
         </div>
     </asp:Panel>
 
-    <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" UpdateMethod="UpdateModel" DefaultMode="Edit" RenderOuterTable="false" EnableViewState="False">
+    <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" UpdateMethod="SetModel" DefaultMode="Edit" RenderOuterTable="false" EnableViewState="False">
         <EditItemTemplate>
             <div class="form-horizontal">
                 <div class="mvc">

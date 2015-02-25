@@ -57,21 +57,9 @@ namespace ExitStrategy.ForWebforms
 
             if (_modelDefinition != null)
             {
-                if (string.IsNullOrEmpty(DataField))
-                {
-                    viewBag.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => null,
-                        _modelDefinition.ModelType);
-                    viewBag.Model = _modelDefinition.Value;
-                    viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
-                }
-                else
-                {
-                    var dataItem = DataBinder.GetDataItem(DataItemContainer);
-                    viewBag.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null,
-                        dataItem.GetType(), DataField);
-                    viewBag.Model = DataBinder.GetPropertyValue(dataItem, DataField);
-                    viewBag.TemplateInfo.HtmlFieldPrefix = ClientID + "." + DataField;
-                }
+                viewBag.ModelMetadata = _modelDefinition.MetaData;
+                viewBag.Model = _modelDefinition.Model;
+                viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
             }
             
             var helper = MvcBridge.CreateHtmlHelper(HttpContextProvider.Current.Request.RequestContext, viewBag, writer);

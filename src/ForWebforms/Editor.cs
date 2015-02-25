@@ -21,7 +21,7 @@ namespace ExitStrategy.ForWebforms
 
         protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)
         {
-            return helper.EditorForModel(TemplateName, AdditionalViewData);
+            return string.IsNullOrEmpty(DataField) ? helper.EditorForModel(TemplateName, AdditionalViewData) : helper.Editor(DataField, TemplateName, AdditionalViewData);
         }
     }
 }

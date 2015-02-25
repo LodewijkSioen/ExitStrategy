@@ -1,21 +1,16 @@
-using System;
+using System.Web.Mvc;
 
 namespace ExitStrategy.ForWebforms.ModelBinding
 {
     public class ModelDefinition
     {
-        public object Value { get; set; }
-        public Type ModelType { get; set; }
+        public object Model { get; set; }
+        public ModelMetadata MetaData { get; set; }
 
-        public ModelDefinition()
+        public ModelDefinition(ModelMetadata metadata, object model)
         {
-
-        }
-
-        public ModelDefinition(object value)
-        {
-            Value = value;
-            ModelType = value != null ? value.GetType() : null;
+            Model = model;
+            MetaData = metadata;
         }
     }
 }

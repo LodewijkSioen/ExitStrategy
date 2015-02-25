@@ -34,8 +34,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(new []{_expectedModel});
 
-                    result.Value.ShouldBe(_expectedModel);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(_expectedModel);
+                    result.MetaData.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -49,8 +49,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(new Object[0]);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -64,8 +64,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -86,8 +86,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(_expectedModel);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(_expectedModel);
+                    result.MetaData.ShouldBe(typeof(DateTime));
                 });
         }
 
@@ -100,8 +100,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(_expectedModel);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(_expectedModel);
+                    result.MetaData.ShouldBe(typeof(DateTime));
                 });
         }
 
@@ -114,8 +114,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ShouldBe(typeof(DateTime));
                 });
         }
 
@@ -128,8 +128,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(null);
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ShouldBe(null);
                 });
         }
 
@@ -151,8 +151,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(new []{_expectedModel});
 
-                    result.Value.ShouldBe(_expectedModel);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(_expectedModel);
+                    result.MetaData.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -166,8 +166,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(Enumerable.Empty<DateTime>());
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -181,8 +181,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(Enumerable.Empty<DateTime>());
 
-                    result.Value.ShouldBe(new DateTime[0]);
-                    result.ModelType.ShouldBe(typeof(DateTime[]));
+                    result.Model.ShouldBe(new DateTime[0]);
+                    result.MetaData.ShouldBe(typeof(DateTime[]));
                 }
             );
         }
@@ -196,8 +196,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(new[] { _expectedModel });
 
-                    result.Value.ShouldBe(new []{ _expectedModel});
-                    result.ModelType.ShouldBe(typeof(DateTime[]));
+                    result.Model.ShouldBe(new []{ _expectedModel});
+                    result.MetaData.ShouldBe(typeof(DateTime[]));
                 }
             );
         }
@@ -211,8 +211,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(null);
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ShouldBe(null);
                 }
             );
         }

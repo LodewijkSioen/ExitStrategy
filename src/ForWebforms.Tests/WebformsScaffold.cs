@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Hosting;
@@ -11,6 +12,8 @@ namespace ExitStrategy.ForWebforms.Tests
     ////http://stackoverflow.com/questions/3702526/is-there-a-way-to-process-an-mvc-view-aspx-file-from-a-non-web-application
     public class WebformsScaffold : MarshalByRefObject
     {
+        private readonly string[] _unserializableExceptions = new[] {"Shouldly", "Moq"};
+
         public string Test(Action<MockPage, HtmlTextWriter> arrangeAct)
         {
             var builder = new StringBuilder();
@@ -30,7 +33,7 @@ namespace ExitStrategy.ForWebforms.Tests
                 }
                 catch (Exception ex)
                 {
-                    if (ex.Source == "Shouldly")
+                    if (_unserializableExceptions.Contains(ex.Source))
                     {
                         throw new Exception(ex.Message);//Schouldly's exceptions are not serializable
                     }

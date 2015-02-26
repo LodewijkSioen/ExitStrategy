@@ -11,8 +11,10 @@ namespace ExitStrategy.ForWebforms.Tests
         {
             var result = Host.Test((p, w) =>
             {
-                var modelProvider = new Mock<IModelProvider> ();
-                modelProvider.Setup(m => m.ExtractModel(null)).Returns(new ModelDefinition(new DateTime(2014, 12, 18)));
+                var selector = new Mock<IBindingStrategySelector> ();
+                var strategy = new Mock<IBindingStrategy>();
+                strategy.Setup(s => s.ExtractModel(null)).Returns(new ModelDefinition(new DateTime(2014, 12, 18)));
+                selector.Setup(s => s.GetStrategy(null)).Returns(strategy.Object);
                 var c = new Editor(modelProvider.Object);
                 c.DataBind();
                 p.Controls.Add(c);

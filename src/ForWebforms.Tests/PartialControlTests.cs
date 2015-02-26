@@ -42,7 +42,7 @@ namespace ExitStrategy.ForWebforms.Tests
         {
             var result = Host.Test((p, w) =>
             {
-                var provider = new Mock<IModelProvider>();
+                var provider = new Mock<IBindingStrategy>();
                 provider.Setup(mp => mp.ExtractModel(null)).Returns(new ModelDefinition(new DateTime(2014, 12, 18)));
                 var c = new Partial(provider.Object)
                 {

@@ -11,8 +11,8 @@ namespace ExitStrategy.ForWebforms
         public Display()
         { }
 
-        public Display(IModelProvider provider = null, IModelValueExtractor extractor = null)
-            :base(provider, extractor)
+        public Display(IBindingStrategySelector selector = null, IModelValueExtractor extractor = null)
+            :base(selector, extractor)
         {  }
 
         public string TemplateName { get; set; }

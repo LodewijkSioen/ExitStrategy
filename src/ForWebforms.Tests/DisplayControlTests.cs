@@ -11,7 +11,7 @@ namespace ExitStrategy.ForWebforms.Tests
         {
             var r = Host.Test((p, w) =>
             {
-                var modelProvider = new Mock<IModelProvider>();
+                var modelProvider = new Mock<IBindingStrategy>();
                 modelProvider.Setup(m => m.ExtractModel(null)).Returns(new ModelDefinition(new DateTime(2014, 12, 18)));
                 var c = new Display(modelProvider.Object);
                 c.DataBind();

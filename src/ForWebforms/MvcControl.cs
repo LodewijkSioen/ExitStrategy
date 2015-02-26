@@ -14,12 +14,12 @@ namespace ExitStrategy.ForWebforms
     public abstract class MvcControl : DataBoundControl, IBindableControl, IDataSourceViewSchemaAccessor
     {
         private ModelDefinition _modelDefinition;
-        private readonly IModelProvider _modelProvider;
+        private readonly IBindingStrategySelector _bindingStrategySelector;
         private readonly IModelValueExtractor _modelExtractor;
 
-        protected MvcControl(IModelProvider provider = null, IModelValueExtractor extractor = null)
+        protected MvcControl(IBindingStrategySelector selector = null, IModelValueExtractor extractor = null)
         {
-            _modelProvider = provider ?? new ModelProvider(this);
+            _bindingStrategySelector = selector ?? new BindingStrategySelector();
             _modelExtractor = extractor ?? new ModelValueExtractor(this);
         }
 
@@ -47,7 +47,7 @@ namespace ExitStrategy.ForWebforms
 
         protected override void PerformDataBinding(IEnumerable data)
         {
-            _modelDefinition = _modelProvider.ExtractModel(data);
+            _modelDefinition = _bindingStrategySelector.GetStrategy(this).ExtractModel(data);
         }
 
         protected override void Render(HtmlTextWriter writer)

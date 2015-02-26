@@ -5,8 +5,8 @@ namespace ExitStrategy.ForWebforms.Tests.Mocks
 {
     public class MockControl : MvcControl
     {
-        public MockControl(IModelProvider provider = null, IModelValueExtractor extractor = null)
-            : base(provider, extractor)
+        public MockControl(IBindingStrategySelector selector = null, IModelValueExtractor extractor = null)
+            : base(selector, extractor)
         {
             
         }

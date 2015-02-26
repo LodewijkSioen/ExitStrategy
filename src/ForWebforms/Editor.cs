@@ -15,8 +15,8 @@ namespace ExitStrategy.ForWebforms
         public Editor()
         { }
 
-        public Editor(IModelProvider provider = null, IModelValueExtractor extractor = null)
-            :base(provider, extractor)
+        public Editor(IBindingStrategySelector selector = null, IModelValueExtractor extractor = null)
+            :base(selector, extractor)
         {  }
 
         protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)

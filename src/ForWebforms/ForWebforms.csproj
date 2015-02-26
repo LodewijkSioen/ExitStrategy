@@ -68,10 +68,15 @@
     <Compile Include="Display.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="HttpRequestProvider.cs" />
+    <Compile Include="ModelBinding\DataItemContainerBindingStrategy.cs" />
+    <Compile Include="ModelBinding\DataSourceBindingStrategy.cs" />
+    <Compile Include="ModelBinding\EnumerableBasedBindingStrategy.cs" />
+    <Compile Include="ModelBinding\IBindingStrategy.cs" />
     <Compile Include="ModelBinding\IModelBinder.cs" />
     <Compile Include="ModelBinding\ModelBinderAdapter.cs" />
+    <Compile Include="ModelBinding\ModelBindingStrategy.cs" />
     <Compile Include="ModelBinding\ModelStateAdapter.cs" />
-    <Compile Include="ModelBinding\ModelProvider.cs" />
+    <Compile Include="ModelBinding\BindingStrategySelector.cs" />
     <Compile Include="ModelBinding\ModelDefinition.cs" />
     <Compile Include="ModelBinding\ModelValueExtractor.cs" />
     <Compile Include="MvcBridge.cs" />

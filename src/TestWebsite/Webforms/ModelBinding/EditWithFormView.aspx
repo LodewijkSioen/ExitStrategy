@@ -22,7 +22,11 @@
         <EditItemTemplate>
             <div class="form-horizontal">
                 <div class="mvc">
-                    <mvc:Editor ID="FormViewEditor" runat="server" DataField="BirthDate" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                    <mvc:Editor runat="server" DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                    <mvc:Editor runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                    <mvc:Editor runat="server" DataField="BirthDate" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                    <mvc:Editor runat="server" DataField="Gender" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                    <mvc:Editor runat="server" DataField="IsDeceased" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

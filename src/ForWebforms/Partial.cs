@@ -14,8 +14,8 @@ namespace ExitStrategy.ForWebforms
         public Partial()
         {  }
 
-        public Partial(IModelProvider provider = null, IModelValueExtractor extractor = null)
-            :base(provider, extractor)
+        public Partial(IBindingStrategySelector selector = null, IModelValueExtractor extractor = null)
+            :base(selector, extractor)
         {  }
 
         protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)

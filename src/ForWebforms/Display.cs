@@ -11,8 +11,8 @@ namespace ExitStrategy.ForWebforms
         public Display()
         { }
 
-        public Display(IModelProvider provider = null, IModelValueExtractor extractor = null)
-            :base(provider, extractor)
+        public Display(IBindingStrategySelector selector = null, IModelValueExtractor extractor = null)
+            :base(selector, extractor)
         {  }
 
         public string TemplateName { get; set; }
@@ -21,7 +21,7 @@ namespace ExitStrategy.ForWebforms
 
         protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)
         {   
-            return helper.DisplayForModel(TemplateName, AdditionalViewData);
+            return string.IsNullOrEmpty(DataField) ? helper.DisplayForModel(TemplateName, AdditionalViewData) : helper.Display(DataField, TemplateName, AdditionalViewData);
         }
     }
 }

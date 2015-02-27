@@ -15,13 +15,13 @@ namespace ExitStrategy.ForWebforms
         public Editor()
         { }
 
-        public Editor(IModelProvider provider = null, IModelValueExtractor extractor = null)
-            :base(provider, extractor)
+        public Editor(IBindingStrategySelector selector = null, IModelValueExtractor extractor = null)
+            :base(selector, extractor)
         {  }
 
         protected override MvcHtmlString RenderMvcContent(HtmlHelper helper, ViewDataDictionary viewBag)
         {
-            return helper.EditorForModel(TemplateName, AdditionalViewData);
+            return string.IsNullOrEmpty(DataField) ? helper.EditorForModel(TemplateName, AdditionalViewData) : helper.Editor(DataField, TemplateName, AdditionalViewData);
         }
     }
 }

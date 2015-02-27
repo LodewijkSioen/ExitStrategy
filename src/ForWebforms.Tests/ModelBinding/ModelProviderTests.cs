@@ -18,11 +18,11 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             _host = WebformsScaffold.Create();
         }
 
-        private ModelProvider ArrangeWithModelBinding(MockPage p)
+        private ModelBindingStrategy ArrangeWithModelBinding(MockPage p)
         {
             var control = new MockControl() { SelectMethod = "GetModel" };
             p.Controls.Add(control);
-            return new ModelProvider(control);
+            return new ModelBindingStrategy(control);
         }
 
         public void TestModelBindingWithData()
@@ -34,8 +34,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(new []{_expectedModel});
 
-                    result.Value.ShouldBe(_expectedModel);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(_expectedModel);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -49,8 +49,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(new Object[0]);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -64,17 +64,17 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
                 }
             );
         }
 
-        private ModelProvider ArrangeWithDataSource(MockPage p, object value, string typeName)
+        private DataSourceBindingStrategy ArrangeWithDataSource(MockPage p, object value, string typeName)
         {
             var control = new MockControl { DataSource = value, ItemType = typeName};
             p.Controls.Add(control);
-            return new ModelProvider(control);
+            return new DataSourceBindingStrategy(control);
         }
 
         public void TestWithDataSourceAndItemType()
@@ -86,8 +86,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(_expectedModel);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(_expectedModel);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
                 });
         }
 
@@ -100,8 +100,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(_expectedModel);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(_expectedModel);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
                 });
         }
 
@@ -114,8 +114,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
                 });
         }
 
@@ -128,18 +128,18 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(null);
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ShouldBe(null);
                 });
         }
 
-        private ModelProvider ArrangeWithDataSourceId(MockPage p, string typeName)
+        private DataSourceBindingStrategy ArrangeWithDataSourceId(MockPage p, string typeName)
         {
             var control = new MockControl { DataSourceID = "DataSourceControl", ItemType = typeName };
             var dataSource = new ObjectDataSource {ID = "DataSourceControl"};
             p.Controls.Add(control);
             p.Controls.Add(dataSource);
-            return new ModelProvider(control);
+            return new DataSourceBindingStrategy(control);
         }
 
         public void TestModelBindingWithDataSourceIdAndTypeName()
@@ -151,8 +151,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(new []{_expectedModel});
 
-                    result.Value.ShouldBe(_expectedModel);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(_expectedModel);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -166,8 +166,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(Enumerable.Empty<DateTime>());
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(typeof(DateTime));
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
                 }
             );
         }
@@ -181,8 +181,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(Enumerable.Empty<DateTime>());
 
-                    result.Value.ShouldBe(new DateTime[0]);
-                    result.ModelType.ShouldBe(typeof(DateTime[]));
+                    result.Model.ShouldBe(new DateTime[0]);
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime[]));
                 }
             );
         }
@@ -196,8 +196,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(new[] { _expectedModel });
 
-                    result.Value.ShouldBe(new []{ _expectedModel});
-                    result.ModelType.ShouldBe(typeof(DateTime[]));
+                    result.Model.ShouldBe(new []{ _expectedModel});
+                    result.MetaData.ModelType.ShouldBe(typeof(DateTime[]));
                 }
             );
         }
@@ -211,8 +211,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
                     var result = provider.ExtractModel(null);
 
-                    result.Value.ShouldBe(null);
-                    result.ModelType.ShouldBe(null);
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ShouldBe(null);
                 }
             );
         }

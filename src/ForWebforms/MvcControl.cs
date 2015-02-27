@@ -2,22 +2,24 @@ using ExitStrategy.ForWebforms.ModelBinding;
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.UI;
+using System.Web.UI.Design;
 using System.Web.UI.WebControls;
 
 namespace ExitStrategy.ForWebforms
 {
-    public abstract class MvcControl : DataBoundControl, IBindableControl
+    public abstract class MvcControl : DataBoundControl, IBindableControl, IDataSourceViewSchemaAccessor
     {
         private ModelDefinition _modelDefinition;
-        private readonly IModelProvider _modelProvider;
+        private readonly IBindingStrategySelector _bindingStrategySelector;
         private readonly IModelValueExtractor _modelExtractor;
 
-        protected MvcControl(IModelProvider provider = null, IModelValueExtractor extractor = null)
+        protected MvcControl(IBindingStrategySelector selector = null, IModelValueExtractor extractor = null)
         {
-            _modelProvider = provider ?? new ModelProvider(this);
+            _bindingStrategySelector = selector ?? new BindingStrategySelector();
             _modelExtractor = extractor ?? new ModelValueExtractor(this);
         }
 
@@ -35,6 +37,9 @@ namespace ExitStrategy.ForWebforms
             }
         }
 
+        [TypeConverter(typeof(DataSourceViewSchemaConverter))]
+        public string DataField { get; set; }
+
         protected override void ValidateDataSource(object dataSource)
         {
             //Do nothing, we accept anything
@@ -42,7 +47,7 @@ namespace ExitStrategy.ForWebforms
 
         protected override void PerformDataBinding(IEnumerable data)
         {
-            _modelDefinition = _modelProvider.ExtractModel(data);
+            _modelDefinition = _bindingStrategySelector.GetStrategy(this).ExtractModel(data);
         }
 
         protected override void Render(HtmlTextWriter writer)
@@ -52,8 +57,8 @@ namespace ExitStrategy.ForWebforms
 
             if (_modelDefinition != null)
             {
-                viewBag.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, _modelDefinition.ModelType);
-                viewBag.Model = _modelDefinition.Value;
+                viewBag.ModelMetadata = _modelDefinition.MetaData;
+                viewBag.Model = _modelDefinition.Model;
                 viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
             }
             
@@ -82,6 +87,11 @@ namespace ExitStrategy.ForWebforms
                 nameValueCollection.Add(value.Key, value.Value);
             }
             return new System.Web.ModelBinding.NameValueCollectionValueProvider(nameValueCollection, CultureInfo.CurrentCulture);
+        }
+
+        object IDataSourceViewSchemaAccessor.DataSourceViewSchema
+        {
+            get; set;
         }
     }
 }

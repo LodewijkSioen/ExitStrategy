@@ -21,9 +21,14 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 
         public IEnumerable<KeyValuePair<string, string>> ExtractValues(NameValueCollection form)
         {
+            if (form.AllKeys.Contains(_control.ClientID))
+            {
+                return new[]{ new KeyValuePair<string, string>(_control.ClientID, GetValue(_control.ClientID, form)) };
+            }
+
             var formPrefix = _control.ClientID + ".";
 
-            return from key in form.Keys.OfType<string>()
+            return from key in form.AllKeys
                 where key.StartsWith(formPrefix)
                 select new KeyValuePair<string, string>(key.Substring(formPrefix.Length), GetValue(key, form));
         }

@@ -8,7 +8,7 @@
     </p>
     <ul>
         <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink></li>
-        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit-formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt; (current page)</asp:HyperLink></li>
+        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit-formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink> (current page)</li>
     </ul>
 
     <asp:Panel runat="server" ID="ValidationSummary" ClientIDMode="Static" CssClass="panel panel-danger" Visible="false">
@@ -21,13 +21,42 @@
     <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" UpdateMethod="SetModel" DefaultMode="Edit" RenderOuterTable="false" EnableViewState="False">
         <EditItemTemplate>
             <div class="form-horizontal">
-                <div class="mvc">
-                    <mvc:Editor runat="server" DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
-                    <mvc:Editor runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
-                    <mvc:Editor runat="server" DataField="BirthDate" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
-                    <mvc:Editor runat="server" DataField="Gender" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
-                    <mvc:Editor runat="server" DataField="IsDeceased" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
-                </div>
+                    <div class="form-group<%= ModelState.IsValidField("LastName") ? "" : " has-error" %>">
+                        <asp:Label Text="Last Name" AssociatedControlID="LastNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
+                        <div class="col-sm-4">
+                            <asp:BoundField DataField="BirthDate" />
+                            <mvc:Editor ID="LastNameEditor" runat="server" DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <asp:ModelErrorMessage runat="server" AssociatedControlID="LastNameEditor" ModelStateKey="LastName" CssClass="help-block"/>
+                        </div>
+                    </div>
+                    <div class="form-group<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
+                        <asp:Label Text="First Name" AssociatedControlID="FirstNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
+                        <div class="col-sm-4">
+                            <mvc:Editor ID="FirstNameEditor" runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <asp:ModelErrorMessage runat="server" AssociatedControlID="FirstNameEditor" ModelStateKey="FirstName" CssClass="help-block"/>
+                        </div>
+                    </div>
+                    <div class="form-group<%= ModelState.IsValidField("BirthDate") ? "" : " has-error" %>">
+                        <asp:Label Text="BirthDate" AssociatedControlID="BirthDateEditor" CssClass="col-sm-2 control-label" runat="server"/>
+                        <div class="col-sm-4">
+                            <mvc:Editor ID="BirthDateEditor" runat="server" DataField="BirthDate" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <asp:ModelErrorMessage runat="server" AssociatedControlID="BirthDateEditor" ModelStateKey="BirthDate" CssClass="help-block"/>
+                        </div>
+                    </div>
+                    <div class="form-group<%= ModelState.IsValidField("Gender") ? "" : " has-error" %>">
+                        <asp:Label Text="Gender" AssociatedControlID="GenderEditor" CssClass="col-sm-2 control-label" runat="server"/>
+                        <div class="col-sm-4">
+                            <mvc:Editor ID="GenderEditor" runat="server" DataField="Gender" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <asp:ModelErrorMessage runat="server" AssociatedControlID="GenderEditor" ModelStateKey="Gender" CssClass="help-block"/>
+                        </div>
+                    </div>
+                    <div class="form-group<%= ModelState.IsValidField("IsDeceased") ? "" : " has-error" %>">
+                        <asp:Label Text="IsDeceased" AssociatedControlID="IsDeceasedEditor" CssClass="col-sm-2 control-label" runat="server"/>
+                        <div class="col-sm-4">
+                            <mvc:Editor ID="IsDeceasedEditor" runat="server" DataField="IsDeceased" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <asp:ModelErrorMessage runat="server" AssociatedControlID="IsDeceasedEditor" ModelStateKey="IsDeceased" CssClass="help-block"/>
+                        </div>
+                    </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <asp:Button CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>

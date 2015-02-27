@@ -87,6 +87,7 @@
     <Compile Include="ModelBinding\ModelStateTests.cs" />
     <Compile Include="ModelBinding\ModelValueExtractorTests.cs" />
     <Compile Include="MvcControlTests.cs" />
+    <Compile Include="PartialControlTests.cs" />
     <Compile Include="WebformsScaffold.cs" />
     <Compile Include="Mocks\MockPage.cs">
       <SubType>ASPXCodeBehind</SubType>

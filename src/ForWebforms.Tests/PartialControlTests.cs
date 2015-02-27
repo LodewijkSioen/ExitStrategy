@@ -2,6 +2,8 @@
 using ExitStrategy.ForWebforms.ModelBinding;
 using Moq;
 using Shouldly;
+using System.Web.Mvc;
+using System.Collections;
 
 namespace ExitStrategy.ForWebforms.Tests
 {
@@ -42,9 +44,12 @@ namespace ExitStrategy.ForWebforms.Tests
         {
             var result = Host.Test((p, w) =>
             {
-                var provider = new Mock<IBindingStrategy>();
-                provider.Setup(mp => mp.ExtractModel(null)).Returns(new ModelDefinition(new DateTime(2014, 12, 18)));
-                var c = new Partial(provider.Object)
+                var selector = new Mock<IBindingStrategySelector>();
+                var strategy = new Mock<IBindingStrategy>();
+                var modelMetaData = ModelMetadata.FromLambdaExpression(x => x.Date, new ViewDataDictionary<DateTime>(new DateTime(2014, 12, 18)));
+                strategy.Setup(s => s.ExtractModel(It.IsAny<IEnumerable>())).Returns(new ModelDefinition(modelMetaData, new DateTime(2014, 12, 18)));
+                selector.Setup(s => s.GetStrategy(It.IsAny<MvcControl>())).Returns(strategy.Object);
+                var c = new Partial(selector.Object)
                 {
                     PartialViewName = "TestWithModel"
                 };

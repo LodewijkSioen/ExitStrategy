@@ -49,8 +49,8 @@ namespace ExitStrategy.TestWebsite.Models
             yield return new Person
             {
                 Id = 3,
-                FirstName = "Harrison",
-                LastName = "George",
+                FirstName = "George",
+                LastName = "Harrison",
                 BirthDate = new DateTime(1943, 2, 24),
                 Gender = Sex.Male,
                 IsDeceased = true
@@ -69,9 +69,9 @@ namespace ExitStrategy.TestWebsite.Models
 
     public class PersonListItem
     {
-        [DisplayName("First Name")]
+        [DisplayName("First Name"), Required]
         public string FirstName { get; set; }
-        [DisplayName("Last Name")]
+        [DisplayName("Last Name"), Required]
         public string LastName { get; set; }
         [DisplayName("")]
         public Link EditLink { get; set; }

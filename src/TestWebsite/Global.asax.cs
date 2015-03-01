@@ -40,6 +40,7 @@ namespace ExitStrategy.TestWebsite
 
             routes.MapPageRoute("Webforms", "Webforms", "~/Webforms/Index.aspx");
             routes.MapPageRoute("Webforms-ModelBinding", "Webforms/ModelBinding", "~/Webforms/ModelBinding/Index.aspx");
+            routes.MapPageRoute("Webforms-ModelBinding-ListView", "Webforms/ModelBinding/listview", "~/Webforms/ModelBinding/IndexWithListView.aspx");
             routes.MapPageRoute("Webforms-ModelBinding-Edit", "Webforms/ModelBinding/edit/{id}", "~/Webforms/ModelBinding/Edit.aspx");
             routes.MapPageRoute("Webforms-ModelBinding-Edit-FormView", "Webforms/ModelBinding/edit/{id}/formview", "~/Webforms/ModelBinding/EditWithFormView.aspx");
         }

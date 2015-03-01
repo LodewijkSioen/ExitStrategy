@@ -132,6 +132,7 @@
     </Content>
     <Content Include="Webforms\ModelBinding\Edit.aspx" />
     <Content Include="Webforms\ModelBinding\EditWithFormView.aspx" />
+    <Content Include="Webforms\ModelBinding\IndexWithListView.aspx" />
     <Content Include="Webforms\ModelBinding\Index.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +175,13 @@
     </Compile>
     <Compile Include="Webforms\ModelBinding\EditWithFormView.aspx.designer.cs">
       <DependentUpon>EditWithFormView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Webforms\ModelBinding\IndexWithListView.aspx.cs">
+      <DependentUpon>IndexWithListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webforms\ModelBinding\IndexWithListView.aspx.designer.cs">
+      <DependentUpon>IndexWithListView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Webforms\ModelBinding\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

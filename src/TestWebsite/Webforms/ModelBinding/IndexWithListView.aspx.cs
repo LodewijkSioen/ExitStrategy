@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Routing;
 using ExitStrategy.TestWebsite.Models;
+using System.Web.UI.WebControls;
 
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
@@ -11,6 +12,17 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
         protected void Page_Load(object sender, EventArgs e)
         {
             
+        }
+
+        protected void ListItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            switch (e.CommandName.ToLower())
+            {
+                case "initinsert":
+                    List.InsertItemPosition = InsertItemPosition.LastItem;
+                    List.EditIndex = -1;
+                    break;
+            }
         }
 
         public IEnumerable<PersonListItem> GetPersons()
@@ -25,7 +37,12 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 
         public void UpdatePerson(PersonListItem person)
         {
+            throw new NotImplementedException("Update");
+        }
 
+        public void InsertPerson(PersonListItem person)
+        {
+            throw new NotImplementedException("Insert");
         }
     }
 }

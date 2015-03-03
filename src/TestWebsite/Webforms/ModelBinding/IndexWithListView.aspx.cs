@@ -37,12 +37,20 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 
         public void UpdatePerson(PersonListItem person)
         {
-            throw new NotImplementedException("Update");
+            ShowResult(person);
         }
 
         public void InsertPerson(PersonListItem person)
         {
-            throw new NotImplementedException("Insert");
+            ShowResult(person);
+        }
+
+        private void ShowResult(PersonListItem person)
+        {
+            ResultPanel.Visible = true;
+            List.Visible = false;
+            ResultDisplay.DataSource = person;
+            ResultDisplay.DataBind();
         }
     }
 }

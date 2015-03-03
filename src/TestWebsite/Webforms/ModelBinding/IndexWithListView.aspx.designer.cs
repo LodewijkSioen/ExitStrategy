@@ -20,5 +20,23 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView List;
+        
+        /// <summary>
+        /// ResultPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ResultPanel;
+        
+        /// <summary>
+        /// ResultDisplay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ExitStrategy.ForWebforms.Display ResultDisplay;
     }
 }

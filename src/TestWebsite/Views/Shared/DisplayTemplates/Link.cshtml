@@ -1,2 +1,4 @@
 ﻿@model ExitStrategy.TestWebsite.Models.Link
-<a href="@Model.Url">@Model.Text</a>
+@if (Model != null) { 
+    <a href="@Model.Url">@Model.Text</a>
+}

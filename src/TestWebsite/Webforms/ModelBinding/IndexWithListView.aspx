@@ -6,7 +6,7 @@
     <p>
         This is a Webforms page that uses a Razor DisplayTemplate to show a property defined in the codebehind.
     </p>
-    <asp:ListView ID="List" runat="server" EnableViewState="False" 
+    <asp:ListView ID="List" runat="server" EnableViewState="True" ItemType="ExitStrategy.TestWebsite.Models.PersonListItem" 
         SelectMethod="GetPersons" 
         UpdateMethod="UpdatePerson" 
         InsertMethod="InsertPerson"

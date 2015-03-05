@@ -11,7 +11,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            ValidationSummary.Visible = false;
         }
 
         protected void ListItemCommand(object sender, ListViewCommandEventArgs e)
@@ -21,8 +21,22 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
                 case "initinsert":
                     List.InsertItemPosition = InsertItemPosition.LastItem;
                     List.EditIndex = -1;
+                    e.Handled = true;
+                    break;
+                case "cancelinsert":
+                    List.InsertItemPosition = InsertItemPosition.None;
+                    List.EditIndex = -1;
+                    e.Handled = true;
+                    break;
+                case "edit":
+                    List.InsertItemPosition = InsertItemPosition.None;
+                    e.Handled = false;
+                    break;
+                default:
+                    e.Handled = false;
                     break;
             }
+            
         }
 
         public IEnumerable<PersonListItem> GetPersons()
@@ -37,12 +51,27 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 
         public void UpdatePerson(PersonListItem person)
         {
-            ShowResult(person);
+            if (ModelState.IsValid)
+            {
+                ShowResult(person);
+                return;
+            }
+            ValidationSummary.Visible = true;
+            List.EditItem.DataItem = person;
+            List.EditItem.DataBind();
         }
 
         public void InsertPerson(PersonListItem person)
         {
-            ShowResult(person);
+            if (ModelState.IsValid)
+            {
+                ShowResult(person);
+                return;
+            }
+            ValidationSummary.Visible = true;
+            List.InsertItemPosition = InsertItemPosition.LastItem;
+            List.InsertItem.DataItem = person;
+            List.InsertItem.DataBind();
         }
 
         private void ShowResult(PersonListItem person)

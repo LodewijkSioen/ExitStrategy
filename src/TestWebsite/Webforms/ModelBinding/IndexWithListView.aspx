@@ -6,7 +6,15 @@
     <p>
         This is a Webforms page that uses a Razor DisplayTemplate to show a property defined in the codebehind.
     </p>
-    <asp:ListView ID="List" runat="server" EnableViewState="True" ItemType="ExitStrategy.TestWebsite.Models.PersonListItem" 
+    
+    <asp:Panel runat="server" ID="ValidationSummary" ClientIDMode="Static" CssClass="panel panel-danger" Visible="false">
+        <div class="panel-heading">Your input is not valid:</div>
+        <div class="panel-body">
+            <asp:ValidationSummary runat="server" />
+        </div>
+    </asp:Panel>
+
+    <asp:ListView ID="List" runat="server" EnableViewState="False" ItemType="ExitStrategy.TestWebsite.Models.PersonListItem"
         SelectMethod="GetPersons" 
         UpdateMethod="UpdatePerson" 
         InsertMethod="InsertPerson"
@@ -60,7 +68,7 @@
                     <asp:Button runat="server" Text="Insert" CommandName="Insert" CssClass="btn btn-primary btn-sm" />
                     <input type="checkbox" id="disableValidation" title="Disable client-side validation" />
                 </td>
-                <td><asp:LinkButton runat="server" Text="Cancel" CommandName="Cancel" CssClass="btn btn-link" /></td>
+                <td><asp:LinkButton runat="server" Text="Cancel" CommandName="CancelInsert" CssClass="btn btn-link" /></td>
             </tr>
         </InsertItemTemplate>
         <EmptyDataTemplate>

@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Routing;
 using ExitStrategy.TestWebsite.Models;
+using ExitStrategy.TestWebsite.Helpers;
 using System.Web.UI.WebControls;
 
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
     public partial class IndexWithListView : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             ValidationSummary.Visible = false;
+            if (Request.QueryString.GetValueOrEmptyString("Mode").Equals("insert", StringComparison.InvariantCultureIgnoreCase))
+            {
+                List.InsertItemPosition = InsertItemPosition.LastItem;
+            }
         }
 
         protected void ListItemCommand(object sender, ListViewCommandEventArgs e)

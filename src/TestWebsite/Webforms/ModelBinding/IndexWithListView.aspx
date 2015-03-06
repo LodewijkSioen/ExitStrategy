@@ -14,11 +14,11 @@
         </div>
     </asp:Panel>
 
-    <asp:ListView ID="List" runat="server" EnableViewState="False" ItemType="ExitStrategy.TestWebsite.Models.PersonListItem"
+    <asp:ListView ID="List" runat="server" EnableViewState="False"
+        ItemType="ExitStrategy.TestWebsite.Models.PersonListItem"
         SelectMethod="GetPersons" 
         UpdateMethod="UpdatePerson" 
-        InsertMethod="InsertPerson"
-        OnItemCommand="ListItemCommand">
+        InsertMethod="InsertPerson">
         <LayoutTemplate>
             <table class="table table-condensed table-striped table-hover">
                 <thead>
@@ -35,7 +35,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="4">
-                            <asp:LinkButton runat="server" CommandName="InitInsert" Text="Add new" CssClass="btn btn-link" />
+                            <asp:HyperLink runat="server" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-ListView,Mode=Insert%>" Text="Add new" CssClass="btn btn-link" />
                         </td>
                     </tr>
                 </tfoot>

@@ -7,6 +7,6 @@ namespace ExitStrategy.TestWebsite.Helpers
         public static MvcHtmlString OnValidationError<TModel>(this HtmlHelper<TModel> htmlHelper, string propertyName, string error)
         {
             return htmlHelper.ViewData.ModelState.IsValidField(propertyName) ? null : new MvcHtmlString(error);
-        }
+        }        
     }
 }

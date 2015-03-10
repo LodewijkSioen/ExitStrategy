@@ -47,16 +47,16 @@
         </LayoutTemplate>
         <ItemTemplate>
             <tr>
-                <td><mvc:Display DataField="FirstName" runat="server" /></td>
-                <td><mvc:Display DataField="LastName" runat="server" /></td>
-                <td><mvc:Display DataField="EditLink" runat="server" /></td>
+                <td class="mvc"><mvc:Display DataField="FirstName" runat="server" /></td>
+                <td class="mvc"><mvc:Display DataField="LastName" runat="server" /></td>
+                <td class="mvc"><mvc:Display DataField="EditLink" runat="server" /></td>
                 <td><asp:LinkButton runat="server" Text="Edit Inline" CommandName="Edit" /></td>
             </tr>
         </ItemTemplate>
         <EditItemTemplate>
             <tr>
-                <td><mvc:Editor DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
-                <td><mvc:Editor DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
+                <td class="mvc"><mvc:Editor DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
+                <td class="mvc"><mvc:Editor DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
                 <td>
                     <asp:Button runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary btn-sm" />
                     <input type="checkbox" id="disableValidation" title="Disable client-side validation" />
@@ -66,8 +66,8 @@
         </EditItemTemplate>
         <InsertItemTemplate>
             <tr>
-                <td><mvc:Editor DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
-                <td><mvc:Editor DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
+                <td class="mvc"><mvc:Editor DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
+                <td class="mvc"><mvc:Editor DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
                 <td>
                     <asp:Button runat="server" Text="Insert" CommandName="Insert" CssClass="btn btn-primary btn-sm" />
                     <input type="checkbox" id="disableValidation" title="Disable client-side validation" />

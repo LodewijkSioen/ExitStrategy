@@ -10,6 +10,6 @@
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding {
     
     
-    public partial class IndexWithGridView {
+    public partial class Index {
     }
 }

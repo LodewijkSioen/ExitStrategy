@@ -4,8 +4,12 @@
 <div class="webforms">
     <h1>Webforms Modelbinding list</h1>
     <p>
-        This is a Webforms page that uses a Razor DisplayTemplate to show a property defined in the codebehind.
+        This is a Webforms page that uses a Razor DisplayTemplate to show a property defined in the codebehind.This page uses an &lt;mcv:Display /&gt; control, which can be used in two ways:
     </p>
+    <ul>
+        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-ModelBinding%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink></li>
+        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-ModelBinding-listview%>" runat="server">As a nested control within an &lt;asp:ListView /&gt;</asp:HyperLink> that also supports adding new items (current page)</li>
+    </ul>
     
     <asp:Panel runat="server" ID="ValidationSummary" ClientIDMode="Static" CssClass="panel panel-danger" Visible="false">
         <div class="panel-heading">Your input is not valid:</div>
@@ -68,7 +72,7 @@
                     <asp:Button runat="server" Text="Insert" CommandName="Insert" CssClass="btn btn-primary btn-sm" />
                     <input type="checkbox" id="disableValidation" title="Disable client-side validation" />
                 </td>
-                <td><asp:LinkButton runat="server" Text="Cancel" CommandName="CancelInsert" CssClass="btn btn-link" /></td>
+                <td><asp:HyperLink runat="server" Text="Cancel" NavigateUrl="<%$RouteUrl:routename=Webforms-ModelBinding-listview%>" CssClass="btn btn-link" /></td>
             </tr>
         </InsertItemTemplate>
         <EmptyDataTemplate>

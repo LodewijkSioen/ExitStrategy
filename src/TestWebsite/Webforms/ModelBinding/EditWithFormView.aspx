@@ -25,35 +25,35 @@
                         <asp:Label Text="Last Name" AssociatedControlID="LastNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
                         <div class="col-sm-4">
                             <asp:BoundField DataField="BirthDate" />
-                            <mvc:Editor ID="LastNameEditor" runat="server" DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <mvc:Editor ID="LastNameEditor" runat="server" DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
                             <asp:ModelErrorMessage runat="server" AssociatedControlID="LastNameEditor" ModelStateKey="LastName" CssClass="help-block"/>
                         </div>
                     </div>
                     <div class="form-group<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
                         <asp:Label Text="First Name" AssociatedControlID="FirstNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
                         <div class="col-sm-4">
-                            <mvc:Editor ID="FirstNameEditor" runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <mvc:Editor ID="FirstNameEditor" runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
                             <asp:ModelErrorMessage runat="server" AssociatedControlID="FirstNameEditor" ModelStateKey="FirstName" CssClass="help-block"/>
                         </div>
                     </div>
                     <div class="form-group<%= ModelState.IsValidField("BirthDate") ? "" : " has-error" %>">
                         <asp:Label Text="BirthDate" AssociatedControlID="BirthDateEditor" CssClass="col-sm-2 control-label" runat="server"/>
                         <div class="col-sm-4">
-                            <mvc:Editor ID="BirthDateEditor" runat="server" DataField="BirthDate" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <mvc:Editor ID="BirthDateEditor" runat="server" DataField="BirthDate" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
                             <asp:ModelErrorMessage runat="server" AssociatedControlID="BirthDateEditor" ModelStateKey="BirthDate" CssClass="help-block"/>
                         </div>
                     </div>
                     <div class="form-group<%= ModelState.IsValidField("Gender") ? "" : " has-error" %>">
                         <asp:Label Text="Gender" AssociatedControlID="GenderEditor" CssClass="col-sm-2 control-label" runat="server"/>
                         <div class="col-sm-4">
-                            <mvc:Editor ID="GenderEditor" runat="server" DataField="Gender" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <mvc:Editor ID="GenderEditor" runat="server" DataField="Gender" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
                             <asp:ModelErrorMessage runat="server" AssociatedControlID="GenderEditor" ModelStateKey="Gender" CssClass="help-block"/>
                         </div>
                     </div>
                     <div class="form-group<%= ModelState.IsValidField("IsDeceased") ? "" : " has-error" %>">
                         <asp:Label Text="IsDeceased" AssociatedControlID="IsDeceasedEditor" CssClass="col-sm-2 control-label" runat="server"/>
                         <div class="col-sm-4">
-                            <mvc:Editor ID="IsDeceasedEditor" runat="server" DataField="IsDeceased" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>'/>
+                            <mvc:Editor ID="IsDeceasedEditor" runat="server" DataField="IsDeceased" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
                             <asp:ModelErrorMessage runat="server" AssociatedControlID="IsDeceasedEditor" ModelStateKey="IsDeceased" CssClass="help-block"/>
                         </div>
                     </div>

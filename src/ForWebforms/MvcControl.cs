@@ -54,13 +54,13 @@ namespace ExitStrategy.ForWebforms
         {
             var viewBag = new ViewDataDictionary();
             viewBag.ModelState.AdaptModelState(Page.ModelState);
+            viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
 
             if (_modelDefinition != null)
             {
                 viewBag.ModelMetadata = _modelDefinition.MetaData;
-                viewBag.Model = _modelDefinition.Model;
-                viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
-            }
+                viewBag.Model = _modelDefinition.Model;                
+            }            
             
             var helper = MvcBridge.CreateHtmlHelper(HttpContextProvider.Current.Request.RequestContext, viewBag, writer);
 

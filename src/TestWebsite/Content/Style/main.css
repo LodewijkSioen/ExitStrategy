@@ -1,20 +1,14 @@
 ﻿body {
     padding-top: 60px;
 }
-.webforms {
-    border: 2px solid transparent;
-}
 .webforms.showFx {
-    border-color: #419641;
+    border: 2px solid  #419641;
 }
 .webformsLegend {
     background-color: #419641;
 }
-.mvc {
-    border: 2px solid transparent;
-}
 .mvc.showFx {
-    border-color: #f0ad4e;
+    border: 2px solid #f0ad4e;
 }
 .mvcLegend {
     background-color: #f0ad4e;

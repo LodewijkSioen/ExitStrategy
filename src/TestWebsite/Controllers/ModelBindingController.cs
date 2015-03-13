@@ -17,9 +17,21 @@ namespace ExitStrategy.TestWebsite.Controllers
             }));
         }
 
-        [HttpGet]
-        public ActionResult Edit(int id)
+        public RedirectResult ListView()
         {
+            //hack because the webforms side has multiple routes
+            return Redirect(Url.Action("Index")); 
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id, string mode)
+        {
+            //hack because the webforms side has multiple routes
+            if (!string.IsNullOrEmpty(mode))
+            {
+                return Redirect(Url.Action("Edit", new {id}));
+            }
+
             var person = Person.GetBeatles().FirstOrDefault(p => p.Id == id);
             return View(person);
         }

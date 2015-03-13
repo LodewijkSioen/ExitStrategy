@@ -9,11 +9,14 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 {
     public static class ModelStateAdapter
     {
-        public static void AdaptModelState(this MvcModelStateDictionary mvcState, WebformsModelStateDictionary webformsState)
+        public static void AdaptModelState(this MvcModelStateDictionary mvcState, WebformsModelStateDictionary webformsState, string htmlTagPrefix)
         {
+            htmlTagPrefix = string.IsNullOrEmpty(htmlTagPrefix) ? "" : string.Join(htmlTagPrefix, ".");
+
             foreach (var state in webformsState)
             {
-                mvcState.Add(state.Key, state.Value.ToMvc());
+                //Mvc expects the key to be the name of the input element
+                mvcState.Add(string.Join(htmlTagPrefix, state.Key), state.Value.ToMvc());
             }
         }
 

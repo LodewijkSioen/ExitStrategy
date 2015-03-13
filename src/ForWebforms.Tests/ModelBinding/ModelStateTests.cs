@@ -22,7 +22,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                 {"Test", new WebformsModelState(){Value = new ValueProviderResult("raw", "attempted", CultureInfo.InvariantCulture)}}
             };
 
-            mvcStateDictionary.AdaptModelState(webformsStateDictionary);
+            mvcStateDictionary.AdaptModelState(webformsStateDictionary, "");
 
             mvcStateDictionary.Count.ShouldBe(1);
             mvcStateDictionary["Test"].Value.AttemptedValue.ShouldBe("attempted");

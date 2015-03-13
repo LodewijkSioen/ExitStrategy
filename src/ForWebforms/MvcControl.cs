@@ -53,7 +53,7 @@ namespace ExitStrategy.ForWebforms
         protected override void Render(HtmlTextWriter writer)
         {
             var viewBag = new ViewDataDictionary();
-            viewBag.ModelState.AdaptModelState(Page.ModelState);
+            viewBag.ModelState.AdaptModelState(Page.ModelState, ClientID);
             viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
 
             if (_modelDefinition != null)

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Globalization;
-using System.Web.ModelBinding;
-using ExitStrategy.ForWebforms.ModelBinding;
+﻿using ExitStrategy.ForWebforms.ModelBinding;
 using Shouldly;
-using MvcModelError = System.Web.Mvc.ModelError;
-using MvcModelState = System.Web.Mvc.ModelState;
-using MvcModelStateDictionary = System.Web.Mvc.ModelStateDictionary;
-using MvcValueProviderResult = System.Web.Mvc.ValueProviderResult;
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Web.ModelBinding;
 using WebformsModelState = System.Web.ModelBinding.ModelState;
 using WebformsModelStateDictionary = System.Web.ModelBinding.ModelStateDictionary;
 
@@ -14,9 +11,12 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 {
     public class ModelStateTests
     {
-        public void AddWebformsStatesToMvcStates()
+        [Input("")]
+        [Input("Client_Id")]
+        public void AddWebformsStatesToMvcStates(string prefix)
         {
             var viewBag = new System.Web.Mvc.ViewDataDictionary();
+            viewBag.TemplateInfo.HtmlFieldPrefix = prefix;
             var webformsStateDictionary = new WebformsModelStateDictionary()
             {
                 {"Test", new WebformsModelState(){Value = new ValueProviderResult("raw", "attempted", CultureInfo.InvariantCulture)}}
@@ -25,9 +25,13 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             viewBag.AdaptModelState(webformsStateDictionary);
 
             viewBag.ModelState.Count.ShouldBe(1);
-            viewBag.ModelState["Test"].Value.AttemptedValue.ShouldBe("attempted");
-            viewBag.ModelState["Test"].Value.RawValue.ShouldBe("raw");
-            viewBag.ModelState["Test"].Value.Culture.ShouldBe(CultureInfo.InvariantCulture);
+
+            var expectedKey = string.IsNullOrEmpty(prefix) ? "Test" : prefix + ".Test";
+            viewBag.ModelState.Keys.ElementAt(0).ShouldBe(expectedKey);
+            var state = viewBag.ModelState[expectedKey];
+            state.Value.AttemptedValue.ShouldBe("attempted");
+            state.Value.RawValue.ShouldBe("raw");
+            state.Value.Culture.ShouldBe(CultureInfo.InvariantCulture);
         }
 
         public void ConvertModelStateToMvc()

@@ -16,18 +16,18 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
     {
         public void AddWebformsStatesToMvcStates()
         {
-            var mvcStateDictionary = new MvcModelStateDictionary();
+            var viewBag = new System.Web.Mvc.ViewDataDictionary();
             var webformsStateDictionary = new WebformsModelStateDictionary()
             {
                 {"Test", new WebformsModelState(){Value = new ValueProviderResult("raw", "attempted", CultureInfo.InvariantCulture)}}
             };
 
-            mvcStateDictionary.AdaptModelState(webformsStateDictionary, "");
+            viewBag.AdaptModelState(webformsStateDictionary);
 
-            mvcStateDictionary.Count.ShouldBe(1);
-            mvcStateDictionary["Test"].Value.AttemptedValue.ShouldBe("attempted");
-            mvcStateDictionary["Test"].Value.RawValue.ShouldBe("raw");
-            mvcStateDictionary["Test"].Value.Culture.ShouldBe(CultureInfo.InvariantCulture);
+            viewBag.ModelState.Count.ShouldBe(1);
+            viewBag.ModelState["Test"].Value.AttemptedValue.ShouldBe("attempted");
+            viewBag.ModelState["Test"].Value.RawValue.ShouldBe("raw");
+            viewBag.ModelState["Test"].Value.Culture.ShouldBe(CultureInfo.InvariantCulture);
         }
 
         public void ConvertModelStateToMvc()

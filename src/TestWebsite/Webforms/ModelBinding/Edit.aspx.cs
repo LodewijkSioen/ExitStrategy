@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.ModelBinding;
 using System.Web.Routing;
 using ExitStrategy.TestWebsite.Models;
+using ExitStrategy.TestWebsite.Helpers;
 
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
@@ -10,17 +11,16 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private Person _validatedPerson;
 
-        public Person GetModel([RouteData]int id = 0)
+        public Person GetModel([RouteData]int? id)
         {
-            if (id == 0)
+            if (!id.HasValue)
             {
-                Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
-                return null;
+                return new Person();
             }
             
             return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);

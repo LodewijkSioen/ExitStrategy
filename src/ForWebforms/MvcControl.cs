@@ -59,7 +59,7 @@ namespace ExitStrategy.ForWebforms
             if (_modelDefinition != null)
             {
                 viewBag.ModelMetadata = _modelDefinition.MetaData;
-                viewBag.Model = _modelDefinition.Model;                
+                if(_modelDefinition.Model != null) viewBag.Model = _modelDefinition.Model;                
             }            
             
             var helper = MvcBridge.CreateHtmlHelper(HttpContextProvider.Current.Request.RequestContext, viewBag, writer);

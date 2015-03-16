@@ -7,6 +7,7 @@ namespace ExitStrategy.TestWebsite.Models
 {
     public enum Sex
     {
+        Unknown,
         Male,
         Female,
         Other
@@ -14,6 +15,12 @@ namespace ExitStrategy.TestWebsite.Models
 
     public class Person
     {
+        public Person()
+        {
+            BirthDate = DateTime.Now;
+            Gender = Sex.Unknown;
+        }
+
         [ScaffoldColumn(false)]
         [Key, ReadOnly(true)]
         public int Id { get; set; }

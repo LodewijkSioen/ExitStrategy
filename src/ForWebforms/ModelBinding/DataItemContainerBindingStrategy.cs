@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Web.Compilation;
 using System.Web.Mvc;
@@ -28,6 +29,11 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             if (dataBoundControl != null)
             {
                 var typeName = dataBoundControl.ItemType;
+                if (string.IsNullOrEmpty(typeName))
+                {
+                    throw new InvalidOperationException(string.Format("Cannot determine the databinding type for control with id '{0}'. Please provide the correct type in the ItemType property of the control.", dataBoundControl.ID));
+                }
+
                 var type = BuildManager.GetType(typeName, true, false);
                 var metaData = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, type, _control.DataField);
 

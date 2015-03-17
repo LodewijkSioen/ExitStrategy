@@ -18,7 +18,12 @@
         </div>
     </asp:Panel>
 
-    <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" UpdateMethod="SetModel" DefaultMode="Edit" RenderOuterTable="false" EnableViewState="False">
+    <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" 
+                                               UpdateMethod="SetModel" 
+                                               DefaultMode="Edit"
+                                               RenderOuterTable="false" 
+                                               EnableViewState="False"
+                                               ItemType="ExitStrategy.TestWebsite.Models.Person">
         <EditItemTemplate>
             <div class="form-horizontal">
                     <div class="form-group<%= ModelState.IsValidField("LastName") ? "" : " has-error" %>">

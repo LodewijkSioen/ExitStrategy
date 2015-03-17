@@ -2,28 +2,30 @@
 using System;
 using System.Linq;
 using System.Web.ModelBinding;
-using System.Web.Routing;
+using System.Web.UI.WebControls;
 
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
     public partial class EditWithFormView : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_PreLoad(object sender, EventArgs e)
         {
-
+            if (RouteData.Values["id"] == null)
+            {
+                FormView.DefaultMode = FormViewMode.Insert;
+            }
         }
 
         private Person _validatedPerson;
 
-        public Person GetModel([RouteData]int id = 0)
+        public Person GetModel([RouteData]int? id)
         {
-            if (id == 0)
+            if (!id.HasValue)
             {
-                Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
                 return null;
             }
 
-            return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);
+            return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id.Value);
         }
 
         public void SetModel(Person person)

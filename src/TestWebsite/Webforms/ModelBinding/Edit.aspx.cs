@@ -20,7 +20,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
         {
             if (!id.HasValue)
             {
-                return new Person();
+                return null;
             }
             
             return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id);

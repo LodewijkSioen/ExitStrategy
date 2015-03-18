@@ -12,4 +12,7 @@
         This page has a Model that is bound to a Razor template using @@Html.DisplayForModel.
     </p>
     @Html.DisplayForModel("Table")
+    <div>
+        @Html.ActionLink("Add New", "Insert", null, new { @class = "btn btn-link" })
+    </div>
 </div>

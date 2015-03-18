@@ -46,5 +46,22 @@ namespace ExitStrategy.TestWebsite.Controllers
 
             return View(editPerson);
         }
+
+        [HttpGet]
+        public ActionResult Insert()
+        {
+            return View("Edit");
+        }
+
+        [HttpPost]
+        public ActionResult Insert(Person editPerson)
+        {
+            if (ModelState.IsValid)
+            {
+                return View("Post", editPerson);
+            }
+
+            return View("Edit", editPerson);
+        }
     }
 }

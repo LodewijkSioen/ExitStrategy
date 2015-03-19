@@ -13,6 +13,24 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding {
     public partial class Edit {
         
         /// <summary>
+        /// LinkNormal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink LinkNormal;
+        
+        /// <summary>
+        /// LinkFormView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink LinkFormView;
+        
+        /// <summary>
         /// ValidationSummary control.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,15 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ExitStrategy.ForWebforms.Editor ModelBoundEditor;
+        
+        /// <summary>
+        /// SubmitButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SubmitButton;
         
         /// <summary>
         /// ResultPanel control.

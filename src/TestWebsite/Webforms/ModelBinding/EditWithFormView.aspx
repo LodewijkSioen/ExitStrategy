@@ -7,14 +7,23 @@
         This page uses an &lt;mcv:Editor /&gt; control, which can be used in two ways:
     </p>
     <ul>
-        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink></li>
-        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit-formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink> (current page)</li>
+        <li><asp:HyperLink ID="LinkNormal" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink></li>
+        <li><asp:HyperLink ID="LinkFormView" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit-formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink> (current page)</li>
     </ul>
 
     <asp:Panel runat="server" ID="ValidationSummary" ClientIDMode="Static" CssClass="panel panel-danger" Visible="false">
         <div class="panel-heading">Your input is not valid:</div>
         <div class="panel-body">
             <asp:ValidationSummary runat="server" />
+        </div>
+    </asp:Panel>
+    
+    <asp:Panel runat="server" ID="AdmitDefeat" CssClass="panel panel-warning" Visible="false">
+        <div class="panel-heading">Help Me!</div>
+        <div class="panel-body">
+            This is one thing that I cannot get working. When used in a Modelbound Formview in Insert Mode, the Editor does not use the correct Shared View. 
+            As you can see, the birthdate is not using the DatePicker, the Enum is not a list of radiobuttons,...<br />
+            I don't find what's different about this use-case. If you can find what's wrong here, feel free to send me a Pull Request for <a href="https://github.com/LodewijkSioen/ExitStrategy/issues/4" target="_blank"># on Github</a>.
         </div>
     </asp:Panel>
 
@@ -26,19 +35,19 @@
                                                ItemType="ExitStrategy.TestWebsite.Models.Person">
         <EditItemTemplate>
             <div class="form-horizontal">
+                    <div class="form-group<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
+                        <asp:Label Text="First Name" AssociatedControlID="FirstNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
+                        <div class="col-sm-4">
+                            <mvc:Editor ID="FirstNameEditor" runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
+                            <asp:ModelErrorMessage runat="server" AssociatedControlID="FirstNameEditor" ModelStateKey="FirstName" CssClass="help-block"/>
+                        </div>
+                    </div>
                     <div class="form-group<%= ModelState.IsValidField("LastName") ? "" : " has-error" %>">
                         <asp:Label Text="Last Name" AssociatedControlID="LastNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
                         <div class="col-sm-4">
                             <asp:BoundField DataField="BirthDate" />
                             <mvc:Editor ID="LastNameEditor" runat="server" DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
                             <asp:ModelErrorMessage runat="server" AssociatedControlID="LastNameEditor" ModelStateKey="LastName" CssClass="help-block"/>
-                        </div>
-                    </div>
-                    <div class="form-group<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
-                        <asp:Label Text="First Name" AssociatedControlID="FirstNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
-                        <div class="col-sm-4">
-                            <mvc:Editor ID="FirstNameEditor" runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
-                            <asp:ModelErrorMessage runat="server" AssociatedControlID="FirstNameEditor" ModelStateKey="FirstName" CssClass="help-block"/>
                         </div>
                     </div>
                     <div class="form-group<%= ModelState.IsValidField("BirthDate") ? "" : " has-error" %>">
@@ -64,7 +73,7 @@
                     </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <asp:Button CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>
+                        <asp:Button CssClass="btn btn-primary" runat="server" CommandName="Update" Text="<%#SubmitButtonText %>"/>
                         <asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
                         <div class="checkbox-inline">
                             <label for="disableValidation">

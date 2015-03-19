@@ -2,17 +2,25 @@
 using System;
 using System.Linq;
 using System.Web.ModelBinding;
+using System.Web.Routing;
 using System.Web.UI.WebControls;
 
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
     public partial class EditWithFormView : System.Web.UI.Page
     {
-        protected void Page_PreLoad(object sender, EventArgs e)
+        protected string SubmitButtonText = "Edit";
+
+        protected void Page_Init(object sender, EventArgs e)
         {
             if (RouteData.Values["id"] == null)
             {
                 FormView.DefaultMode = FormViewMode.Insert;
+                FormView.InsertItemTemplate = FormView.EditItemTemplate;
+                LinkNormal.NavigateUrl = GetRouteUrl("Webforms-Modelbinding-insert", new RouteValueDictionary());
+                LinkFormView.NavigateUrl = GetRouteUrl("Webforms-Modelbinding-insert-formview", new RouteValueDictionary());
+                SubmitButtonText = "Insert";
+                AdmitDefeat.Visible = true;
             }
         }
 

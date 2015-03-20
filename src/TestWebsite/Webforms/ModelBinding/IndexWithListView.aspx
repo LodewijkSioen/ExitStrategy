@@ -29,6 +29,7 @@
                     <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Birthdate</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -39,7 +40,8 @@
                 <tfoot>
                     <tr>
                         <td colspan="4">
-                            <asp:HyperLink runat="server" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-ListView,Mode=Insert%>" Text="Add new" CssClass="btn btn-link" />
+                            <asp:HyperLink runat="server" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-ListView,Mode=Insert%>" Text="Add new inline" CssClass="btn btn-link" />
+                            <asp:HyperLink runat="server" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-Insert%>" Text="Add new" CssClass="btn btn-link" />
                         </td>
                     </tr>
                 </tfoot>
@@ -49,14 +51,25 @@
             <tr>
                 <td class="mvc"><mvc:Display DataField="FirstName" runat="server" /></td>
                 <td class="mvc"><mvc:Display DataField="LastName" runat="server" /></td>
+                <td class="mvc"><mvc:Display DataField="BirthDate" runat="server" /></td>
                 <td class="mvc"><mvc:Display DataField="EditLink" runat="server" /></td>
                 <td><asp:LinkButton runat="server" Text="Edit Inline" CommandName="Edit" /></td>
             </tr>
         </ItemTemplate>
         <EditItemTemplate>
             <tr>
-                <td class="mvc<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>"><mvc:Editor DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
-                <td class="mvc<%= ModelState.IsValidField("LastName") ? "" : " has-error" %>"><mvc:Editor DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" /></td>
+                <td class="mvc<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
+                    <mvc:Editor ID="FirstNameEditor" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
+                    <asp:ModelErrorMessage runat="server" AssociatedControlID="FirstNameEditor" ModelStateKey="FirstName" CssClass="help-block"/>
+                </td>
+                <td class="mvc<%= ModelState.IsValidField("LastName") ? "" : " has-error" %>">
+                    <mvc:Editor ID="LastNameEditor" DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
+                    <asp:ModelErrorMessage runat="server" AssociatedControlID="LastNameEditor" ModelStateKey="LastName" CssClass="help-block"/>
+                </td>
+                <td class="mvc<%= ModelState.IsValidField("BirthDate") ? "" : " has-error" %>">
+                    <mvc:Editor ID="BirthDateEditor" DataField="BirthDate" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
+                    <asp:ModelErrorMessage runat="server" AssociatedControlID="BirthDateEditor" ModelStateKey="BirthDate" CssClass="help-block"/>
+                </td>
                 <td>
                     <asp:Button runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary btn-sm" />
                     <input type="checkbox" id="disableValidation" title="Disable client-side validation" />
@@ -66,13 +79,17 @@
         </EditItemTemplate>
         <InsertItemTemplate>
             <tr>
-                <td class="mvc">
+                <td class="form-group<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
                     <mvc:Editor DataField="FirstName" ID="FirstNameEditor" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
                     <asp:ModelErrorMessage runat="server" AssociatedControlID="FirstNameEditor" ModelStateKey="FirstName" CssClass="help-block"/>
                 </td>
-                <td class="mvc">
+                <td class="form-group<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
                     <mvc:Editor DataField="LastName" ID="LastNameEditor" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
                     <asp:ModelErrorMessage runat="server" AssociatedControlID="LastNameEditor" ModelStateKey="LastName" CssClass="help-block"/>
+                </td>
+                <td class="mvc<%= ModelState.IsValidField("BirthDate") ? "" : " has-error" %>">
+                    <mvc:Editor ID="BirthDateEditor" DataField="BirthDate" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control"},} %>' runat="server" />
+                    <asp:ModelErrorMessage runat="server" AssociatedControlID="BirthDateEditor" ModelStateKey="BirthDate" CssClass="help-block"/>
                 </td>
                 <td>
                     <asp:Button runat="server" Text="Insert" CommandName="Insert" CssClass="btn btn-primary btn-sm" />

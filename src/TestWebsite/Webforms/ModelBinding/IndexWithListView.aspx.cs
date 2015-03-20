@@ -10,38 +10,16 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
     public partial class IndexWithListView : System.Web.UI.Page
     {
+        private bool _isInInsertMode = false;
+
         protected void Page_Init(object sender, EventArgs e)
         {
             ValidationSummary.Visible = false;
             if (Request.QueryString.GetValueOrEmptyString("Mode").Equals("insert", StringComparison.InvariantCultureIgnoreCase))
             {
                 List.InsertItemPosition = InsertItemPosition.LastItem;
+                _isInInsertMode = true;
             }
-        }
-
-        protected void ListItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            switch (e.CommandName.ToLower())
-            {
-                case "initinsert":
-                    List.InsertItemPosition = InsertItemPosition.LastItem;
-                    List.EditIndex = -1;
-                    e.Handled = true;
-                    break;
-                case "cancelinsert":
-                    List.InsertItemPosition = InsertItemPosition.None;
-                    List.EditIndex = -1;
-                    e.Handled = true;
-                    break;
-                case "edit":
-                    List.InsertItemPosition = InsertItemPosition.None;
-                    e.Handled = false;
-                    break;
-                default:
-                    e.Handled = false;
-                    break;
-            }
-            
         }
 
         public IEnumerable<PersonListItem> GetPersons()
@@ -50,6 +28,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
             {
                 FirstName = p.FirstName,
                 LastName = p.LastName,
+                BirthDate = p.BirthDate,
                 EditLink = new Link("Edit", RouteTable.Routes.GetVirtualPath(null, "Webforms-ModelBinding-Edit", new RouteValueDictionary { { "Id", p.Id } }).VirtualPath)
             });
         }

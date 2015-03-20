@@ -23,7 +23,7 @@
         <div class="panel-body">
             This is one thing that I cannot get working. When used in a Modelbound Formview in Insert Mode, the Editor does not use the correct Shared View. 
             As you can see, the birthdate is not using the DatePicker, the Enum is not a list of radiobuttons,...<br />
-            I don't find what's different about this use-case. If you can find what's wrong here, feel free to send me a Pull Request for <a href="https://github.com/LodewijkSioen/ExitStrategy/issues/4" target="_blank"># on Github</a>.
+            I don't find what's different about this use-case. If you can find what's wrong here, feel free to send me a Pull Request for <a href="https://github.com/LodewijkSioen/ExitStrategy/issues/8" target="_blank">issue #8 on Github</a>.
         </div>
     </asp:Panel>
 

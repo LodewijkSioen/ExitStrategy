@@ -9,9 +9,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
     public partial class EditWithFormView : System.Web.UI.Page
     {
-        protected string SubmitButtonText = "Edit";
-
-        protected void Page_Init(object sender, EventArgs e)
+        protected void FormViewInit(object sender, EventArgs e)
         {
             if (RouteData.Values["id"] == null)
             {
@@ -19,8 +17,17 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
                 FormView.InsertItemTemplate = FormView.EditItemTemplate;
                 LinkNormal.NavigateUrl = GetRouteUrl("Webforms-Modelbinding-insert", new RouteValueDictionary());
                 LinkFormView.NavigateUrl = GetRouteUrl("Webforms-Modelbinding-insert-formview", new RouteValueDictionary());
-                SubmitButtonText = "Insert";
                 AdmitDefeat.Visible = true;
+            }
+        }
+
+        protected void FormViewModeDataBound(object sender, EventArgs e)
+        {
+            if (FormView.DefaultMode == FormViewMode.Insert)
+            {
+                var button = FormView.FindControl("SubmitButton") as Button;
+                button.Text = "Insert";
+                button.CommandName = "Insert";
             }
         }
 

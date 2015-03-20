@@ -29,9 +29,12 @@
 
     <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" 
                                                UpdateMethod="SetModel" 
+                                               InsertMethod="SetModel" 
                                                DefaultMode="Edit"
                                                RenderOuterTable="false" 
                                                EnableViewState="False"
+                                               OnInit="FormViewInit"
+                                               OnDataBound="FormViewModeDataBound"
                                                ItemType="ExitStrategy.TestWebsite.Models.Person">
         <EditItemTemplate>
             <div class="form-horizontal">
@@ -73,7 +76,7 @@
                     </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <asp:Button CssClass="btn btn-primary" runat="server" CommandName="Update" Text="<%#SubmitButtonText %>"/>
+                        <asp:Button ID="SubmitButton" CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>
                         <asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
                         <div class="checkbox-inline">
                             <label for="disableValidation">

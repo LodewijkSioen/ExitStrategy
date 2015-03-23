@@ -33,7 +33,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 
         private Person _validatedPerson;
 
-        public Person GetModel([RouteData]int? id)
+        public Person GetPerson([RouteData]int? id)
         {
             if (!id.HasValue)
             {
@@ -43,21 +43,38 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
             return _validatedPerson ?? Person.GetBeatles().FirstOrDefault(p => p.Id == id.Value);
         }
 
-        public void SetModel(Person person)
+        public void UpdatePerson(Person person)
         {
             if (ModelState.IsValid)
             {
-                FormView.Visible = false;
-                ValidationSummary.Visible = false;
-                ResultPanel.Visible = true;
-                ResultDisplay.DataSource = person;
-                ResultDisplay.DataBind();
+                ShowResult(person);
                 return;
             }
 
             ValidationSummary.Visible = true;
             _validatedPerson = person;
             FormView.DataBind();
+        }
+
+        public void InsertPerson(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                ShowResult(person);
+                return;
+            }
+            ValidationSummary.Visible = true;
+            _validatedPerson = person;
+            FormView.DataBind();
+        }
+
+        private void ShowResult(Person person)
+        {
+            FormView.Visible = false;
+            ValidationSummary.Visible = false;
+            ResultPanel.Visible = true;
+            ResultDisplay.DataSource = person;
+            ResultDisplay.DataBind();
         }
     }
 }

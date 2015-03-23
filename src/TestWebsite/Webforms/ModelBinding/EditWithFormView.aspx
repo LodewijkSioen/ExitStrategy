@@ -27,9 +27,9 @@
         </div>
     </asp:Panel>
 
-    <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" 
-                                               UpdateMethod="SetModel" 
-                                               InsertMethod="SetModel" 
+    <asp:FormView ID="FormView" runat="server" SelectMethod="GetPerson" 
+                                               UpdateMethod="UpdatePerson" 
+                                               InsertMethod="InsertPerson" 
                                                DefaultMode="Edit"
                                                RenderOuterTable="false" 
                                                EnableViewState="False"

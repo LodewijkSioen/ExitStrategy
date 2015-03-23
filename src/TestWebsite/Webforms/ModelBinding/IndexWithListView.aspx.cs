@@ -10,15 +10,13 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
     public partial class IndexWithListView : System.Web.UI.Page
     {
-        private bool _isInInsertMode = false;
-
         protected void Page_Init(object sender, EventArgs e)
         {
             ValidationSummary.Visible = false;
             if (Request.QueryString.GetValueOrEmptyString("Mode").Equals("insert", StringComparison.InvariantCultureIgnoreCase))
             {
+                AdmitDefeat.Visible = true;
                 List.InsertItemPosition = InsertItemPosition.LastItem;
-                _isInInsertMode = true;
             }
         }
 

@@ -19,6 +19,7 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
             {
                 FirstName = p.FirstName,
                 LastName = p.LastName,
+                BirthDate = p.BirthDate,
                 EditLink = new Link("Edit", RouteTable.Routes.GetVirtualPath(null, "Webforms-ModelBinding-Edit", new RouteValueDictionary { { "Id", p.Id } }).VirtualPath)
             });
         }

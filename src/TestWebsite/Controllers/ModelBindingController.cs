@@ -13,6 +13,7 @@ namespace ExitStrategy.TestWebsite.Controllers
             {
                 FirstName = p.FirstName, 
                 LastName = p.LastName,
+                BirthDate = p.BirthDate,
                 EditLink = new Link("Edit", Url.Action("Edit", new {p.Id}))
             }));
         }

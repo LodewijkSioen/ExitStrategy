@@ -17,17 +17,17 @@ namespace ExitStrategy.ForWebforms
             return context.HttpContext.Items["ExitStrategy_ControllerContext"] as ControllerContext;
         }
 
-        public static ViewContext CreateViewContext(ControllerContext controllerContext, HtmlTextWriter output, ViewDataDictionary viewBag)
+        public static ViewContext CreateViewContext(ControllerContext controllerContext, HtmlTextWriter output, ViewDataDictionary viewData)
         {
             var view = new RazorView(controllerContext, "~/View", "", false, new string[0]);
-            return new ViewContext(controllerContext, view, viewBag, new TempDataDictionary(), output);
+            return new ViewContext(controllerContext, view, viewData, new TempDataDictionary(), output);
         }
 
-        public static HtmlHelper CreateHtmlHelper(RequestContext context, ViewDataDictionary viewBag, HtmlTextWriter output)
+        public static HtmlHelper CreateHtmlHelper(RequestContext context, ViewDataDictionary viewData, HtmlTextWriter output)
         {
             var controllerContext = CreateControllerContext(context);
-            var viewContext = CreateViewContext(controllerContext, output, viewBag);
-            return new HtmlHelper(viewContext, new WebformsViewDataContainer(viewBag));
+            var viewContext = CreateViewContext(controllerContext, output, viewData);
+            return new HtmlHelper(viewContext, new WebformsViewDataContainer(viewData));
         }
     }
 }

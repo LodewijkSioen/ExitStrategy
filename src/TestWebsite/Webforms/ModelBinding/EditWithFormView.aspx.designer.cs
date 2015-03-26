@@ -40,15 +40,6 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding {
         protected global::System.Web.UI.WebControls.Panel ValidationSummary;
         
         /// <summary>
-        /// AdmitDefeat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AdmitDefeat;
-        
-        /// <summary>
         /// FormView control.
         /// </summary>
         /// <remarks>

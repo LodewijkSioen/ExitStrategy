@@ -17,7 +17,6 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
                 FormView.InsertItemTemplate = FormView.EditItemTemplate;
                 LinkNormal.NavigateUrl = GetRouteUrl("Webforms-Modelbinding-insert", new RouteValueDictionary());
                 LinkFormView.NavigateUrl = GetRouteUrl("Webforms-Modelbinding-insert-formview", new RouteValueDictionary());
-                AdmitDefeat.Visible = true;
             }
         }
 

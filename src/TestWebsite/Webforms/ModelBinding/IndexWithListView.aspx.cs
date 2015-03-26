@@ -15,7 +15,6 @@ namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
             ValidationSummary.Visible = false;
             if (Request.QueryString.GetValueOrEmptyString("Mode").Equals("insert", StringComparison.InvariantCultureIgnoreCase))
             {
-                AdmitDefeat.Visible = true;
                 List.InsertItemPosition = InsertItemPosition.LastItem;
             }
         }

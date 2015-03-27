@@ -1,16 +1,16 @@
 ﻿using Fixie;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 
 namespace ExitStrategy.ForWebforms.Tests
 {
-    public class TestConvention : Convention
+    public abstract class BasicConvention : Convention
     {
-        public TestConvention()
+        public BasicConvention()
         {
-            Classes.NameEndsWith("Tests");
+            Classes.NameEndsWith("Tests").InTheSameNamespaceAs(this.GetType());;
 
             Methods.Where(m => m.IsVoid());
 

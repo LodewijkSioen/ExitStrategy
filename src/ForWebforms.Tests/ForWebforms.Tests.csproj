@@ -80,22 +80,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisplayControlTests.cs" />
-    <Compile Include="EditorControlTests.cs" />
+    <Compile Include="Bridge\Convention.cs" />
+    <Compile Include="Controls\Convention.cs" />
+    <Compile Include="Controls\DisplayControlTests.cs" />
+    <Compile Include="Controls\EditorControlTests.cs" />
     <Compile Include="Mocks\MockControl.cs" />
+    <Compile Include="ModelBinding\Convention.cs" />
     <Compile Include="ModelBinding\ModelProviderTests.cs" />
     <Compile Include="ModelBinding\ModelStateTests.cs" />
     <Compile Include="ModelBinding\ModelValueExtractorTests.cs" />
-    <Compile Include="MvcControlTests.cs" />
-    <Compile Include="PartialControlTests.cs" />
-    <Compile Include="TestConvention.cs" />
-    <Compile Include="WebformsScaffold.cs" />
+    <Compile Include="Controls\MvcControlTests.cs" />
+    <Compile Include="Controls\PartialControlTests.cs" />
+    <Compile Include="BasicConvention.cs" />
+    <Compile Include="Controls\WebformsScaffold.cs" />
     <Compile Include="Mocks\MockPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NewObjectExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MvcBridgeTests.cs" />
+    <Compile Include="Bridge\MvcBridgeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForWebforms\ForWebforms.csproj">
@@ -119,6 +122,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

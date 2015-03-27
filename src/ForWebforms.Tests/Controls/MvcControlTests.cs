@@ -1,4 +1,4 @@
-﻿namespace ExitStrategy.ForWebforms.Tests
+﻿namespace ExitStrategy.ForWebforms.Tests.Controls
 {
     public abstract class MvcControlTests
     {

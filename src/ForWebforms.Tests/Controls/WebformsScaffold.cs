@@ -7,7 +7,7 @@ using System.Web.Hosting;
 using System.Web.UI;
 using ExitStrategy.ForWebforms.Tests.Mocks;
 
-namespace ExitStrategy.ForWebforms.Tests
+namespace ExitStrategy.ForWebforms.Tests.Controls
 {
     ////http://stackoverflow.com/questions/3702526/is-there-a-way-to-process-an-mvc-view-aspx-file-from-a-non-web-application
     public class WebformsScaffold : MarshalByRefObject

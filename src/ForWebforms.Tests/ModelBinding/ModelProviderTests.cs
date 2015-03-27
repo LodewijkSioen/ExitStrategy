@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using ExitStrategy.ForWebforms.ModelBinding;
 using ExitStrategy.ForWebforms.Tests.Mocks;
 using Shouldly;
+using ExitStrategy.ForWebforms.Tests.Controls;
 
 namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 {

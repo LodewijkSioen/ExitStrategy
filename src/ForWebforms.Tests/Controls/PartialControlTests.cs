@@ -5,7 +5,7 @@ using Shouldly;
 using System.Web.Mvc;
 using System.Collections;
 
-namespace ExitStrategy.ForWebforms.Tests
+namespace ExitStrategy.ForWebforms.Tests.Controls
 {
     public class PartialControlTests : MvcControlTests
     {

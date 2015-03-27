@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace ExitStrategy.ForWebforms
+namespace ExitStrategy.ForWebforms.Bridge
 {
     public class WebformsViewDataContainer : IViewDataContainer
     {

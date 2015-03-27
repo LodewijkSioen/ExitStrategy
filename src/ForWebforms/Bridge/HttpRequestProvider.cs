@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace ExitStrategy.ForWebforms
+namespace ExitStrategy.ForWebforms.Bridge
 {
     public static class HttpContextProvider
     {

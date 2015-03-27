@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using System.Web.UI;
 
-namespace ExitStrategy.ForWebforms
+namespace ExitStrategy.ForWebforms.Bridge
 {
     public static class MvcBridge
     {

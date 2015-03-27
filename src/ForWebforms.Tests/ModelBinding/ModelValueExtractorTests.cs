@@ -7,6 +7,7 @@ using ExitStrategy.ForWebforms.ModelBinding;
 using ExitStrategy.ForWebforms.Tests.Mocks;
 using Moq;
 using Shouldly;
+using ExitStrategy.ForWebforms.Bridge;
 
 namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 {

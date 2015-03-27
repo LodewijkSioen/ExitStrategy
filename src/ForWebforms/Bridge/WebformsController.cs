@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace ExitStrategy.ForWebforms
+namespace ExitStrategy.ForWebforms.Bridge
 {
     internal class WebformsController : Controller
     {

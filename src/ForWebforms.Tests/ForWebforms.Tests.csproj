@@ -84,6 +84,7 @@
     <Compile Include="Controls\Convention.cs" />
     <Compile Include="Controls\DisplayControlTests.cs" />
     <Compile Include="Controls\EditorControlTests.cs" />
+    <Compile Include="Expressions\Convention.cs" />
     <Compile Include="Mocks\MockControl.cs" />
     <Compile Include="ModelBinding\Convention.cs" />
     <Compile Include="ModelBinding\ModelProviderTests.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="Mocks\MockPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NewObjectExpressionTests.cs" />
+    <Compile Include="Expressions\NewObjectExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bridge\MvcBridgeTests.cs" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Shouldly;
 
-namespace ExitStrategy.ForWebforms.Tests
+namespace ExitStrategy.ForWebforms.Tests.Expressions
 {
     public class NewObjectExpressionTests
     {

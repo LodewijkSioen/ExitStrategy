@@ -18,19 +18,20 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 
         public ModelDefinition ExtractModel(IEnumerable dataSource)
         {
-            var dataItem = DataBinder.GetDataItem(_control.DataItemContainer);
+            bool found;
+            var dataContainer = _control.DataItemContainer;
+            var dataItem = DataBinder.GetDataItem(dataContainer, out found);
+
             if (dataItem != null)
             {
                 var metaData = ModelMetadataProviders.Current.GetMetadataForType(() => null, dataItem.GetType());
                 return new ModelDefinition(metaData, dataItem);
             }
 
-            var dataBoundControl = FindDataboundControl(_control);
-            
-            var typeName = dataBoundControl.ItemType;
+            var typeName = (dataContainer as DataBoundControl).ItemType;
             if (string.IsNullOrEmpty(typeName))
             {
-                throw new InvalidOperationException(string.Format("Cannot determine the databinding type for control with id '{0}'. Please provide the correct type in the ItemType property of the control.", dataBoundControl.ID));
+                throw new InvalidOperationException(string.Format("Cannot determine the databinding type for control with id '{0}'. Please provide the correct type in the ItemType property of the control.", dataContainer.ID));
             }
 
             var type = BuildManager.GetType(typeName, true, false);
@@ -39,15 +40,6 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             return new ModelDefinition(metaDataForItemType, null);
         }
 
-        public DataBoundControl FindDataboundControl(Control control)
-        {
-            var parent = control.DataKeysContainer;
-            var parentAsDataBoundControl = parent as DataBoundControl;
-            if (parentAsDataBoundControl == null)
-            {
-                throw new InvalidOperationException(string.Format("Cannot determine the DataBoundControl the control with ID '{0}' is nested in. Make sure the control is nested within the template of a DataBoundControl (eg. ListView, FormView,..)", _control.ID));
-            }
-            return parentAsDataBoundControl;
-        }
+        
     }
 }

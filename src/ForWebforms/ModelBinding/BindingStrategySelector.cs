@@ -10,8 +10,12 @@ namespace ExitStrategy.ForWebforms.ModelBinding
         public IBindingStrategy GetStrategy(MvcControl control)
         {
             if (control.IsModelBound) return new ModelBindingStrategy(control);
-            if (!string.IsNullOrEmpty(control.DataField)) return new DataItemContainerBindingStrategy(control);
-            return new DataSourceBindingStrategy(control);
+
+            if (control.DataSource != null) return new DataSourceBindingStrategy(control);
+
+            if (!string.IsNullOrEmpty(control.DataSourceID)) return new DataSourceBindingStrategy(control);
+
+            return new DataItemContainerBindingStrategy(control);
         }
     }
 }

@@ -1,31 +1,23 @@
 ﻿using System;
-using System.Collections;
-using System.Web.Mvc;
-using ExitStrategy.ForWebforms.ModelBinding;
-using Moq;
-using Shouldly;
 
 namespace ExitStrategy.ForWebforms.Tests.Controls
 {
+    [Serializable]
     public class EditorControlTests : MvcControlTests
     {
-        public void RenderWithoutTemplateNameShouldRenderDefaultTemplate()
+        protected override MvcControl CreateControl()
         {
-            var result = Host.Test((p, w) =>
-            {
-                var selector = new Mock<IBindingStrategySelector>();
-                var strategy = new Mock<IBindingStrategy>();
-                var modelMetaData = ModelMetadata.FromLambdaExpression(x => x.Date, new ViewDataDictionary<DateTime>(new DateTime(2014, 12, 18)));
-                strategy.Setup(s => s.ExtractModel(It.IsAny<IEnumerable>())).Returns(new ModelDefinition(modelMetaData, new DateTime(2014, 12, 18)));
-                selector.Setup(s => s.GetStrategy(It.IsAny<MvcControl>())).Returns(strategy.Object);
-                var c = new Editor(selector.Object);
-                c.DataBind();
-                p.Controls.Add(c);
+            return new Editor();
+        }
 
-                c.RenderControl(w);
-            });
+        protected override string ExpectedContentForDateTime
+        {
+            get { return "This is an editortemplate for 18/12/2014"; }
+        }
 
-            result.ShouldBe("This is an editortemplate for 18/12/2014");
+        protected override string ExpectedContentForDateTimeNull
+        {
+            get { return "This is an editortemplate for 01/01/2015"; }
         }
     }
 }

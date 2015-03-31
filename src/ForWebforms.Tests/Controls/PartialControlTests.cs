@@ -7,8 +7,15 @@ using System.Collections;
 
 namespace ExitStrategy.ForWebforms.Tests.Controls
 {
-    public class PartialControlTests : MvcControlTests
+    public class PartialControlTests
     {
+        protected readonly WebformsScaffold Host;
+
+        public PartialControlTests()
+        {
+            Host = WebformsScaffold.Create();
+        }
+
         public void RenderWithoutModel()
         {
             var result = Host.Test((p, w) =>

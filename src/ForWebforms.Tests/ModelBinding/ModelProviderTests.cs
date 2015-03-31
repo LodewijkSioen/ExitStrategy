@@ -36,7 +36,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                     var result = provider.ExtractModel(new []{_expectedModel});
 
                     result.Model.ShouldBe(_expectedModel);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
+                    result.MetaData.ModelType.ShouldBe(typeof(MockModel));
                 }
             );
         }
@@ -51,7 +51,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                     var result = provider.ExtractModel(new Object[0]);
 
                     result.Model.ShouldBe(null);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
+                    result.MetaData.ModelType.ShouldBe(typeof(MockModel));
                 }
             );
         }
@@ -66,7 +66,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                     var result = provider.ExtractModel(null);
 
                     result.Model.ShouldBe(null);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
+                    result.MetaData.ModelType.ShouldBe(typeof(MockModel));
                 }
             );
         }

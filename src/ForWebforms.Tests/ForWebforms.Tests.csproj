@@ -87,8 +87,11 @@
     <Compile Include="Controls\EditorControlTests.cs" />
     <Compile Include="Expressions\Convention.cs" />
     <Compile Include="Mocks\MockControl.cs" />
+    <Compile Include="ModelBinding\BaseBindingStrategyTests.cs" />
     <Compile Include="ModelBinding\Convention.cs" />
-    <Compile Include="ModelBinding\ModelProviderTests.cs" />
+    <Compile Include="ModelBinding\DataSourceBindingStrategyWithDataSourceTests.cs" />
+    <Compile Include="ModelBinding\ModelBindingStrategyTests.cs" />
+    <Compile Include="ModelBinding\DataSourceBindingStrategyWithDataSourceIdTests.cs" />
     <Compile Include="ModelBinding\ModelStateTests.cs" />
     <Compile Include="ModelBinding\ModelValueExtractorTests.cs" />
     <Compile Include="Controls\MvcControlTests.cs" />

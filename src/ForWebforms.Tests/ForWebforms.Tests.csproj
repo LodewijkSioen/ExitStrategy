@@ -89,6 +89,7 @@
     <Compile Include="Mocks\MockControl.cs" />
     <Compile Include="ModelBinding\BaseBindingStrategyTests.cs" />
     <Compile Include="ModelBinding\Convention.cs" />
+    <Compile Include="ModelBinding\DataItemContainerBindingStrategyTests.cs" />
     <Compile Include="ModelBinding\DataSourceBindingStrategyWithDataSourceTests.cs" />
     <Compile Include="ModelBinding\ModelBindingStrategyTests.cs" />
     <Compile Include="ModelBinding\DataSourceBindingStrategyWithDataSourceIdTests.cs" />
@@ -102,6 +103,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Expressions\NewObjectExpressionTests.cs" />
+    <Compile Include="ModelBinding\BindingStrategySelectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bridge\MvcBridgeTests.cs" />
   </ItemGroup>

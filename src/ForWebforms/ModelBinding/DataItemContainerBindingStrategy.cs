@@ -28,7 +28,8 @@ namespace ExitStrategy.ForWebforms.ModelBinding
                 return new ModelDefinition(metaData, dataItem);
             }
 
-            var typeName = (dataContainer as DataBoundControl).ItemType;
+            var dataBoundControl = FindDataboundControl(dataContainer);
+            var typeName = dataBoundControl.ItemType;
             if (string.IsNullOrEmpty(typeName))
             {
                 throw new InvalidOperationException(string.Format("Cannot determine the databinding type for control with id '{0}'. Please provide the correct type in the ItemType property of the control.", dataContainer.ID));
@@ -40,6 +41,17 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             return new ModelDefinition(metaDataForItemType, null);
         }
 
-        
+        private DataBoundControl FindDataboundControl(Control control)
+        {
+            while (control != null)
+            {
+                var databoundControl = control as DataBoundControl;
+                if (databoundControl != null)
+                    return databoundControl;
+
+                control = control.NamingContainer;
+            }
+            throw new InvalidOperationException();
+        }
     }
 }

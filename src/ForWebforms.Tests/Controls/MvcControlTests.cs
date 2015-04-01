@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExitStrategy.ForWebforms.Tests.Mocks;
 using Shouldly;
@@ -8,12 +9,7 @@ namespace ExitStrategy.ForWebforms.Tests.Controls
     [Serializable]
     public abstract class MvcControlTests
     {
-        protected readonly WebformsScaffold Host;
-
-        protected MvcControlTests()
-        {
-            Host = WebformsScaffold.Create();
-        }
+        protected WebformsScaffold Host = WebformsScaffold.Default;
 
         protected abstract MvcControl CreateControl();
         protected abstract String ExpectedContentForDateTime { get; }
@@ -161,6 +157,61 @@ namespace ExitStrategy.ForWebforms.Tests.Controls
                 f.ItemCreated += (sender, args) =>
                 {
                     (sender as FormView).Controls.Add(c);
+                };
+
+                p.DataBind();
+                c.RenderControl(w);
+            });
+
+            r.ShouldBe(ExpectedContentForDateTimeNull);
+        }
+
+        public void ListViewForDataFieldShouldDisplayCorrectValue()
+        {
+            var r = Host.Test((p, w) =>
+            {
+                var f = new ListView
+                {
+                    ItemTemplate = new TemplateBuilder(),
+                    DataSourceID = "ModelDataSource",
+                    ItemType = "ExitStrategy.ForWebforms.Tests.Mocks.MockModel"
+                };
+                p.Controls.Add(f);
+
+                var c = CreateControl();
+                c.DataField = "DateField";
+
+                f.ItemCreated += (sender, args) =>
+                {
+                    args.Item.Controls.Add(c);
+                };
+
+                p.DataBind();
+                c.RenderControl(w);
+            });
+
+            r.ShouldBe(ExpectedContentForDateTime);
+        }
+
+        public void ListViewForDataFieldWithNullShouldDisplayCorrectValue()
+        {
+            var r = Host.Test((p, w) =>
+            {
+                var f = new ListView
+                {
+                    InsertItemTemplate = new TemplateBuilder(),
+                    InsertItemPosition = InsertItemPosition.LastItem,
+                    DataSourceID = "NullModelDataSource",
+                    ItemType = "ExitStrategy.ForWebforms.Tests.Mocks.MockModel",
+                };
+                p.Controls.Add(f);
+
+                var c = CreateControl();
+                c.DataField = "DateField";
+
+                f.ItemCreated += (sender, args) =>
+                {
+                    args.Item.Controls.Add(c);
                 };
 
                 p.DataBind();

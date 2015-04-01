@@ -11,13 +11,8 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
     [Serializable]
     public class ModelProviderTests
     {
-        private readonly WebformsScaffold _host;
+        private readonly WebformsScaffold _host = WebformsScaffold.Default;
         private readonly DateTime _expectedModel = new DateTime(2014, 12, 28);
-
-        public ModelProviderTests()
-        {
-            _host = WebformsScaffold.Create();
-        }
 
         private ModelBindingStrategy ArrangeWithModelBinding(MockPage p)
         {

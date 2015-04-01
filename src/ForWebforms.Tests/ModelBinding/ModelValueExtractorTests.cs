@@ -55,7 +55,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
         public void IntegrationTest()
         {
-            WebformsScaffold.Create().Test((p, w) =>
+            WebformsScaffold.Default.Test((p, w) =>
             {
                 var control = new MockControl { ID = "ControlId", ClientIDMode = ClientIDMode.Static };
                 var context = new Mock<HttpContextBase>();

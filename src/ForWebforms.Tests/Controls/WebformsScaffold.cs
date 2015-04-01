@@ -64,10 +64,16 @@ namespace ExitStrategy.ForWebforms.Tests.Controls
             }
         }
 
-        public static WebformsScaffold Create()
+        private static WebformsScaffold Create()
         {
             var websiteLocation = Directory.GetParent(typeof(WebformsScaffold).Assembly.Location).Parent;
             return (WebformsScaffold)ApplicationHost.CreateApplicationHost(typeof(WebformsScaffold), "/", websiteLocation.FullName);
+        }
+
+        private static WebformsScaffold _default;
+        public static WebformsScaffold Default
+        {
+            get { return _default ?? (_default = Create()); }
         }
     }
 }

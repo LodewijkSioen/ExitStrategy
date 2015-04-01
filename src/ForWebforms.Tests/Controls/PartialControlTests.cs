@@ -9,12 +9,7 @@ namespace ExitStrategy.ForWebforms.Tests.Controls
 {
     public class PartialControlTests
     {
-        protected readonly WebformsScaffold Host;
-
-        public PartialControlTests()
-        {
-            Host = WebformsScaffold.Create();
-        }
+        protected readonly WebformsScaffold Host = WebformsScaffold.Default;
 
         public void RenderWithoutModel()
         {

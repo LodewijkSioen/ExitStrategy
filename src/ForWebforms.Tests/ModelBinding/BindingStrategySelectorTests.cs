@@ -1,5 +1,9 @@
-﻿using System.Web.UI.WebControls;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.UI.WebControls;
 using ExitStrategy.ForWebforms.ModelBinding;
+using ExitStrategy.ForWebforms.Tests.Controls;
+using ExitStrategy.ForWebforms.Tests.Mocks;
 using Moq;
 using Shouldly;
 
@@ -9,31 +13,36 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
     {
         readonly BindingStrategySelector _selector = new BindingStrategySelector();
 
-        private void GetStrategyModelBound()
+        public static IEnumerable<Object[]> TestInput()
         {
-            var control = new Mock<MvcControl>(null, null);
-            control.Setup(c => c.IsModelBound).Returns(true);
+            yield return new object[]{new Partial()};
+            yield return new object[]{new Editor()};
+            yield return new object[]{new Display()};
+        }
 
-            var strategy = _selector.GetStrategy(control.Object);
-
+        [InputSource("TestInput")]
+        public void GetStrategyModelBound(MvcControl control)
+        {
+            control.SelectMethod = "GetModel";
+            var strategy = _selector.GetStrategy(control);
             strategy.ShouldBeOfType<ModelBindingStrategy>();
         }
 
-        private void GetStrategyDataItemContainer()
+        [InputSource("TestInput")]
+        public void GetStrategyDataItemContainer(MvcControl control)
         {
-            var control = new Mock<MvcControl>(null, null);
-            control.Setup(c => c.DataItemContainer).Returns(new FormView());
+            var formView = new FormView();
+            formView.Controls.Add(control);
 
-            var strategy = _selector.GetStrategy(control.Object);
+            var strategy = _selector.GetStrategy(control);
 
             strategy.ShouldBeOfType<DataItemContainerBindingStrategy>();
         }
 
-        private void GetStrategyDataSource()
+        [InputSource("TestInput")]
+        public void GetStrategyDataSource(MvcControl control)
         {
-            var control = new Mock<MvcControl>(null, null);
-
-            var strategy = _selector.GetStrategy(control.Object);
+            var strategy = _selector.GetStrategy(control);
 
             strategy.ShouldBeOfType<DataSourceBindingStrategy>();
         }

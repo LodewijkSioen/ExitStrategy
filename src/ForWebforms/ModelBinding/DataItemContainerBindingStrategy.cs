@@ -18,9 +18,8 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 
         public ModelDefinition ExtractModel(IEnumerable dataSource)
         {
-            bool found;
             var dataContainer = _control.DataItemContainer;
-            var dataItem = DataBinder.GetDataItem(dataContainer, out found);
+            var dataItem = DataBinder.GetDataItem(dataContainer);
 
             if (dataItem != null)
             {
@@ -29,6 +28,11 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             }
 
             var dataBoundControl = FindDataboundControl(dataContainer);
+            if (dataBoundControl == null)
+            {
+                throw new InvalidOperationException(string.Format("Cannot determine the DataBoundControl that control with id '{0}' is nested in. Are you sure this control is used in a template for a DataBoundControl?", dataContainer.ID));
+            }
+
             var typeName = dataBoundControl.ItemType;
             if (string.IsNullOrEmpty(typeName))
             {
@@ -51,7 +55,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 
                 control = control.NamingContainer;
             }
-            throw new InvalidOperationException();
+            return null;
         }
     }
 }

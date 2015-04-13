@@ -10,7 +10,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
     [Serializable]
     public class DataItemContainerBindingStrategyTests : BaseBindingStrategyTests
     {
-        private DataItemContainerBindingStrategy ArrangeWithFormView(MockPage p, string typeName, DateTime expectedModel)
+        private DataItemContainerBindingStrategy ArrangeWithFormView(MockPage p, string typeName, BindingStrategyTestModel expectedModel)
         {
             var control = new MockControl();
             var formView = new FormView()
@@ -27,6 +27,35 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             return new DataItemContainerBindingStrategy(control);
         }
 
+        private void ArrangeActAssertWithListView(MockPage p, string typeName, BindingStrategyTestModel expectedModel)
+        {
+            var circuitBreaker = false; //Sanity check that the event is actually called
+            var control = new MockControl();
+            var listView = new ListView()
+            {
+                ItemType = typeName,
+                DataSource = new[] { expectedModel },
+                ItemTemplate = new TemplateBuilder()
+            };
+            listView.ItemCreated += (sender, args) =>
+            {
+                args.Item.Controls.Add(control);
+            };
+            listView.ItemDataBound += (sender, args) =>
+            {
+                var strategy = new DataItemContainerBindingStrategy(control);
+                var result = strategy.ExtractModel(null);
+
+                result.Model.ShouldBe(expectedModel);
+                result.MetaData.ModelType.ShouldBe(_modelType);
+                circuitBreaker = true;
+            };
+            
+            p.Controls.Add(listView);
+            p.DataBind();
+            circuitBreaker.ShouldBe(true);
+        }
+
         public void InsideFormViewWithDataItem()
         {
             _host.Test(
@@ -37,7 +66,34 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                     var result = provider.ExtractModel(null);
 
                     result.Model.ShouldBe(_expectedModel);
-                    result.MetaData.ModelType.ShouldBe(typeof (DateTime));
+                    result.MetaData.ModelType.ShouldBe(_modelType);
+                });
+        }
+
+        public void InsideFormViewWithoutDataItemAndItemTypeShouldThrow()
+        {
+            var ex = _host.Throws<InvalidOperationException>(
+                (p, w) =>
+                {
+                    var provider = ArrangeWithFormView(p, null, null);
+
+                    provider.ExtractModel(null);
+                });
+
+            ex.Message.ShouldBe("Cannot determine the databinding type for control with id ''. Please provide the correct type in the ItemType property of the control.");
+        }
+
+        public void InsideFormViewWithouDataItemAndWithItemType()
+        {
+            _host.Test(
+                (p, w) =>
+                {
+                    var provider = ArrangeWithFormView(p, _modelName, null);
+
+                    var result = provider.ExtractModel(null);
+
+                    result.Model.ShouldBe(null);
+                    result.MetaData.ModelType.ShouldBe(_modelType);
                 });
         }
 
@@ -46,25 +102,26 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             _host.Test(
                 (p, w) =>
                 {
-                    var control = new MockControl();
-                    DataItemContainerBindingStrategy strategy = null;
-                    var listView = new ListView()
-                    {
-                        ItemType = null,
-                        DataSource = new[] { _expectedModel },
-                        ItemTemplate = new TemplateBuilder()
-                    };
-                    listView.ItemCreated += (sender, args) =>
-                    {
-                        args.Item.Controls.Add(control);
-                        strategy = new DataItemContainerBindingStrategy(control);
-                        var result = strategy.ExtractModel(null);
+                    ArrangeActAssertWithListView(p, null, _expectedModel);
+                });
+        }
 
-                        result.Model.ShouldBe(_expectedModel);
-                        result.MetaData.ModelType.ShouldBe(typeof(DateTime));
-                    };
-                    p.Controls.Add(listView);
-                    p.DataBind();
+        public void InsideListViewWithoutDataItemAndWithoutItemTypeShouldThrow()
+        {
+            var ex = _host.Throws<InvalidOperationException>(
+                (p, w) =>
+                {
+                    ArrangeActAssertWithListView(p, null, null);
+                });
+            ex.Message.ShouldBe("Cannot determine the databinding type for control with id 'ctrl0'. Please provide the correct type in the ItemType property of the control.");
+        }
+
+        public void InsideListViewWithoutDataItemAndWithItemType()
+        {
+            _host.Test(
+                (p, w) =>
+                {
+                    ArrangeActAssertWithListView(p, _modelName, null);
                 });
         }
     }

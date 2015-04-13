@@ -20,12 +20,12 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             _host.Test(
                 (p, w) =>
                 {
-                    var provider = ArrangeWithDataSource(p, _expectedModel, "System.DateTime");
+                    var provider = ArrangeWithDataSource(p, _expectedModel, _modelName);
 
                     var result = provider.ExtractModel(null);
 
                     result.Model.ShouldBe(_expectedModel);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
+                    result.MetaData.ModelType.ShouldBe(_modelType);
                 });
         }
 
@@ -39,7 +39,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                     var result = provider.ExtractModel(null);
 
                     result.Model.ShouldBe(_expectedModel);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
+                    result.MetaData.ModelType.ShouldBe(_modelType);
                 });
         }
 
@@ -48,12 +48,12 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             _host.Test(
                 (p, w) =>
                 {
-                    var provider = ArrangeWithDataSource(p, null, "System.DateTime");
+                    var provider = ArrangeWithDataSource(p, null, _modelName);
 
                     var result = provider.ExtractModel(null);
 
                     result.Model.ShouldBe(null);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
+                    result.MetaData.ModelType.ShouldBe(_modelType);
                 });
         }
 

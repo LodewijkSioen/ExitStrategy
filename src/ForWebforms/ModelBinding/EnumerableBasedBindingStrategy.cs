@@ -14,7 +14,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
             {
                 return null;
             }
-            else if (typeof(IEnumerable).IsAssignableFrom(expectedType))
+            else if (typeof(IEnumerable).IsAssignableFrom(expectedType) && expectedType != typeof(String))
             {
                 return source;
             }

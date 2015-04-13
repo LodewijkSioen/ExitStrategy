@@ -7,6 +7,11 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
     public abstract class BaseBindingStrategyTests
     {
         protected readonly WebformsScaffold _host = WebformsScaffold.Default;
-        protected readonly DateTime _expectedModel = new DateTime(2014, 12, 28);
+        protected readonly BindingStrategyTestModel _expectedModel = new BindingStrategyTestModel();
+        protected readonly Type _modelType = typeof(BindingStrategyTestModel);
+        protected readonly string _modelName = typeof(BindingStrategyTestModel).FullName;
+
+        [Serializable]
+        public class BindingStrategyTestModel { }
     }
 }

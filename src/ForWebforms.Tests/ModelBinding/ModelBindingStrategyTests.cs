@@ -21,10 +21,11 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                 (p, w) =>
                 {
                     var provider = ArrangeWithModelBinding(p);
+                    var expected = new MockModel();
 
-                    var result = provider.ExtractModel(new[] { _expectedModel });
+                    var result = provider.ExtractModel(new[] { expected });
 
-                    result.Model.ShouldBe(_expectedModel);
+                    result.Model.ShouldBe(expected);
                     result.MetaData.ModelType.ShouldBe(typeof(MockModel));
                 }
                 );

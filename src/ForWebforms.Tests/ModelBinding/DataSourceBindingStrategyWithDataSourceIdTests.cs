@@ -24,12 +24,12 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             _host.Test(
                 (p, w) =>
                 {
-                    var provider = ArrangeWithDataSourceId(p, "System.DateTime");
+                    var provider = ArrangeWithDataSourceId(p, _modelName);
 
                     var result = provider.ExtractModel(new []{_expectedModel});
 
                     result.Model.ShouldBe(_expectedModel);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
+                    result.MetaData.ModelType.ShouldBe(_modelType);
                 }
             );
         }
@@ -39,12 +39,12 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
             _host.Test(
                 (p, w) =>
                 {
-                    var provider = ArrangeWithDataSourceId(p, "System.DateTime");
+                    var provider = ArrangeWithDataSourceId(p, _modelName);
 
-                    var result = provider.ExtractModel(Enumerable.Empty<DateTime>());
+                    var result = provider.ExtractModel(Enumerable.Empty<BindingStrategyTestModel>());
 
                     result.Model.ShouldBe(null);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime));
+                    result.MetaData.ModelType.ShouldBe(_modelType);
                 }
             );
         }
@@ -56,10 +56,10 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                 {
                     var provider = ArrangeWithDataSourceId(p, null);
 
-                    var result = provider.ExtractModel(Enumerable.Empty<DateTime>());
+                    var result = provider.ExtractModel(Enumerable.Empty<BindingStrategyTestModel>());
 
-                    result.Model.ShouldBe(new DateTime[0]);
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime[]));
+                    result.Model.ShouldBe(new BindingStrategyTestModel[0]);
+                    result.MetaData.ModelType.ShouldBe(typeof(BindingStrategyTestModel[]));
                 }
             );
         }
@@ -74,7 +74,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
                     var result = provider.ExtractModel(new[] { _expectedModel });
 
                     result.Model.ShouldBe(new []{ _expectedModel});
-                    result.MetaData.ModelType.ShouldBe(typeof(DateTime[]));
+                    result.MetaData.ModelType.ShouldBe(typeof(BindingStrategyTestModel[]));
                 }
             );
         }

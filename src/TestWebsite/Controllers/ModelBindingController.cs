@@ -13,6 +13,7 @@ namespace ExitStrategy.TestWebsite.Controllers
             {
                 FirstName = p.FirstName, 
                 LastName = p.LastName,
+                BirthDate = p.BirthDate,
                 EditLink = new Link("Edit", Url.Action("Edit", new {p.Id}))
             }));
         }
@@ -45,6 +46,23 @@ namespace ExitStrategy.TestWebsite.Controllers
             }
 
             return View(editPerson);
+        }
+
+        [HttpGet]
+        public ActionResult Insert()
+        {
+            return View("Edit");
+        }
+
+        [HttpPost]
+        public ActionResult Insert(Person editPerson)
+        {
+            if (ModelState.IsValid)
+            {
+                return View("Post", editPerson);
+            }
+
+            return View("Edit", editPerson);
         }
     }
 }

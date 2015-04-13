@@ -7,6 +7,7 @@ namespace ExitStrategy.TestWebsite.Models
 {
     public enum Sex
     {
+        Unknown,
         Male,
         Female,
         Other
@@ -14,6 +15,12 @@ namespace ExitStrategy.TestWebsite.Models
 
     public class Person
     {
+        public Person()
+        {
+            BirthDate = DateTime.Now;
+            Gender = Sex.Unknown;
+        }
+
         [ScaffoldColumn(false)]
         [Key, ReadOnly(true)]
         public int Id { get; set; }
@@ -73,6 +80,8 @@ namespace ExitStrategy.TestWebsite.Models
         public string FirstName { get; set; }
         [DisplayName("Last Name"), Required]
         public string LastName { get; set; }
+        [DataType(DataType.Date), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd'/'MM'/'yyyy}")]
+        public DateTime BirthDate { get; set; }
         [DisplayName("")]
         public Link EditLink { get; set; }
     }

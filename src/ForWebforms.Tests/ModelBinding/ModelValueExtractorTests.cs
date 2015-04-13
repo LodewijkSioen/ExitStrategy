@@ -7,6 +7,8 @@ using ExitStrategy.ForWebforms.ModelBinding;
 using ExitStrategy.ForWebforms.Tests.Mocks;
 using Moq;
 using Shouldly;
+using ExitStrategy.ForWebforms.Bridge;
+using ExitStrategy.ForWebforms.Tests.Controls;
 
 namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 {
@@ -53,7 +55,7 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
 
         public void IntegrationTest()
         {
-            WebformsScaffold.Create().Test((p, w) =>
+            WebformsScaffold.Default.Test((p, w) =>
             {
                 var control = new MockControl { ID = "ControlId", ClientIDMode = ClientIDMode.Static };
                 var context = new Mock<HttpContextBase>();

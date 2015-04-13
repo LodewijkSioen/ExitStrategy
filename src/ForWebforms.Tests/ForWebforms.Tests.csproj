@@ -30,9 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fixie, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Fixie, Version=1.0.0.15, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Fixie.1.0.0.3\lib\net45\Fixie.dll</HintPath>
+      <HintPath>..\packages\Fixie.1.0.0.15\lib\net45\Fixie.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -80,22 +81,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisplayControlTests.cs" />
-    <Compile Include="EditorControlTests.cs" />
+    <Compile Include="Bridge\Convention.cs" />
+    <Compile Include="Controls\Convention.cs" />
+    <Compile Include="Controls\DisplayControlTests.cs" />
+    <Compile Include="Controls\EditorControlTests.cs" />
+    <Compile Include="Expressions\Convention.cs" />
     <Compile Include="Mocks\MockControl.cs" />
-    <Compile Include="ModelBinding\ModelProviderTests.cs" />
+    <Compile Include="ModelBinding\BaseBindingStrategyTests.cs" />
+    <Compile Include="ModelBinding\Convention.cs" />
+    <Compile Include="ModelBinding\DataItemContainerBindingStrategyTests.cs" />
+    <Compile Include="ModelBinding\DataSourceBindingStrategyWithDataSourceTests.cs" />
+    <Compile Include="ModelBinding\ModelBindingStrategyTests.cs" />
+    <Compile Include="ModelBinding\DataSourceBindingStrategyWithDataSourceIdTests.cs" />
     <Compile Include="ModelBinding\ModelStateTests.cs" />
     <Compile Include="ModelBinding\ModelValueExtractorTests.cs" />
-    <Compile Include="MvcControlTests.cs" />
-    <Compile Include="PartialControlTests.cs" />
-    <Compile Include="TestConvention.cs" />
-    <Compile Include="WebformsScaffold.cs" />
+    <Compile Include="Controls\MvcControlTests.cs" />
+    <Compile Include="Controls\PartialControlTests.cs" />
+    <Compile Include="BasicConvention.cs" />
+    <Compile Include="Controls\WebformsScaffold.cs" />
     <Compile Include="Mocks\MockPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NewObjectExpressionTests.cs" />
+    <Compile Include="Expressions\NewObjectExpressionTests.cs" />
+    <Compile Include="ModelBinding\BindingStrategySelectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MvcBridgeTests.cs" />
+    <Compile Include="Bridge\MvcBridgeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForWebforms\ForWebforms.csproj">
@@ -115,6 +125,9 @@
     <Content Include="Views\Shared\TestWithModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

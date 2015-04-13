@@ -1,3 +1,4 @@
+using ExitStrategy.ForWebforms.Bridge;
 using ExitStrategy.ForWebforms.ModelBinding;
 using System;
 using System.Collections;
@@ -52,19 +53,19 @@ namespace ExitStrategy.ForWebforms
 
         protected override void Render(HtmlTextWriter writer)
         {
-            var viewBag = new ViewDataDictionary();
-            viewBag.TemplateInfo.HtmlFieldPrefix = ClientID;
-            viewBag.AdaptModelState(Page.ModelState);
+            var viewData = new ViewDataDictionary();
+            viewData.TemplateInfo.HtmlFieldPrefix = ClientID;
+            viewData.AdaptModelState(Page.ModelState);
 
             if (_modelDefinition != null)
             {
-                viewBag.ModelMetadata = _modelDefinition.MetaData;
-                viewBag.Model = _modelDefinition.Model;                
+                viewData.ModelMetadata = _modelDefinition.MetaData;
+                if(_modelDefinition.Model != null) viewData.Model = _modelDefinition.Model;                
             }            
             
-            var helper = MvcBridge.CreateHtmlHelper(HttpContextProvider.Current.Request.RequestContext, viewBag, writer);
+            var helper = MvcBridge.CreateHtmlHelper(HttpContextProvider.Current.Request.RequestContext, viewData, writer);
 
-            var markup = RenderMvcContent(helper, viewBag);
+            var markup = RenderMvcContent(helper, viewData);
 
             writer.Write(markup.ToString());
         }

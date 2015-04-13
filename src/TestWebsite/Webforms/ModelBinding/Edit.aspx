@@ -8,8 +8,8 @@
         This page uses an &lt;mcv:Editor /&gt; control, which can be used in two ways:
     </p>
     <ul>
-        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink> (current page)</li>
-        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit-formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink></li>
+        <li><asp:HyperLink ID="LinkNormal" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink> (current page)</li>
+        <li><asp:HyperLink ID="LinkFormView" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit-formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink></li>
     </ul>
 
     <asp:Panel runat="server" ID="ValidationSummary" ClientIDMode="Static" CssClass="panel panel-danger" Visible="false">
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <asp:Button Text="Edit" CssClass="btn btn-primary" OnClick="Button_Click" runat="server" />
+                <asp:Button ID="SubmitButton" Text="Edit" CssClass="btn btn-primary" OnClick="Button_Click" runat="server" />
                 <asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
                 <div class="checkbox-inline">
                     <label for="disableValidation">

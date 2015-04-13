@@ -9,19 +9,18 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 {
     public static class ModelStateAdapter
     {
-        public static void AdaptModelState(this System.Web.Mvc.ViewDataDictionary viewBag, WebformsModelStateDictionary webformsState)
+        public static void AdaptModelState(this System.Web.Mvc.ViewDataDictionary viewData, WebformsModelStateDictionary webformsState)
         {
             foreach (var state in webformsState)
             {
                 //Mvc expects the key to be the name of the input element
-                var key = viewBag.TemplateInfo.GetFullHtmlFieldName(state.Key);
-                viewBag.ModelState.Add(key, state.Value.ToMvc());
+                var key = viewData.TemplateInfo.GetFullHtmlFieldName(state.Key);
+                viewData.ModelState.Add(key, state.Value.ToMvc());
             }
         }
 
         public static MvcModelState ToMvc(this WebformsModelState webformsState)
         {
-
             var mvcState = new MvcModelState();
             if(webformsState.Value != null)
             {

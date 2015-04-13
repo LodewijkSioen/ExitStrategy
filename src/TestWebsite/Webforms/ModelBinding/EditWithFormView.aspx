@@ -7,8 +7,8 @@
         This page uses an &lt;mcv:Editor /&gt; control, which can be used in two ways:
     </p>
     <ul>
-        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink></li>
-        <li><asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit-formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink> (current page)</li>
+        <li><asp:HyperLink ID="LinkNormal" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit%>" runat="server">As a top-level control using ModelBinding</asp:HyperLink></li>
+        <li><asp:HyperLink ID="LinkFormView" NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding-edit-formview%>" runat="server">As a nested control within an &lt;asp:FormView /&gt;</asp:HyperLink> (current page)</li>
     </ul>
 
     <asp:Panel runat="server" ID="ValidationSummary" ClientIDMode="Static" CssClass="panel panel-danger" Visible="false">
@@ -17,23 +17,31 @@
             <asp:ValidationSummary runat="server" />
         </div>
     </asp:Panel>
-
-    <asp:FormView ID="FormView" runat="server" SelectMethod="GetModel" UpdateMethod="SetModel" DefaultMode="Edit" RenderOuterTable="false" EnableViewState="False">
+    
+    <asp:FormView ID="FormView" runat="server" SelectMethod="GetPerson" 
+                                               UpdateMethod="UpdatePerson" 
+                                               InsertMethod="InsertPerson" 
+                                               DefaultMode="Edit"
+                                               RenderOuterTable="false" 
+                                               EnableViewState="False"
+                                               OnInit="FormViewInit"
+                                               OnDataBound="FormViewModeDataBound"
+                                               ItemType="ExitStrategy.TestWebsite.Models.Person">
         <EditItemTemplate>
             <div class="form-horizontal">
+                    <div class="form-group<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
+                        <asp:Label Text="First Name" AssociatedControlID="FirstNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
+                        <div class="col-sm-4">
+                            <mvc:Editor ID="FirstNameEditor" runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
+                            <asp:ModelErrorMessage runat="server" AssociatedControlID="FirstNameEditor" ModelStateKey="FirstName" CssClass="help-block"/>
+                        </div>
+                    </div>
                     <div class="form-group<%= ModelState.IsValidField("LastName") ? "" : " has-error" %>">
                         <asp:Label Text="Last Name" AssociatedControlID="LastNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
                         <div class="col-sm-4">
                             <asp:BoundField DataField="BirthDate" />
                             <mvc:Editor ID="LastNameEditor" runat="server" DataField="LastName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
                             <asp:ModelErrorMessage runat="server" AssociatedControlID="LastNameEditor" ModelStateKey="LastName" CssClass="help-block"/>
-                        </div>
-                    </div>
-                    <div class="form-group<%= ModelState.IsValidField("FirstName") ? "" : " has-error" %>">
-                        <asp:Label Text="First Name" AssociatedControlID="FirstNameEditor" CssClass="col-sm-2 control-label" runat="server"/>
-                        <div class="col-sm-4">
-                            <mvc:Editor ID="FirstNameEditor" runat="server" DataField="FirstName" AdditionalViewData='<%$new: {htmlAttributes = new {@class = "form-control mvc"},} %>'/>
-                            <asp:ModelErrorMessage runat="server" AssociatedControlID="FirstNameEditor" ModelStateKey="FirstName" CssClass="help-block"/>
                         </div>
                     </div>
                     <div class="form-group<%= ModelState.IsValidField("BirthDate") ? "" : " has-error" %>">
@@ -59,7 +67,7 @@
                     </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <asp:Button CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>
+                        <asp:Button ID="SubmitButton" CssClass="btn btn-primary" runat="server" CommandName="Update" Text="Edit"/>
                         <asp:HyperLink NavigateUrl="<%$RouteUrl:routename=Webforms-Modelbinding%>" Text="Cancel" CssClass="btn btn-link" runat="server" />
                         <div class="checkbox-inline">
                             <label for="disableValidation">

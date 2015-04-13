@@ -1,3 +1,3 @@
-﻿@model DateTime
+﻿@model ExitStrategy.ForWebforms.Tests.Mocks.MockModel
 
-Today is @Model.ToString("dd/MM/yyyy")
+Today is @(Model != null ? Model.DateField.ToString("dd/MM/yyyy") : "null")

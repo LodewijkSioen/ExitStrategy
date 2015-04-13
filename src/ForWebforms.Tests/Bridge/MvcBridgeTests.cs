@@ -7,8 +7,9 @@ using System.Web.Routing;
 using System.Web.UI;
 using Moq;
 using Shouldly;
+using ExitStrategy.ForWebforms.Bridge;
 
-namespace ExitStrategy.ForWebforms.Tests
+namespace ExitStrategy.ForWebforms.Tests.Bridge
 {
     public class MvcBridgeTests
     {

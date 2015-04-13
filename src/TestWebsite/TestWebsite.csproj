@@ -144,6 +144,7 @@
     <Compile Include="Helpers\CollectionHelper.cs" />
     <Compile Include="Helpers\DateTimeBinder.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Helpers\TypeHelpers.cs" />
     <Compile Include="Models\Link.cs" />
     <Compile Include="Webforms\Index.aspx.cs">

@@ -14,5 +14,8 @@
     <div class="mvc">
         <mvc:Display SelectMethod="GetPersons" TemplateName="Table" runat="server" />
     </div>
+    <div>
+        <asp:hyperLink runat="server" Text="Add new" NavigateUrl="<%$RouteUrl:routename=Webforms-ModelBinding-Insert %>" CssClass="btn btn-link"/>
+    </div>
 </div>
 </asp:Content>

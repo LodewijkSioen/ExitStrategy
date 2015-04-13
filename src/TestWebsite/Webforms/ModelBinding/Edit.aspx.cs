@@ -2,24 +2,29 @@
 using System.Linq;
 using System.Web.ModelBinding;
 using System.Web.Routing;
+using System.Web.UI;
 using ExitStrategy.TestWebsite.Models;
 
 namespace ExitStrategy.TestWebsite.Webforms.ModelBinding
 {
-    public partial class Edit : System.Web.UI.Page
+    public partial class Edit : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
-
+            if (RouteData.Values["id"] == null)
+            {
+                LinkNormal.NavigateUrl = GetRouteUrl("Webforms-Modelbinding-insert", new RouteValueDictionary());
+                LinkFormView.NavigateUrl = GetRouteUrl("Webforms-Modelbinding-insert-formview", new RouteValueDictionary());
+                SubmitButton.Text = "Insert";
+            }
         }
 
         private Person _validatedPerson;
 
-        public Person GetModel([RouteData]int id = 0)
+        public Person GetModel([RouteData]int? id)
         {
-            if (id == 0)
+            if (!id.HasValue)
             {
-                Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "Webforms-Modelbinding", new RouteValueDictionary()).VirtualPath);
                 return null;
             }
             

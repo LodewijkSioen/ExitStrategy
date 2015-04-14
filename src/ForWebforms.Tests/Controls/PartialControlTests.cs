@@ -1,9 +1,5 @@
 ﻿using System;
-using ExitStrategy.ForWebforms.ModelBinding;
-using Moq;
 using Shouldly;
-using System.Web.Mvc;
-using System.Collections;
 
 namespace ExitStrategy.ForWebforms.Tests.Controls
 {   

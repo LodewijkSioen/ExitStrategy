@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using ExitStrategy.ForWebforms.ModelBinding;
-using ExitStrategy.ForWebforms.Tests.Controls;
-using ExitStrategy.ForWebforms.Tests.Mocks;
-using Moq;
 using Shouldly;
 
 namespace ExitStrategy.ForWebforms.Tests.ModelBinding

@@ -5,7 +5,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 {
     public class ModelBindingStrategy : EnumerableBasedBindingStrategy
     {
-        MvcControl _control;
+        readonly MvcControl _control;
 
         public ModelBindingStrategy(MvcControl control)
         {

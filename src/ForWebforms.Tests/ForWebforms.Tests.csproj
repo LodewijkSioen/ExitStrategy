@@ -98,7 +98,7 @@
     <Compile Include="Controls\MvcControlTests.cs" />
     <Compile Include="Controls\PartialControlTests.cs" />
     <Compile Include="BasicConvention.cs" />
-    <Compile Include="Controls\WebformsScaffold.cs" />
+    <Compile Include="WebformsScaffold.cs" />
     <Compile Include="Mocks\MockPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

@@ -6,7 +6,7 @@ namespace ExitStrategy.ForWebforms.ModelBinding
 {
     public class DataSourceBindingStrategy : EnumerableBasedBindingStrategy
     {
-        MvcControl _control;
+        readonly MvcControl _control;
 
         public DataSourceBindingStrategy(MvcControl control)
         {

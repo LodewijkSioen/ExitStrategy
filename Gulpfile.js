@@ -18,7 +18,7 @@ gulp.task('build', ['nuget-restore'], function() {
 	return gulp
         .src('./src/ExitStrategy.sln')
         .pipe(msbuild({
-            toolsVersion: 12.0,
+            toolsVersion: 14.0,
             targets: ['Clean', 'Build'],
             errorOnFail: true,
             stdout: true

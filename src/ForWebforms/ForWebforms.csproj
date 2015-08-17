@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Display.cs" />
     <Compile Include="Editor.cs" />
-    <Compile Include="Bridge\HttpRequestProvider.cs" />
+    <Compile Include="Bridge\HttpContextProvider.cs" />
     <Compile Include="ModelBinding\DataItemContainerBindingStrategy.cs" />
     <Compile Include="ModelBinding\DataSourceBindingStrategy.cs" />
     <Compile Include="ModelBinding\EnumerableBasedBindingStrategy.cs" />

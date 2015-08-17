@@ -18,5 +18,10 @@ namespace ExitStrategy.ForWebforms.Bridge
         {
             _current = context;
         }
+
+        public static void Reset()
+        {
+            _current = null;
+        }
     }
 }

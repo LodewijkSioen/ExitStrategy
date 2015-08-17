@@ -57,21 +57,27 @@ namespace ExitStrategy.ForWebforms.Tests.ModelBinding
         {
             WebformsScaffold.Default.Test((p, w) =>
             {
-                var control = new MockControl { ID = "ControlId", ClientIDMode = ClientIDMode.Static };
-                var context = new Mock<HttpContextBase>();
-                var request = new Mock<HttpRequestBase>();
-                request.Setup(r => r.Form).Returns(new NameValueCollection {{"ControlId.TestValue", "Value"}});
-                context.Setup(c => c.Request).Returns(request.Object);
-                HttpContextProvider.SetHttpContext(context.Object);
+                try {
+                    var control = new MockControl { ID = "ControlId", ClientIDMode = ClientIDMode.Static };
+                    var context = new Mock<HttpContextBase>();
+                    var request = new Mock<HttpRequestBase>();
+                    request.Setup(r => r.Form).Returns(new NameValueCollection { { "ControlId.TestValue", "Value" } });
+                    context.Setup(c => c.Request).Returns(request.Object);
+                    HttpContextProvider.SetHttpContext(context.Object);
 
-                var dictionary = new OrderedDictionary();
-                control.ExtractValues(dictionary);
+                    var dictionary = new OrderedDictionary();
+                    control.ExtractValues(dictionary);
 
-                dictionary.Count.ShouldBe(1);
-                dictionary["TestValue"].ShouldBe("Value");
+                    dictionary.Count.ShouldBe(1);
+                    dictionary["TestValue"].ShouldBe("Value");
 
-                var valueProvider = control.GetValueProvider();
-                valueProvider.GetValue("TestValue").AttemptedValue.ShouldBe("Value");
+                    var valueProvider = control.GetValueProvider();
+                    valueProvider.GetValue("TestValue").AttemptedValue.ShouldBe("Value");
+                }
+                finally
+                {
+                    HttpContextProvider.Reset();
+                }
             });
         }
     }

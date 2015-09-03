@@ -1,4 +1,6 @@
 ﻿@model Boolean?
-<label>
-@Html.CheckBox("", @Model.GetValueOrDefault(false), new {@class="form-control check-box checkbox-inline"})
-</label>
+<div class="checkbox">
+    <label>
+        @Html.CheckBox("", @Model.GetValueOrDefault(false))
+    </label>
+</div>

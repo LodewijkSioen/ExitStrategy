@@ -1,3 +1,6 @@
+<b>This is now archived since dotnet core took over the world and I can't keep up 😄 </b>
+
+
 <img src='https://raw.githubusercontent.com/LodewijkSioen/ExitStrategy/master/img/Banner.png' alt='ExitStrategy Logo' />
 ================================
 
